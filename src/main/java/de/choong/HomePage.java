@@ -21,13 +21,15 @@ public class HomePage extends WebPage {
 	    add(createLink("addAnime", AddAnimePage.class));
 	}
 	
-	private AjaxFallbackLink<String> createLink(String id, Class<?> page) {
+	@SuppressWarnings("rawtypes")
+	private AjaxFallbackLink<String> createLink(String id, Class page) {
 		return new AjaxFallbackLink<String>(id) {
 			private static final long serialVersionUID = 3949370585208906040L;
 
+			@SuppressWarnings("unchecked")
 			@Override
             public void onClick(AjaxRequestTarget target) {
-                setResponsePage(AddAnimePage.class);
+                setResponsePage(page);
             }
 		};
 	}
