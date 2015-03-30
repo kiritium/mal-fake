@@ -13,7 +13,7 @@ import de.choong.dao.AnimeStaticDBDao;
 import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
 
-public class AddAnimePage extends WebPage {
+public class AddAnimePage extends BasePage {
 
     private static final long serialVersionUID = 8623937508924029855L;
     private IAnimeDao<AnimeDO> dao = new AnimeStaticDBDao();

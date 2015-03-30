@@ -2,7 +2,6 @@ package de.choong;
 
 import java.util.ArrayList;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RepeatingView;
@@ -14,7 +13,7 @@ import de.choong.dao.AnimeStaticDBDao;
 import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
 
-public class ShowAnimePage extends WebPage {
+public class ShowAnimePage extends BasePage {
 
 	private static final long serialVersionUID = -8485039198076648005L;
 	private IAnimeDao<AnimeDO> dao = new AnimeStaticDBDao();

@@ -5,7 +5,7 @@ import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class HomePage extends WebPage {
+public class HomePage extends BasePage {
 
 	private static final long serialVersionUID = -2274690262727601331L;
 
