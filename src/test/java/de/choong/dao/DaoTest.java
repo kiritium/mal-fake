@@ -11,7 +11,7 @@ import de.choong.model.AnimeDO;
 public class DaoTest {
 
     private ArrayList<AnimeDO> testDB;
-    private AnimeDao dao;
+    private AnimeStaticDBDao dao;
     private AnimeDO dbAnime1 = new AnimeDO(1, "Kiseijuu", 2014, "Tom");
     private AnimeDO dbAnime2 = new AnimeDO(2, "Death Parade", 2015, "Decim");
 
@@ -20,7 +20,7 @@ public class DaoTest {
         testDB = new ArrayList<AnimeDO>();
         testDB.add(dbAnime1);
         testDB.add(dbAnime2);
-        dao = new AnimeDao(testDB);
+        dao = new AnimeStaticDBDao(testDB);
     }
 
     @Test

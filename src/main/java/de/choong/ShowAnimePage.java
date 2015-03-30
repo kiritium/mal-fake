@@ -10,7 +10,7 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import de.choong.dao.AnimeDao;
+import de.choong.dao.AnimeStaticDBDao;
 import de.choong.model.AnimeDO;
 
 public class ShowAnimePage extends WebPage {
@@ -22,7 +22,7 @@ public class ShowAnimePage extends WebPage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        AnimeDao dao = new AnimeDao();
+        AnimeStaticDBDao dao = new AnimeStaticDBDao();
         ArrayList<AnimeDO> allAnimes = dao.readAll();
         
         ListDataProvider<AnimeDO> provider = new ListDataProvider<AnimeDO>(allAnimes);
