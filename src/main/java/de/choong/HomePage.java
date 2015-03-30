@@ -22,7 +22,7 @@ public class HomePage extends WebPage {
 	}
 	
 	private AjaxFallbackLink<String> createLink(String id, Class<?> page) {
-		return new AjaxFallbackLink<String>("addAnime") {
+		return new AjaxFallbackLink<String>(id) {
 			private static final long serialVersionUID = 3949370585208906040L;
 
 			@Override
