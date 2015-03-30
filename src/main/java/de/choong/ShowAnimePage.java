@@ -9,14 +9,14 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import de.choong.dao.AnimeStaticDBDao;
+import de.choong.dao.AnimeSqliteDBDao;
 import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
 
 public class ShowAnimePage extends BasePage {
 
 	private static final long serialVersionUID = -8485039198076648005L;
-	private IAnimeDao<AnimeDO> dao = new AnimeStaticDBDao();
+	private IAnimeDao<AnimeDO> dao = new AnimeSqliteDBDao();
 	
     public ShowAnimePage(final PageParameters parameters) {
         super(parameters);
