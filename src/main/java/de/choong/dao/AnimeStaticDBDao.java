@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import de.choong.mockup.AnimeDB;
 import de.choong.model.AnimeDO;
 
-public class AnimeDao implements DaoInterface<AnimeDO> {
+public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
 
     private ArrayList<AnimeDO> db;
     
-    public AnimeDao() {
+    public AnimeStaticDBDao() {
         
     }
     
-    public AnimeDao(ArrayList<AnimeDO> db) {
+    public AnimeStaticDBDao(ArrayList<AnimeDO> db) {
         this.db = db;
     }
     
