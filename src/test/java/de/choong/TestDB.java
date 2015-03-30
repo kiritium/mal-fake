@@ -3,6 +3,7 @@ package de.choong;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -41,8 +42,16 @@ public class TestDB {
 	public void testCreate() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("CREATE TABLE ANIME (ID LONG PRIMARY KEY NOT NULL, NAME TEXT NOT NULL)");
-			statement.execute("INSERT INTO ANIME (ID,NAME) VALUES (1, 'Paul')");
+			statement.executeUpdate("CREATE TABLE T_ANIME (ID LONG PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, AUTHOR TEXT NOT NULL, YEAR INT NOT NULL)");
+			statement.execute("INSERT INTO T_ANIME (ID,NAME,AUTHOR,YEAR) VALUES (1, 'Kiseijuu', 'Tom', 2014)");
+			statement.execute("INSERT INTO T_ANIME (ID,NAME,AUTHOR,YEAR) VALUES (2, 'Death Parade', 'Decim', 2015)");
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO T_ANIME (ID,NAME,AUTHOR,YEAR) VALUES (?, ?, ?, ?)");
+			stmt.setLong(1, 3);
+			stmt.setString(2, "SAO");
+			stmt.setString(3, "Bob");
+			stmt.setInt(4, 2012);
+			stmt.execute();
+			
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
