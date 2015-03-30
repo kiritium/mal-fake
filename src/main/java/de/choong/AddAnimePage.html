@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>MalFake</title>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+	</head>
+	<body>
+		<div>
+			<h1>Test</h1>
+			<a href="/">Back</a>
+			<form wicket:id="form">
+				<label for="title">Title</label><input type="text" id="title" wicket:id="title" />
+				<br />
+				<label for="year">Year</label><input type="text" id="year" wicket:id="year" />
+				<br />
+				<label for="author">Author</label><input type="text" id="author" wicket:id="author" />
+				<br />
+				<input type="submit" wicket:id="submit" value="Add"/>
+			</form>
+		</div>
+	</body>
+</html>
