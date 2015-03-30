@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import de.choong.mockup.AnimeDB;
 import de.choong.model.AnimeDO;
 
+/**
+ * Anime Dao that saves the Data in RAM (List).
+ *
+ */
 public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
 
     private ArrayList<AnimeDO> db;
