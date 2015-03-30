@@ -10,12 +10,13 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.dao.AnimeStaticDBDao;
+import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
 
 public class AddAnimePage extends WebPage {
 
     private static final long serialVersionUID = 8623937508924029855L;
-    private AnimeStaticDBDao dao = new AnimeStaticDBDao();
+    private IAnimeDao<AnimeDO> dao = new AnimeStaticDBDao();
 
     public AddAnimePage(PageParameters parameters) {
         super(parameters);

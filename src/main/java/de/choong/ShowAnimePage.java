@@ -11,10 +11,14 @@ import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.dao.AnimeStaticDBDao;
+import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
 
 public class ShowAnimePage extends WebPage {
 
+	private static final long serialVersionUID = -8485039198076648005L;
+	private IAnimeDao<AnimeDO> dao = new AnimeStaticDBDao();
+	
     public ShowAnimePage(final PageParameters parameters) {
         super(parameters);
     }
@@ -22,7 +26,6 @@ public class ShowAnimePage extends WebPage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        AnimeStaticDBDao dao = new AnimeStaticDBDao();
         ArrayList<AnimeDO> allAnimes = dao.readAll();
         
         ListDataProvider<AnimeDO> provider = new ListDataProvider<AnimeDO>(allAnimes);

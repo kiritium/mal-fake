@@ -6,7 +6,8 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class HomePage extends WebPage {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -2274690262727601331L;
 
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
@@ -16,18 +17,18 @@ public class HomePage extends WebPage {
 	protected void onInitialize() {
 	    super.onInitialize();
 	    
-	    add(new AjaxFallbackLink<String>("showAnime") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                setResponsePage(ShowAnimePage.class);
-            }
-        });
-	    
-	    add(new AjaxFallbackLink<String>("addAnime") {
-            @Override
+	    add(createLink("showAnime", ShowAnimePage.class));
+	    add(createLink("addAnime", AddAnimePage.class));
+	}
+	
+	private AjaxFallbackLink<String> createLink(String id, Class<?> page) {
+		return new AjaxFallbackLink<String>("addAnime") {
+			private static final long serialVersionUID = 3949370585208906040L;
+
+			@Override
             public void onClick(AjaxRequestTarget target) {
                 setResponsePage(AddAnimePage.class);
             }
-        });
+		};
 	}
 }
