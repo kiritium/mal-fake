@@ -20,18 +20,17 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     public void create(AnimeDO newObject) {
         Connection connection = connectToDB();
         try {
-            long id;
+            long id = 1;
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
             while (rs.next()) {
                 if (rs.isLast()) {
-                    id = rs.getLong("ID") + 1;
-                    newObject.setId(id);
+                    id += rs.getLong("ID");
                 }
             }
             PreparedStatement prestmt = connection
                     .prepareStatement("INSERT INTO T_ANIME (ID,TITLE,AUTHOR,YEAR) VALUES (?, ?, ?, ?)");
-            prestmt.setLong(1, newObject.getId());
+            prestmt.setLong(1, id);
             prestmt.setString(2, newObject.getTitle());
             prestmt.setString(3, newObject.getAuthor());
             prestmt.setInt(4, newObject.getYear());
@@ -59,6 +58,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
                     anime.setYear(rs.getInt("YEAR"));
                 }
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("UPDATE T_ANIME SET TITLE=" + title + ",AUTHOR="
                     + author + ",YEAR=" + year + " WHERE ID=" + id + ";");
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,6 +90,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("DELETE from T_ANIME where ID=" + id + ";");
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,6 +123,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
                 anime.setYear(rs.getInt("YEAR"));
                 animes.add(anime);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
