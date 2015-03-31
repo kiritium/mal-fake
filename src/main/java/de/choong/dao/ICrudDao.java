@@ -1,5 +1,7 @@
 package de.choong.dao;
 
+import java.io.Serializable;
+
 /**
  * Basic dao functionality.
  * 
@@ -11,7 +13,7 @@ package de.choong.dao;
  * 
  * @param <T> Datatype
  */
-public interface ICrudDao<T> {
+public interface ICrudDao<T> extends Serializable{
 
     public void create(T newObject);
     public T read(long id);

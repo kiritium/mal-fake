@@ -37,6 +37,7 @@ public class ShowAnimePage extends BasePage {
                 AnimeDO anime = item.getModelObject();
                 RepeatingView animeInfo = new RepeatingView("animeInfo");
                 
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getId()));
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getTitle()));
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getYear()));
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getAuthor()));
