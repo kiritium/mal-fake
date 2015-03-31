@@ -20,16 +20,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     public void create(AnimeDO newObject) {
         Connection connection = connectToDB();
         try {
-//            long id = 0;
-//            Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
-//            while (rs.next()) {
-//                id = rs.getLong("ID");
-//            }
-//            id++;
-            PreparedStatement prestmt = connection
-                    .prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
-//            prestmt.setLong(1, id);
+            PreparedStatement prestmt = connection.prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
             prestmt.setString(1, newObject.getTitle());
             prestmt.setString(2, newObject.getAuthor());
             prestmt.setInt(3, newObject.getYear());
@@ -42,14 +33,14 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     }
 
     @Override
-    public AnimeDO read(long id) {
+    public AnimeDO read(int id) {
         Connection connection = connectToDB();
         AnimeDO anime = new AnimeDO();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
             while (rs.next()) {
-                long readId = rs.getLong("ID");
+                int readId = rs.getInt("ID");
                 if (readId == id) {
                     anime.setId(readId);
                     anime.setTitle(rs.getString("TITLE"));
@@ -68,7 +59,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     @Override
     public void update(AnimeDO updatedObj) {
         Connection connection = connectToDB();
-        long id = updatedObj.getId();
+        int id = updatedObj.getId();
         String title = updatedObj.getTitle();
         String author = updatedObj.getAuthor();
         int year = updatedObj.getYear();
@@ -83,7 +74,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         Connection connection = connectToDB();
 
         try {
@@ -116,7 +107,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
             while (rs.next()) {
                 AnimeDO anime = new AnimeDO();
-                anime.setId(rs.getLong("ID"));
+                anime.setId(rs.getInt("ID"));
                 anime.setTitle(rs.getString("TITLE"));
                 anime.setAuthor(rs.getString("AUTHOR"));
                 anime.setYear(rs.getInt("YEAR"));

@@ -7,7 +7,7 @@ import de.choong.model.AnimeDO;
 public class AnimeDB {
 	
 	private static ArrayList<AnimeDO> db = new ArrayList<AnimeDO>();
-	private static long idCounter = 2;
+	private static int idCounter = 2;
 	
 	static {
 		db.add(new AnimeDO(1, "Kiseijuu", 2014, "Tom"));
@@ -22,7 +22,7 @@ public class AnimeDB {
 	    return db;
 	}
 
-	public long getNewId() {
+	public int getNewId() {
 	    idCounter++;
 	    return idCounter;
 	}

@@ -16,8 +16,8 @@ import java.io.Serializable;
 public interface ICrudDao<T> extends Serializable{
 
     public void create(T newObject);
-    public T read(long id);
+    public T read(int id);
     public void update(T updatedObj);
-    public void delete(long id);
+    public void delete(int id);
     
 }

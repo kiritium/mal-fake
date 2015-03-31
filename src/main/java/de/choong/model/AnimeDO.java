@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class AnimeDO implements Serializable {
     private static final long serialVersionUID = 743646977201312600L;
-    private long id;
+    private int id;
     private String title;
     private int year;
     private String author;
@@ -12,18 +12,18 @@ public class AnimeDO implements Serializable {
     public AnimeDO() {
     }
     
-    public AnimeDO(long id, String title, int year, String author) {
+    public AnimeDO(int id, String title, int year, String author) {
         this.id = id;
         this.title = title;
         this.year = year;
         this.author = author;
     }
     
-    public long getId() {
+    public int getId() {
         return id;
     }
     
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -46,7 +46,7 @@ public class WicketApplication extends WebApplication {
             try {
                 rs.getString("NAME");
             } catch (SQLException e) {
-                stmt.executeUpdate("CREATE TABLE T_ANIME (ID LONG PRIMARY KEY NOT NULL AUTOINCREMENT, TITLE TEXT NOT NULL, AUTHOR TEXT NOT NULL, YEAR INT NOT NULL)");
+                stmt.executeUpdate("CREATE TABLE T_ANIME (ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT NOT NULL, AUTHOR TEXT NOT NULL, YEAR INT NOT NULL)");
             }
 
             connection.close();

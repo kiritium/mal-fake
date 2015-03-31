@@ -36,7 +36,7 @@ public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
     }
 
     @Override
-    public AnimeDO read(long id) {
+    public AnimeDO read(int id) {
         ArrayList<AnimeDO> db = getDB();
         for (AnimeDO obj : db) {
             if (obj.getId() == id) {
@@ -59,7 +59,7 @@ public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         ArrayList<AnimeDO> db = getDB();
         db.remove(read(id));
     }
