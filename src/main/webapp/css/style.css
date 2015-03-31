@@ -70,3 +70,11 @@ h3 {
 	font-size:24pt;
 	color:#092E67;
 }
+
+#form-row {
+	padding: 10px 0px;
+}
+
+#addbutton {
+	width: 100px;
+}

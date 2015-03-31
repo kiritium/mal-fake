@@ -29,8 +29,8 @@ public class AddAnimePage extends BasePage {
         
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
         form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
-        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
         form.add(new TextField<String>("author", new PropertyModel<String>(anime, "author")));
+        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
         form.add(new AjaxSubmitLink("submit", form) {
             private static final long serialVersionUID = -2717359351525157884L;
 
