@@ -20,19 +20,19 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
     public void create(AnimeDO newObject) {
         Connection connection = connectToDB();
         try {
-            long id = 0;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
-            while (rs.next()) {
-                id = rs.getLong("ID");
-            }
-            id++;
+//            long id = 0;
+//            Statement stmt = connection.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * from T_ANIME");
+//            while (rs.next()) {
+//                id = rs.getLong("ID");
+//            }
+//            id++;
             PreparedStatement prestmt = connection
-                    .prepareStatement("INSERT INTO T_ANIME (ID,TITLE,AUTHOR,YEAR) VALUES (?, ?, ?, ?)");
-            prestmt.setLong(1, id);
-            prestmt.setString(2, newObject.getTitle());
-            prestmt.setString(3, newObject.getAuthor());
-            prestmt.setInt(4, newObject.getYear());
+                    .prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
+//            prestmt.setLong(1, id);
+            prestmt.setString(1, newObject.getTitle());
+            prestmt.setString(2, newObject.getAuthor());
+            prestmt.setInt(3, newObject.getYear());
             prestmt.execute();
             connection.close();
         } catch (SQLException e) {
