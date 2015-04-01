@@ -8,6 +8,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.AnimeTable;
 import de.choong.dao.AnimeSqliteDBDao;
 import de.choong.dao.IAnimeDao;
+import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 
 public class ShowAnimePage extends BasePage {
@@ -26,7 +27,12 @@ public class ShowAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        ArrayList<AnimeDO> allAnimes = dao.readAll();
+        ArrayList<AnimeDO> allAnimes = new ArrayList<>();
+		try {
+			allAnimes = dao.readAll();
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
 
         ListDataProvider<AnimeDO> provider = new ListDataProvider<AnimeDO>(
                 allAnimes);

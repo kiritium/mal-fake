@@ -2,6 +2,8 @@ package de.choong.dao;
 
 import java.io.Serializable;
 
+import de.choong.exceptions.DBException;
+
 /**
  * Basic dao functionality.
  * 
@@ -15,9 +17,9 @@ import java.io.Serializable;
  */
 public interface ICrudDao<T> extends Serializable{
 
-    public void create(T newObject);
-    public T read(int id);
-    public void update(T updatedObj);
-    public void delete(int id);
+    public void create(T newObject) throws DBException;
+    public T read(int id) throws DBException;
+    public void update(T updatedObj) throws DBException;
+    public void delete(int id) throws DBException;
     
 }

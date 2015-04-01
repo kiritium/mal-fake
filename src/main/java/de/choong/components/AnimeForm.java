@@ -9,16 +9,22 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import de.choong.dao.AnimeSqliteDBDao;
+import de.choong.dao.IAnimeDao;
+import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 
-public abstract class AnimeEditForm extends Panel {
+public class AnimeForm extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
-
     private FeedbackPanel feedback;
+    private IAnimeDao<AnimeDO> dao = new AnimeSqliteDBDao();
+	private FormMode mode;
 
-    public AnimeEditForm(String id, Model<AnimeDO> model) {
+
+    public AnimeForm(String id, Model<AnimeDO> model, FormMode mode) {
         super(id, model);
+		this.mode = mode;
     }
 
     @Override
@@ -39,21 +45,52 @@ public abstract class AnimeEditForm extends Panel {
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 super.onSubmit(target, form);
-                AnimeEditForm.this.onSubmit(target, form);
-
-                getFeedback().setVisible(true);
-                target.add(getFeedback());
+                
+                AnimeDO anime = (AnimeDO) form.getModelObject();
+                AnimeForm.this.onSubmit(anime, target);
+                
+                feedback.setVisible(feedback.getFeedbackMessages().size() > 0);
+                target.add(feedback);
             }
         });
         add(form);
-        form.setOutputMarkupId(true);
         feedback = new FeedbackPanel("feedback");
-        feedback.setOutputMarkupId(true);
+        
+        feedback.setOutputMarkupPlaceholderTag(true);
         feedback.setVisible(false);
         form.add(feedback);
     }
-
-    public abstract void onSubmit(AjaxRequestTarget target, Form<?> form);
+    
+    public void onSubmit(AnimeDO anime, AjaxRequestTarget target) {
+    	switch(mode) {
+        case ADD:
+        	onAdd(anime, target);
+        	break;
+        case EDIT:
+        	onEdit(anime, target);
+        	break;
+        default:
+        	// do nothing
+        }
+    }
+    
+    public void onAdd(AnimeDO anime, AjaxRequestTarget target) {
+    	try {
+        	dao.create(anime);
+        } catch(DBException ex) {
+        	error("DB Error");
+        }
+    	success("Anime added.");
+    }
+    
+    public void onEdit(AnimeDO anime, AjaxRequestTarget target) {
+    	try {
+    		dao.update(anime);
+    	} catch(DBException ex) {
+    		error("DB Error");
+    	}
+    	success("Anime updated.");
+    }
 
     public FeedbackPanel getFeedback() {
         return feedback;
