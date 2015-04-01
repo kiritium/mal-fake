@@ -6,13 +6,18 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+
+import de.choong.dao.IUserDao;
+import de.choong.dao.UserDao;
+import de.choong.exceptions.DBException;
+import de.choong.model.UserDO;
 
 public class LoginForm extends Panel {
 
     private static final long serialVersionUID = -2072142982507657566L;
-    private String username;
-    private String password;
+    private IUserDao dao = new UserDao();
 
     public LoginForm(String id) {
         super(id);
@@ -21,18 +26,38 @@ public class LoginForm extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        TextField<String> userTextField = new TextField<String>("username",
-                new PropertyModel<String>(this, "username"));
+        
+        UserDO user = new UserDO();
+        
+        Form<UserDO> form = new Form<>("form", Model.of(user));
+        
+        // Username
+        TextField<String> userTextField = new TextField<>("username",
+                new PropertyModel<>(user, "username"));
         userTextField.setRequired(true);
-        add(userTextField);
-        add(new PasswordTextField("password", new PropertyModel<String>(this, "password")));
-        add(new AjaxSubmitLink("login") {
+        form.add(userTextField);
 
-            @Override
+        // Password
+        form.add(new PasswordTextField("password", new PropertyModel<>(user, "password")));
+        
+        // Submit
+        form.add(new AjaxSubmitLink("login") {
+			private static final long serialVersionUID = -8648337841887290056L;
+
+			@Override
             public void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                System.out.println("Login");
+				UserDO user = (UserDO) form.getModelObject();
+				try {
+					login(user);
+				} catch (DBException e) {
+					e.printStackTrace();
+				}
             }
 
         });
+    }
+    
+    private boolean login(UserDO user) throws DBException {
+    	return dao.login(user);
     }
 }
