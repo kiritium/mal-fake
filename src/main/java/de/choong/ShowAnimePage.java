@@ -15,6 +15,10 @@ public class ShowAnimePage extends BasePage {
     private static final long serialVersionUID = -8485039198076648005L;
     private IAnimeDao<AnimeDO> dao = new AnimeSqliteDBDao();
 
+    public ShowAnimePage() {
+        super();
+    }
+
     public ShowAnimePage(final PageParameters parameters) {
         super(parameters);
     }

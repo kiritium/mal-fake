@@ -23,25 +23,14 @@
 						<span class="icon-bar"></span> <span class="icon-bar"></span> 
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">MAL-Fake</a>
+					<a class="navbar-brand" href="/">MAL-Fake</a>
 				</div>
 	
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="dropdown">
-          					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Anime<span class="caret"></span></a>
-          					<ul class="dropdown-menu" role="menu">
-            					<li><a>Anime-List</a></li>
-            					<li class="divider"></li>
-            					<li><a href="#">Add Anime</a></li>
-            					<li><a href="#">Something</a></li>
-            					<li><a href="#">Something</a></li>
-          					</ul>
-        				</li>
-						<li><a href="#">Tab<span class="sr-only">(current)</span></a></li>
-						<li><a href="#">Login</a></li>
-					</ul>
+					
+					<wicket:panel wicket:id="navlinks" />
+					
 					<form class="navbar-form navbar-right" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Search">
