@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 
 /**
@@ -15,9 +16,11 @@ import de.choong.model.AnimeDO;
  * 
  */
 public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
-	
-    @Override
-    public void create(AnimeDO newObject) {
+
+	private static final long serialVersionUID = -6371901382222268180L;
+
+	@Override
+    public void create(AnimeDO newObject) throws DBException {
         Connection connection = connectToDB();
         try {
             PreparedStatement prestmt = connection.prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
@@ -27,13 +30,13 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             prestmt.execute();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DBException("SQL Error", e);
         }
 
     }
 
     @Override
-    public AnimeDO read(int id) {
+    public AnimeDO read(int id) throws DBException {
         Connection connection = connectToDB();
         AnimeDO anime = new AnimeDO();
         try {
@@ -50,14 +53,14 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             }
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	throw new DBException("SQL Error", e);
         }
 
         return anime;
     }
 
     @Override
-    public void update(AnimeDO updatedObj) {
+    public void update(AnimeDO updatedObj) throws DBException {
         Connection connection = connectToDB();
         int id = updatedObj.getId();
         String title = updatedObj.getTitle();
@@ -69,12 +72,12 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
                     + author + ",YEAR=" + year + " WHERE ID=" + id + ";");
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	throw new DBException("SQL Error", e);
         }
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws DBException {
         Connection connection = connectToDB();
 
         try {
@@ -82,31 +85,23 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             stmt.executeUpdate("DELETE from T_ANIME where ID=" + id + ";");
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	throw new DBException("SQL Error", e);
         }
     }
 
-    /**
-     * This should be optimized: Instead of creating a connection, everytime we use an
-     * operation, the connections should be "pooled".
-     * 
-     * http://stackoverflow.com/questions/19841392/java-sql-connection-closing-caching-best-practices
-     * 
-     * @return
-     */
-    private Connection connectToDB() {
+    private Connection connectToDB() throws DBException {
         String db_path = "src/main/resources/mysite.db";
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + db_path);
         } catch (SQLException e) {
-            e.printStackTrace();
+        	throw new DBException("SQL Error", e);
         }
         return connection;
     }
 
     @Override
-    public ArrayList<AnimeDO> readAll() {
+    public ArrayList<AnimeDO> readAll() throws DBException {
         ArrayList<AnimeDO> animes = new ArrayList<>();
         Connection connection = connectToDB();
 
@@ -123,7 +118,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             }
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+        	throw new DBException("SQL Error", e);
         }
 
         return animes;

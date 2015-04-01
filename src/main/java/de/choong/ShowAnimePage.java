@@ -1,6 +1,7 @@
 package de.choong;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -27,7 +28,7 @@ public class ShowAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        ArrayList<AnimeDO> allAnimes = new ArrayList<>();
+        List<AnimeDO> allAnimes = new ArrayList<>();
 		try {
 			allAnimes = dao.readAll();
 		} catch (DBException e) {
