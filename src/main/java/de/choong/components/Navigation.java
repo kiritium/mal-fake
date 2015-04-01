@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import de.choong.AddAnimePage;
+import de.choong.LoginPage;
 import de.choong.ShowAnimePage;
 
 public class Navigation extends Panel {
@@ -22,6 +23,7 @@ public class Navigation extends Panel {
         RepeatingView navigationItems = new RepeatingView("navigation");
         addMenuItem(navigationItems, new ShowAnimePage(), "Anime-List");
         addMenuItem(navigationItems, new AddAnimePage(), "Add Anime");
+        addMenuItem(navigationItems, new LoginPage(), "Login");
         add(navigationItems);
     }
 
