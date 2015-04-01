@@ -55,6 +55,7 @@ public class LoginForm extends Panel {
             }
 
         });
+        add(form);
     }
     
     private boolean login(UserDO user) throws DBException {
