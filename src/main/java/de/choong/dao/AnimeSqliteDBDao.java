@@ -15,7 +15,7 @@ import de.choong.model.AnimeDO;
  * 
  */
 public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
-
+	
     @Override
     public void create(AnimeDO newObject) {
         Connection connection = connectToDB();
@@ -86,6 +86,14 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
         }
     }
 
+    /**
+     * This should be optimized: Instead of creating a connection, everytime we use an
+     * operation, the connections should be "pooled".
+     * 
+     * http://stackoverflow.com/questions/19841392/java-sql-connection-closing-caching-best-practices
+     * 
+     * @return
+     */
     private Connection connectToDB() {
         String db_path = "src/main/resources/mysite.db";
         Connection connection = null;
