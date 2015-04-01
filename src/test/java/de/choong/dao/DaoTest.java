@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 
 public class DaoTest {
@@ -24,7 +25,7 @@ public class DaoTest {
     }
 
     @Test
-    public void testCreate() {
+    public void testCreate() throws DBException {
         AnimeDO newAnime = new AnimeDO(1, "Anime", 2000, "Author");
         dao.create(newAnime);
         for (AnimeDO anime : testDB) {
@@ -36,7 +37,7 @@ public class DaoTest {
     }
 
     @Test
-    public void testRead() {
+    public void testRead() throws DBException {
         AnimeDO anime1 = dao.read(1);
         assertAnimeEquals(dbAnime1, anime1);
         AnimeDO anime2 = dao.read(2);
@@ -46,7 +47,7 @@ public class DaoTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDelete() throws DBException {
         int initialSize = testDB.size();
         dao.delete(1);
         for (AnimeDO anime : testDB) {
@@ -67,7 +68,7 @@ public class DaoTest {
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws DBException {
         int initialSize = testDB.size();
         AnimeDO newAnime = new AnimeDO(2, "DP", 2015, "Decim");
         dao.update(newAnime);
