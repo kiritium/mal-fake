@@ -2,6 +2,7 @@ package de.choong.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,8 +18,12 @@ public class UserDO implements Serializable {
     @GeneratedValue
     private int id;
 
+    @Column(unique = true, length = 20, nullable = false)
     private String username;
+
+    @Column(length = 20)
     private String password;
+    private String salt;
 
     public String getUsername() {
         return username;
@@ -42,6 +47,14 @@ public class UserDO implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
 }

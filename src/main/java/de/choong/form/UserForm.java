@@ -1,5 +1,6 @@
 package de.choong.form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
@@ -13,6 +14,7 @@ import org.apache.wicket.model.PropertyModel;
 import de.choong.dao.UserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.UserDO;
+import de.choong.util.UserUtil;
 
 public class UserForm extends Panel {
 
@@ -44,6 +46,9 @@ public class UserForm extends Panel {
                 super.onSubmit(target, form);
 
                 UserDO user = (UserDO) form.getModelObject();
+                user.setSalt(UserUtil.generateSalt());
+                String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
+                user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
                 UserForm.this.onSubmit(user, target);
 
                 feedback.setVisible(feedback.getFeedbackMessages().size() > 0);
