@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.UserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.UserDO;
@@ -51,15 +52,12 @@ public class UserForm extends Panel {
                 user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
                 UserForm.this.onSubmit(user, target);
 
-                feedback.setVisible(feedback.getFeedbackMessages().size() > 0);
                 target.add(feedback);
             }
         });
         add(form);
-        feedback = new FeedbackPanel("feedback");
+        feedback = new AjaxFeedbackPanel("feedback");
 
-        feedback.setOutputMarkupPlaceholderTag(true);
-        feedback.setVisible(false);
         form.add(feedback);
     }
 

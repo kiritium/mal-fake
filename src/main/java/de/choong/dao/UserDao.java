@@ -60,7 +60,7 @@ public class UserDao implements IUserDao {
 
     @Override
     public boolean login(UserDO user) throws DBException {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
@@ -68,6 +68,12 @@ public class UserDao implements IUserDao {
     public void logout() throws DBException {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public UserDO readByName(String name) throws DBException {
+
+        return null;
     }
 
 }
