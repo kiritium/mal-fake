@@ -22,6 +22,7 @@ public class UserForm extends Panel {
     private static final long serialVersionUID = -6052123356031657622L;
 
     private FeedbackPanel feedback;
+    // TODO Load with spring + IUserDao
     private UserDao dao = new UserDao();
     private FormMode mode;
 

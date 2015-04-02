@@ -19,6 +19,7 @@ import de.choong.util.UserUtil;
 public class LoginForm extends Panel {
 
     private static final long serialVersionUID = -2072142982507657566L;
+    // TODO Load with spring
     private IUserDao dao = new UserDao();
 
     public LoginForm(String id) {

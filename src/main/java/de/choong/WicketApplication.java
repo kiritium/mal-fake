@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import de.choong.pages.HomePage;
+import de.choong.util.HibernateUtil;
 
 /**
  * Application object for your web application. If you want to run this
@@ -18,36 +19,40 @@ import de.choong.pages.HomePage;
  * @see de.choong.Start#main(String[])
  */
 public class WicketApplication extends WebApplication {
-    @Override
-    public Class<? extends WebPage> getHomePage() {
-        return HomePage.class;
-    }
+	@Override
+	public Class<? extends WebPage> getHomePage() {
+		return HomePage.class;
+	}
 
-    @Override
-    public void init() {
-        super.init();
-        createDB();
-        // add your configuration here
-        getMarkupSettings().setStripWicketTags(true);
-    }
+	@Override
+	public void init() {
+		super.init();
+		// createDB();
+		// add your configuration here
+		getMarkupSettings().setStripWicketTags(true);
+		
+		// Update schema and load settings.
+		HibernateUtil.getSessionFactory();
+	}
 
-    private void createDB() {
-        String db_path = "src/main/resources/mysite.db";
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + db_path);
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt
-                    .executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='T_ANIME'");
-            try {
-                rs.getString("NAME");
-            } catch (SQLException e) {
-                stmt.executeUpdate("CREATE TABLE T_ANIME (ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT NOT NULL, AUTHOR TEXT NOT NULL, YEAR INT NOT NULL)");
-            }
+	// TODO remove + old daos
+	private void createDB() {
+		String db_path = "src/main/resources/mysite.db";
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:sqlite:" + db_path);
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='T_ANIME'");
+			try {
+				rs.getString("NAME");
+			} catch (SQLException e) {
+				stmt.executeUpdate("CREATE TABLE T_ANIME (ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT NOT NULL, AUTHOR TEXT NOT NULL, YEAR INT NOT NULL)");
+			}
 
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
