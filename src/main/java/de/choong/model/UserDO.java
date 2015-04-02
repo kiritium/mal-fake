@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import de.choong.UserRight;
 
 @Entity
 @Table(name = "T_USER")
@@ -21,9 +25,14 @@ public class UserDO implements Serializable {
     @Column(unique = true, length = 20, nullable = false)
     private String username;
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String password;
+    
+    @Column(length = 16, nullable = false)
     private String salt;
+    
+    @Enumerated(EnumType.STRING)
+    private UserRight userRight;
 
     public String getUsername() {
         return username;
@@ -56,5 +65,13 @@ public class UserDO implements Serializable {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+	public UserRight getUserRight() {
+		return userRight;
+	}
+
+	public void setUserRight(UserRight userRight) {
+		this.userRight = userRight;
+	}
 
 }

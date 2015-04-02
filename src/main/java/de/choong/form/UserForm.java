@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import de.choong.UserRight;
 import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.UserDao;
 import de.choong.exceptions.DBException;
@@ -51,6 +52,10 @@ public class UserForm extends Panel {
                 user.setSalt(UserUtil.generateSalt());
                 String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
                 user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
+                
+                // TODO set via Dropdown
+                user.setUserRight(UserRight.USER);
+                
                 UserForm.this.onSubmit(user, target);
 
                 target.add(feedback);
