@@ -1,4 +1,4 @@
-package de.choong.components;
+package de.choong.form;
 
 public enum FormMode {
 

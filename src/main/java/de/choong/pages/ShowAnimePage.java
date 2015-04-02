@@ -1,4 +1,4 @@
-package de.choong;
+package de.choong.pages;
 
 import java.util.ArrayList;
 import java.util.List;

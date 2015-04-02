@@ -1,10 +1,10 @@
-package de.choong;
+package de.choong.pages;
 
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import de.choong.components.AnimeForm;
-import de.choong.components.FormMode;
+import de.choong.form.AnimeForm;
+import de.choong.form.FormMode;
 import de.choong.model.AnimeDO;
 
 public class AddAnimePage extends BasePage {

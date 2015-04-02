@@ -4,9 +4,9 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
-import de.choong.AddAnimePage;
-import de.choong.LoginPage;
-import de.choong.ShowAnimePage;
+import de.choong.pages.AddAnimePage;
+import de.choong.pages.LoginPage;
+import de.choong.pages.ShowAnimePage;
 
 public class Navigation extends Panel {
 

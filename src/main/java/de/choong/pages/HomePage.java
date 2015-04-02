@@ -1,4 +1,4 @@
-package de.choong;
+package de.choong.pages;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
@@ -22,6 +22,7 @@ public class HomePage extends BasePage {
 
         add(createLink("showAnime", ShowAnimePage.class));
         add(createLink("addAnime", AddAnimePage.class));
+        add(createLink("addUser", AddUserPage.class));
     }
 
     @SuppressWarnings("rawtypes")

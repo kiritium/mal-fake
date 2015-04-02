@@ -1,4 +1,4 @@
-package de.choong.components;
+package de.choong.form;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;

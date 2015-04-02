@@ -5,8 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "T_ANIME")
 public class AnimeDO implements Serializable {
     private static final long serialVersionUID = 743646977201312600L;
 
