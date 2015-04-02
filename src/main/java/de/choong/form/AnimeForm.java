@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
@@ -44,16 +45,20 @@ public class AnimeForm extends Panel {
 
                 AnimeDO anime = (AnimeDO) form.getModelObject();
                 AnimeForm.this.onSubmit(anime, target);
-
-                feedback.setVisible(feedback.getFeedbackMessages().size() > 0);
+                
                 target.add(feedback);
+            }
+            
+            @Override
+            protected void onError(AjaxRequestTarget target, Form<?> form) {
+            	super.onError(target, form);
+            	
+            	System.out.println("Error");
             }
         });
         add(form);
-        feedback = new FeedbackPanel("feedback");
+        feedback = new AjaxFeedbackPanel("feedback");
 
-        feedback.setOutputMarkupPlaceholderTag(true);
-        feedback.setVisible(false);
         form.add(feedback);
     }
 
@@ -74,18 +79,18 @@ public class AnimeForm extends Panel {
         try {
             dao.create(anime);
         } catch (DBException ex) {
-            error("DB Error");
+        	feedback.error("DB Error");
         }
-        success("Anime added.");
+        feedback.success("Anime added.");
     }
 
     public void onEdit(AnimeDO anime, AjaxRequestTarget target) {
         try {
             dao.update(anime);
         } catch (DBException ex) {
-            error("DB Error");
+        	feedback.error("DB Error");
         }
-        success("Anime updated.");
+        feedback.success("Anime updated.");
     }
 
     public FeedbackPanel getFeedback() {
