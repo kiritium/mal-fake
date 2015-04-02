@@ -1,7 +1,10 @@
 package de.choong.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import de.choong.exceptions.DBException;
 import de.choong.model.UserDO;
@@ -67,13 +70,26 @@ public class UserDao implements IUserDao {
     @Override
     public void logout() throws DBException {
         // TODO Auto-generated method stub
-
+    
     }
 
     @Override
     public UserDO readByName(String name) throws DBException {
+        Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
 
-        return null;
+        @SuppressWarnings("unchecked")
+		List<UserDO> result = session.createCriteria(UserDO.class)
+			.add(Restrictions.eqOrIsNull("username", name))
+			.list();
+
+        session.flush();
+        tx.commit();
+
+        if(result.isEmpty()) {
+        	return null;
+        }
+    	return result.get(0);
     }
 
 }
