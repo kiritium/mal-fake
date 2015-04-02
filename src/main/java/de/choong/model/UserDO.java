@@ -2,30 +2,44 @@ package de.choong.model;
 
 import java.io.Serializable;
 
-/**
- * User
- *
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class UserDO implements Serializable {
 
-	private static final long serialVersionUID = 4038226541758100768L;
-	private String username;
-	private String password;
+    private static final long serialVersionUID = 4038226541758100768L;
 
-	public String getUsername() {
-		return username;
-	}
+    @Id
+    @GeneratedValue
+    private int id;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    private String username;
+    private String password;
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

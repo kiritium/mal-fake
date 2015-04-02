@@ -11,25 +11,27 @@ import de.choong.model.AnimeDO;
  * Anime Dao that saves the Data in RAM (List).
  *
  */
-public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
+public class AnimeStaticDBDao implements IAnimeDao {
+
+    private static final long serialVersionUID = -1836978430031150120L;
 
     private ArrayList<AnimeDO> db;
-    
+
     public AnimeStaticDBDao() {
-        
+
     }
-    
+
     public AnimeStaticDBDao(ArrayList<AnimeDO> db) {
         this.db = db;
     }
-    
+
     private ArrayList<AnimeDO> getDB() {
         if (db == null) {
             return new AnimeDB().get();
         }
         return db;
     }
-    
+
     @Override
     public void create(AnimeDO newObject) throws DBException {
         ArrayList<AnimeDO> db = getDB();
@@ -38,7 +40,7 @@ public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
     }
 
     @Override
-    public AnimeDO read(int id) throws DBException  {
+    public AnimeDO read(int id) throws DBException {
         ArrayList<AnimeDO> db = getDB();
         for (AnimeDO obj : db) {
             if (obj.getId() == id) {
@@ -47,7 +49,7 @@ public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
         }
         return null;
     }
-    
+
     public List<AnimeDO> readAll() throws DBException {
         return getDB();
     }
@@ -65,5 +67,5 @@ public class AnimeStaticDBDao implements IAnimeDao<AnimeDO> {
         ArrayList<AnimeDO> db = getDB();
         db.remove(read(id));
     }
-    
+
 }

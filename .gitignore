@@ -5,3 +5,4 @@ target/*
 test.db
 /target/
 mysite.db
+src/main/resources/hsqldb/*

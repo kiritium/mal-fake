@@ -2,27 +2,36 @@ package de.choong.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class AnimeDO implements Serializable {
     private static final long serialVersionUID = 743646977201312600L;
+
+    @Id
+    @GeneratedValue
     private int id;
+
     private String title;
-    private int year;
+    private Integer year;
     private String author;
 
     public AnimeDO() {
     }
-    
-    public AnimeDO(int id, String title, int year, String author) {
+
+    public AnimeDO(int id, String title, Integer year, String author) {
         this.id = id;
         this.title = title;
         this.year = year;
         this.author = author;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -35,11 +44,11 @@ public class AnimeDO implements Serializable {
         this.title = title;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

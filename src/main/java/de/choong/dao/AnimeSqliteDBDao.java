@@ -15,15 +15,16 @@ import de.choong.model.AnimeDO;
  * Anime Dao that saves the data in a SQLite DB.
  * 
  */
-public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
+public class AnimeSqliteDBDao implements IAnimeDao {
 
-	private static final long serialVersionUID = -6371901382222268180L;
+    private static final long serialVersionUID = -6371901382222268180L;
 
-	@Override
+    @Override
     public void create(AnimeDO newObject) throws DBException {
         Connection connection = connectToDB();
         try {
-            PreparedStatement prestmt = connection.prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
+            PreparedStatement prestmt = connection
+                    .prepareStatement("INSERT INTO T_ANIME (TITLE,AUTHOR,YEAR) VALUES (?, ?, ?)");
             prestmt.setString(1, newObject.getTitle());
             prestmt.setString(2, newObject.getAuthor());
             prestmt.setInt(3, newObject.getYear());
@@ -53,7 +54,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             }
             connection.close();
         } catch (SQLException e) {
-        	throw new DBException("SQL Error", e);
+            throw new DBException("SQL Error", e);
         }
 
         return anime;
@@ -68,11 +69,11 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
         int year = updatedObj.getYear();
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("UPDATE T_ANIME SET TITLE=" + title + ",AUTHOR="
-                    + author + ",YEAR=" + year + " WHERE ID=" + id + ";");
+            stmt.executeUpdate("UPDATE T_ANIME SET TITLE=" + title + ",AUTHOR=" + author + ",YEAR="
+                    + year + " WHERE ID=" + id + ";");
             connection.close();
         } catch (SQLException e) {
-        	throw new DBException("SQL Error", e);
+            throw new DBException("SQL Error", e);
         }
     }
 
@@ -85,7 +86,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             stmt.executeUpdate("DELETE from T_ANIME where ID=" + id + ";");
             connection.close();
         } catch (SQLException e) {
-        	throw new DBException("SQL Error", e);
+            throw new DBException("SQL Error", e);
         }
     }
 
@@ -95,7 +96,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + db_path);
         } catch (SQLException e) {
-        	throw new DBException("SQL Error", e);
+            throw new DBException("SQL Error", e);
         }
         return connection;
     }
@@ -118,7 +119,7 @@ public class AnimeSqliteDBDao implements IAnimeDao<AnimeDO> {
             }
             connection.close();
         } catch (SQLException e) {
-        	throw new DBException("SQL Error", e);
+            throw new DBException("SQL Error", e);
         }
 
         return animes;
