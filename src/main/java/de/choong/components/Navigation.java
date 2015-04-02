@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import de.choong.pages.AddAnimePage;
+import de.choong.pages.AddUserPage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.ShowAnimePage;
 
@@ -24,13 +25,12 @@ public class Navigation extends Panel {
         addMenuItem(navigationItems, new ShowAnimePage(), "Anime-List");
         addMenuItem(navigationItems, new AddAnimePage(), "Add Anime");
         addMenuItem(navigationItems, new LoginPage(), "Login");
+        addMenuItem(navigationItems, new AddUserPage(), "Register");
         add(navigationItems);
     }
 
-    private void addMenuItem(RepeatingView navigationItems, Page page,
-            String name) {
-        navigationItems.add(new NavigationItem(navigationItems.newChildId(),
-                page, name));
+    private void addMenuItem(RepeatingView navigationItems, Page page, String name) {
+        navigationItems.add(new NavigationItem(navigationItems.newChildId(), page, name));
     }
 
 }

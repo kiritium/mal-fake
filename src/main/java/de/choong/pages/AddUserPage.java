@@ -1,6 +1,11 @@
 package de.choong.pages;
 
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+
+import de.choong.form.FormMode;
+import de.choong.form.UserForm;
+import de.choong.model.UserDO;
 
 public class AddUserPage extends BasePage {
 
@@ -17,6 +22,9 @@ public class AddUserPage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        UserDO user = new UserDO();
+        add((new UserForm("form", Model.of(user), FormMode.ADD)));
     }
 
 }
