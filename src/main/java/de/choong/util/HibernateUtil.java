@@ -7,11 +7,15 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+/**
+ * Util to access DB operations.
+ *
+ */
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
     /**
-     * Creates SessionFactory from hibernate.cfg.xml
+     * Creates SessionFactory from hibernate.cfg.xml.
      * 
      * @return
      * @throws HibernateException
@@ -26,6 +30,10 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
+    /**
+     * Simple way to access a DB session.
+     * @return
+     */
     public static Session getCurrentSession() {
         return getSessionFactory().getCurrentSession();
     }
