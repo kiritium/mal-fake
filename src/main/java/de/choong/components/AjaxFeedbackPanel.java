@@ -21,15 +21,20 @@ public class AjaxFeedbackPanel extends FeedbackPanel {
 	protected void onConfigure() {
 		super.onConfigure();
         setOutputMarkupPlaceholderTag(true);
+
+        if(getFeedbackMessages().isEmpty()) {
+        	setVisible(false);
+        } else {
+        	setVisible(true);
+        }
+        
 	}
 	
 	@Override
 	protected void onBeforeRender() {
 		super.onBeforeRender();
 		
-		if(getFeedbackMessages().size() > 0) {
-            setVisible(true);
-            
+		if(getFeedbackMessages().isEmpty() == false) {
             FeedbackMessage msg = getFeedbackMessages().first();
             if(msg.isError()) {
             	add(new AttributeModifier("class", "alert alert-danger"));
@@ -38,8 +43,6 @@ public class AjaxFeedbackPanel extends FeedbackPanel {
             } else if(msg.isInfo()) {
             	add(new AttributeModifier("class", "alert alert-info"));
             }
-        } else {
-        	setVisible(false);
         }
 	}
 }

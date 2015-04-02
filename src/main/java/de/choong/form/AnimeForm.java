@@ -57,8 +57,8 @@ public class AnimeForm extends Panel {
             }
         });
         add(form);
+        
         feedback = new AjaxFeedbackPanel("feedback");
-
         form.add(feedback);
     }
 
@@ -91,10 +91,6 @@ public class AnimeForm extends Panel {
         	feedback.error("DB Error");
         }
         feedback.success("Anime updated.");
-    }
-
-    public FeedbackPanel getFeedback() {
-        return feedback;
     }
 
 }

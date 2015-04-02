@@ -56,8 +56,8 @@ public class UserForm extends Panel {
             }
         });
         add(form);
+        
         feedback = new AjaxFeedbackPanel("feedback");
-
         form.add(feedback);
     }
 
@@ -78,21 +78,17 @@ public class UserForm extends Panel {
         try {
             dao.create(user);
         } catch (DBException ex) {
-            error("DB Error");
+        	feedback.error("DB Error");
         }
-        success("User added.");
+        feedback.success("User added.");
     }
 
     public void onEdit(UserDO user, AjaxRequestTarget target) {
         try {
             dao.update(user);
         } catch (DBException ex) {
-            error("DB Error");
+        	feedback.error("DB Error");
         }
-        success("User updated.");
-    }
-
-    public FeedbackPanel getFeedback() {
-        return feedback;
+        feedback.success("User updated.");
     }
 }
