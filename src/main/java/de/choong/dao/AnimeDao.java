@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
+import de.choong.dao.lambda.ExecuteInTransaction;
 import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 import de.choong.util.HibernateUtil;
@@ -17,88 +18,53 @@ public class AnimeDao implements IAnimeDao {
 
     @Override
     public void create(AnimeDO newObject) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.save(newObject);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.save(newObject));
     }
 
     @Override
     public AnimeDO read(int id) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        AnimeDO anime = (AnimeDO) session.get(AnimeDO.class, id);
-
-        session.flush();
-        tx.commit();
-
-        return anime;
+        return ExecuteInTransaction.get(session -> (AnimeDO) session.get(AnimeDO.class, id));
     }
 
     @Override
     public void update(AnimeDO updatedObj) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.update(updatedObj);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.update(updatedObj));
     }
 
     @Override
     public void delete(int id) throws DBException {
         AnimeDO anime = read(id);
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.delete(anime);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.delete(anime));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<AnimeDO> readAll() throws DBException {
+        return ExecuteInTransaction.get(session -> session.createCriteria(AnimeDO.class).list());
+    }
+
+    public long countAll() {
         Session session = HibernateUtil.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
-        @SuppressWarnings("unchecked")
-        List<AnimeDO> animes = session.createCriteria(AnimeDO.class).list();
-
-        session.flush();
-        tx.commit();
-        return animes;
-    }
-    
-    public long countAll() {
-    	Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        
-        long count = (Long) session.createCriteria(AnimeDO.class).setProjection(Projections.rowCount()).uniqueResult();
+        long count = (Long) session.createCriteria(AnimeDO.class)
+                .setProjection(Projections.rowCount()).uniqueResult();
 
         session.flush();
         tx.commit();
         return count;
     }
-    
+
     public List<AnimeDO> readWithLimit(int first, int max, Order order) {
-    	Session session = HibernateUtil.getCurrentSession();
+        Session session = HibernateUtil.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        
+
         @SuppressWarnings("unchecked")
-		List<AnimeDO> animes = session.createCriteria(AnimeDO.class)
-			.setFirstResult(first)
-			.setMaxResults(max)
-			.addOrder(order)
-			.list();
+        List<AnimeDO> animes = session.createCriteria(AnimeDO.class).setFirstResult(first)
+                .setMaxResults(max).addOrder(order).list();
 
         session.flush();
         tx.commit();
-    	return animes;
+        return animes;
     }
 }
