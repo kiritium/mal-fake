@@ -6,7 +6,7 @@ import de.choong.dao.lambda.ExecuteInTransaction;
 import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 
-public class AnimeHibernateDBDao implements IAnimeDao {
+public class AnimeDao implements IAnimeDao {
 
 	private static final long serialVersionUID = 6398704770406750368L;
 

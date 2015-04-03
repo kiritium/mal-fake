@@ -35,7 +35,9 @@ public class AnimeForm extends Panel {
         // TODO add validation to form
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
         form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
-        form.add(new TextField<String>("author", new PropertyModel<String>(anime, "author")));
+        form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle")));
+        form.add(new TextField<String>("creator", new PropertyModel<String>(anime, "creator")));
+        form.add(new TextField<String>("studio", new PropertyModel<String>(anime, "studio")));
         form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
         form.add(new AjaxSubmitLink("submit", form) {
             private static final long serialVersionUID = -2717359351525157884L;
@@ -46,21 +48,21 @@ public class AnimeForm extends Panel {
 
                 AnimeDO anime = (AnimeDO) form.getModelObject();
                 AnimeForm.this.onSubmit(anime, target);
-                
+
                 target.add(feedback);
             }
-            
+
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
-            	super.onError(target, form);
-            	
-            	// TODO react to error
-            	error("from.onError");
-            	target.add(feedback);
+                super.onError(target, form);
+
+                // TODO react to error
+                error("from.onError");
+                target.add(feedback);
             }
         });
         add(form);
-        
+
         feedback = new AjaxFeedbackPanel("feedback");
         form.add(feedback);
     }
@@ -82,7 +84,7 @@ public class AnimeForm extends Panel {
         try {
             dao.create(anime);
         } catch (DBException ex) {
-        	feedback.error("DB Error");
+            feedback.error("DB Error");
         }
         feedback.success("Anime added.");
     }
@@ -91,7 +93,7 @@ public class AnimeForm extends Panel {
         try {
             dao.update(anime);
         } catch (DBException ex) {
-        	feedback.error("DB Error");
+            feedback.error("DB Error");
         }
         feedback.success("Anime updated.");
     }

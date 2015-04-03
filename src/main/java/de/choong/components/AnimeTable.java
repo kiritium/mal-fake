@@ -24,8 +24,7 @@ public class AnimeTable extends Panel {
     protected void onInitialize() {
         super.onInitialize();
 
-        DataView<AnimeDO> animeRow = new DataView<AnimeDO>("animeRow",
-                dataProvider) {
+        DataView<AnimeDO> animeRow = new DataView<AnimeDO>("animeRow", dataProvider) {
             private static final long serialVersionUID = -2390389602389777774L;
 
             @Override
@@ -34,12 +33,10 @@ public class AnimeTable extends Panel {
                 RepeatingView animeInfo = new RepeatingView("animeInfo");
 
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getId()));
-                animeInfo.add(new Label(animeInfo.newChildId(), anime
-                        .getTitle()));
-                animeInfo
-                        .add(new Label(animeInfo.newChildId(), anime.getYear()));
-                animeInfo.add(new Label(animeInfo.newChildId(), anime
-                        .getAuthor()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getTitle()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getCreator()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getStudio()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getYear()));
 
                 item.add(animeInfo);
             }
