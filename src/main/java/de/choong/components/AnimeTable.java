@@ -15,7 +15,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.sortable.SortableTable;
-import de.choong.model.AnimeDO;
+import de.choong.model.anime.AnimeDO;
 import de.choong.pages.SingleAnimePage;
 
 // TODO this extra component is unnessesary, now that we have a sortable table component.
@@ -39,8 +39,11 @@ public class AnimeTable extends Panel {
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Title"), "title", "title"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Alt. Title"), "altTitle",
                 "altTitle"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Type"), "type", "type"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Status"), "status", "status"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Creator"), "creator", "creator"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Studio"), "studio", "studio"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Season"), "season", "season"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Year"), "year", "year"));
 
         add(new SortableTable<AnimeDO, String>("test", columns, dataProvider, 10) {
@@ -55,7 +58,6 @@ public class AnimeTable extends Panel {
 
                     @Override
                     protected void onEvent(AjaxRequestTarget target) {
-                        // TODO redirect to SingleAnimePage
                         AnimeDO anime = model.getObject();
                         int id = anime.getId();
                         PageParameters param = new PageParameters();

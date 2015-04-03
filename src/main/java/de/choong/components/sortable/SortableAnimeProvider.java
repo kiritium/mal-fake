@@ -11,7 +11,7 @@ import org.hibernate.criterion.Order;
 
 import de.choong.dao.AnimeDao;
 import de.choong.dao.IAnimeDao;
-import de.choong.model.AnimeDO;
+import de.choong.model.anime.AnimeDO;
 import de.choong.util.SpringUtil;
 
 public class SortableAnimeProvider extends SortableDataProvider<AnimeDO, String>{

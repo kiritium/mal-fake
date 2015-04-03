@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import de.choong.exceptions.DBException;
-import de.choong.model.UserDO;
+import de.choong.model.user.UserDO;
 import de.choong.util.HibernateUtil;
 
 public class UserDao implements IUserDao {

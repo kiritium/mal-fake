@@ -14,11 +14,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import de.choong.UserRight;
 import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
-import de.choong.model.UserDO;
+import de.choong.model.user.UserDO;
+import de.choong.model.user.UserRight;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 
@@ -42,11 +42,20 @@ public class UserForm extends Panel {
         UserDO user = (UserDO) getDefaultModelObject();
 
         Form<UserDO> form = new Form<UserDO>("form", Model.of(user));
+
+        // username
         form.add(new TextField<String>("username", new PropertyModel<String>(user, "username")));
+
+        // password
         form.add(new PasswordTextField("password", new PropertyModel<String>(user, "password")));
+
+        // userRight
         // TODO only visible to admin, else userRight default to USER
-        form.add(new DropDownChoice<UserRight>("userRight", new PropertyModel<UserRight>(user,
-                "userRight"), Arrays.asList(UserRight.values())));
+        DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
+                new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
+        userRight.setNullValid(false);
+        userRight.setDefaultModelObject(UserRight.USER);
+        form.add(userRight);
         form.add(new AjaxSubmitLink("submit", form) {
             private static final long serialVersionUID = -2717359351525157884L;
 

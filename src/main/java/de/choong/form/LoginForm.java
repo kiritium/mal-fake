@@ -11,7 +11,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import de.choong.dao.IUserDao;
-import de.choong.model.UserDO;
+import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 

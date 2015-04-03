@@ -1,4 +1,4 @@
-package de.choong;
+package de.choong.model.user;
 
 /**
  * UserRights for the User Management. The visibility of pages or components are
@@ -8,8 +8,8 @@ package de.choong;
  */
 public enum UserRight {
 
-	ADMIN, // User Management
-	MODERATOR, // can Add Animes
-	USER, // Profile, Watched List
-
+    ADMIN, // User Management
+    MODERATOR, // can Add Animes
+    USER, // Profile, Watched List
+    ;
 }

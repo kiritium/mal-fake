@@ -5,7 +5,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.form.AnimeForm;
 import de.choong.form.FormMode;
-import de.choong.model.AnimeDO;
+import de.choong.model.anime.AnimeDO;
 
 public class AddAnimePage extends BasePage {
 

@@ -5,7 +5,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.form.FormMode;
 import de.choong.form.UserForm;
-import de.choong.model.UserDO;
+import de.choong.model.user.UserDO;
 
 public class AddUserPage extends BasePage {
 

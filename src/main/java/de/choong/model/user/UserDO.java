@@ -1,4 +1,4 @@
-package de.choong.model;
+package de.choong.model.user;
 
 import java.io.Serializable;
 
@@ -9,8 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import de.choong.UserRight;
 
 @Entity
 @Table(name = "T_USER")

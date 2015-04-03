@@ -1,9 +1,11 @@
-package de.choong.model;
+package de.choong.model.anime;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -31,6 +33,15 @@ public class AnimeDO implements Serializable {
 
     @Column
     private Integer year;
+
+    @Enumerated(EnumType.STRING)
+    private Season season;
+
+    @Enumerated(EnumType.STRING)
+    private MediaType type;
+
+    @Enumerated(EnumType.STRING)
+    private AiringStatus status;
 
     public AnimeDO() {
     }

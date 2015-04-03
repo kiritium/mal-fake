@@ -7,8 +7,8 @@ import java.util.Random;
 
 import org.apache.wicket.util.crypt.Base64;
 
-import de.choong.UserRight;
-import de.choong.model.UserDO;
+import de.choong.model.user.UserDO;
+import de.choong.model.user.UserRight;
 
 public class UserUtil {
 	public static String generateSalt() {

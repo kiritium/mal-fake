@@ -9,7 +9,7 @@ import org.hibernate.criterion.Projections;
 
 import de.choong.dao.lambda.ExecuteInTransaction;
 import de.choong.exceptions.DBException;
-import de.choong.model.AnimeDO;
+import de.choong.model.anime.AnimeDO;
 import de.choong.util.HibernateUtil;
 
 public class AnimeDao implements IAnimeDao {
