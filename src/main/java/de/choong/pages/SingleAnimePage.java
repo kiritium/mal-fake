@@ -28,7 +28,13 @@ public class SingleAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        // TODO fill information
+        add(new Label("bigTitle", anime.getTitle()));
         add(new Label("title", anime.getTitle()));
+        add(new Label("altTitle", anime.getAltTitle()));
+        add(new Label("type", anime.getType().getDisplayName()));
+        add(new Label("status", anime.getStatus().getDisplayName()));
+        add(new Label("season", anime.getSeason().getDisplayName() + " " + anime.getYear()));
+        add(new Label("creator", anime.getCreator()));
+        add(new Label("studio", anime.getStudio()));
     }
 }

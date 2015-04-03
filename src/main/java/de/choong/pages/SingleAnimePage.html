@@ -1,10 +1,10 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div class="center-block">
 		<div class="page-header">
-			<h1>Anime Title</h1>
+			<h1><wicket:container wicket:id="bigTitle" /></h1>
 		</div>
 		<div class="col-sm-4">
-			<img class="img-thumbnail" src="img/shigatsu.jpg" alt="Cover" /> <br />
+			<img class="img-thumbnail" src="img/cover/shigatsu.jpg" alt="Cover" /> <br />
 			<div class="panel panel-default" id="animeInfoPanel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -16,17 +16,17 @@
 						<dt>Title</dt>
 						<dd><wicket:container wicket:id="title" /></dd>
 						<dt>Alternativ title</dt>
-						<dd>English title</dd>
+						<dd><wicket:container wicket:id="altTitle" /></dd>
 						<dt>Type</dt>
-						<dd>TV/Movie/OVA</dd>
+						<dd><wicket:container wicket:id="type" /></dd>
 						<dt>Status</dt>
-						<dd>Not aired/Airing/Completed</dd>
+						<dd><wicket:container wicket:id="status" /></dd>
 						<dt>Season</dt>
-						<dd>Season Year</dd>
+						<dd><wicket:container wicket:id="season" /></dd>
 						<dt>Original creator</dt>
-						<dd>Name of creator</dd>
+						<dd><wicket:container wicket:id="creator" /></dd>
 						<dt>Studio</dt>
-						<dd>Name of studio</dd>
+						<dd><wicket:container wicket:id="studio" /></dd>
 						<dt>Genres</dt>
 						<dd>Genres</dd>
 					</dl>
@@ -60,9 +60,9 @@
 				<div role="tabpanel" id="ppltabpanel">
 					<div class="panel-heading" id="ppltabpanelhead">
 						<ul class="nav nav-tabs nav-justified" role="tablist" >
-							<li role="presentation" class="active"><a href="#animelist"
-								aria-controls="animelist" role="tab" data-toggle="tab">Anime-List</a></li>
-							<li role="presentation"><a href="#char" aria-controls="char"
+							<!--<li role="presentation"><a href="#animelist"
+								aria-controls="animelist" role="tab" data-toggle="tab">Anime-List</a></li>-->
+							<li role="presentation" class="active"><a href="#char" aria-controls="char"
 								role="tab" data-toggle="tab">Characters</a></li>
 							<li role="presentation"><a href="#staff"
 								aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
@@ -70,13 +70,13 @@
 					</div>
 					<div class="panel-body">
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane fade in active" id="animelist">
+							<!--<div role="tabpanel" class="tab-pane " id="animelist">
 								<p>User-Anime-List Options</p>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="char">
+							</div>-->
+							<div role="tabpanel" class="tab-pane active" id="char">
 								<p>List of characters</p>
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="staff">
+							<div role="tabpanel" class="tab-pane" id="staff">
 								<p>List of staff</p>
 							</div>
 						</div>

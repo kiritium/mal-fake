@@ -49,7 +49,7 @@ public class AnimeTable extends Panel {
                 "season.displayName"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Year"), "year", "year"));
 
-        add(new SortableTable<AnimeDO, String>("test", columns, dataProvider, 10) {
+        add(new SortableTable<AnimeDO, String>("table", columns, dataProvider, 10) {
             private static final long serialVersionUID = 6781390593244163407L;
 
             @Override
