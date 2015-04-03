@@ -2,13 +2,11 @@ package de.choong.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import de.choong.dao.lambda.ExecuteInTransaction;
 import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
-import de.choong.util.HibernateUtil;
 
 public class UserDao implements IUserDao {
 
@@ -16,68 +14,36 @@ public class UserDao implements IUserDao {
 
     @Override
     public void create(UserDO newObject) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.save(newObject);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.save(newObject));
     }
 
     @Override
     public UserDO read(int id) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        UserDO user = (UserDO) session.get(UserDO.class, id);
-
-        session.flush();
-        tx.commit();
-
-        return user;
+        return (UserDO) ExecuteInTransaction.get(session -> session.get(UserDO.class, id));
     }
 
     @Override
     public void update(UserDO updatedObj) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.update(updatedObj);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.update(updatedObj));
     }
 
     @Override
     public void delete(int id) throws DBException {
         UserDO user = read(id);
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        session.delete(user);
-
-        session.flush();
-        tx.commit();
+        ExecuteInTransaction.run(session -> session.delete(user));
     }
 
     @Override
     public UserDO readByName(String name) throws DBException {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
         @SuppressWarnings("unchecked")
-		List<UserDO> result = session.createCriteria(UserDO.class)
-			.add(Restrictions.eqOrIsNull("username", name))
-			.list();
+        List<UserDO> result = ExecuteInTransaction
+                .get(session -> session.createCriteria(UserDO.class)
+                        .add(Restrictions.eqOrIsNull("username", name)).list());
 
-        session.flush();
-        tx.commit();
-
-        if(result.isEmpty()) {
-        	return null;
+        if (result.isEmpty()) {
+            return null;
         }
-    	return result.get(0);
+        return result.get(0);
     }
 
 }
