@@ -29,8 +29,8 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
-		// createDB();
-		// add your configuration here
+
+		// Don't show wicket tags in rendered html.
 		getMarkupSettings().setStripWicketTags(true);
 		
 		// Update schema and load settings.
