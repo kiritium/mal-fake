@@ -14,7 +14,7 @@
 				<div class="panel-body">
 					<dl>
 						<dt>Title</dt>
-						<dd>Title</dd>
+						<dd><wicket:container wicket:id="title" /></dd>
 						<dt>Alternativ title</dt>
 						<dd>English title</dd>
 						<dt>Type</dt>
@@ -56,30 +56,32 @@
 			</div>
 
 			<!-- Tabpanel unfinished -->
-			<div role="tabpanel" id="ppltabpanel">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs nav-justified" role="tablist">
-					<li role="presentation" class="active"><a href="#animelist"
-						aria-controls="animelist" role="tab" data-toggle="tab">Anime-List</a></li>
-					<li role="presentation"><a href="#char"
-						aria-controls="char" role="tab" data-toggle="tab">Characters</a></li>
-					<li role="presentation"><a href="#staff"
-						aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
-				</ul>
-
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="animelist">
-						<p>User-Anime-List Options</p>
+			<div class="panel panel-default">
+				<div role="tabpanel" id="ppltabpanel">
+					<div class="panel-heading" id="ppltabpanelhead">
+						<ul class="nav nav-tabs nav-justified" role="tablist" >
+							<li role="presentation" class="active"><a href="#animelist"
+								aria-controls="animelist" role="tab" data-toggle="tab">Anime-List</a></li>
+							<li role="presentation"><a href="#char" aria-controls="char"
+								role="tab" data-toggle="tab">Characters</a></li>
+							<li role="presentation"><a href="#staff"
+								aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
+						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="char">
-						<p>List of characters</p>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="staff">
-						<p>List of staff</p>
+					<div class="panel-body">
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="animelist">
+								<p>User-Anime-List Options</p>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="char">
+								<p>List of characters</p>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="staff">
+								<p>List of staff</p>
+							</div>
+						</div>
 					</div>
 				</div>
-
 			</div>
 
 			<div class="panel panel-default">
