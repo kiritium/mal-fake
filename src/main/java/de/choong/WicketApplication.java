@@ -1,7 +1,9 @@
 package de.choong;
 
+import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.settings.IRequestCycleSettings.RenderStrategy;
 
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
@@ -18,29 +20,38 @@ import de.choong.util.HibernateUtil;
  * @see de.choong.Start#main(String[])
  */
 public class WicketApplication extends WebApplication {
-    @Override
-    public Class<? extends WebPage> getHomePage() {
-        return HomePage.class;
-    }
+	@Override
+	public Class<? extends WebPage> getHomePage() {
+		return HomePage.class;
+	}
 
-    @Override
-    public void init() {
-        super.init();
+	@Override
+	public void init() {
+		super.init();
 
-        // Don't show wicket tags in rendered html.
-        getMarkupSettings().setStripWicketTags(true);
+		// Don't show wicket tags in rendered html.
+		getMarkupSettings().setStripWicketTags(true);
 
-        // Update schema and load settings.
-        HibernateUtil.getSessionFactory();
+		// Update schema and load settings.
+		HibernateUtil.getSessionFactory();
 
-        addMountPages();
-    }
+		addMountPages();
 
-    private void addMountPages() {
-        mountPage("/addAnime", AddAnimePage.class);
-        mountPage("/addUser", AddUserPage.class);
-        mountPage("/login", LoginPage.class);
-        mountPage("/animeList", ShowAnimePage.class);
-        mountPage("/anime", SingleAnimePage.class);
-    }
+		// Remove further versioning
+		getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
+	}
+
+	private void addMountPages() {
+		mountPage("/addAnime", AddAnimePage.class);
+		mountPage("/addUser", AddUserPage.class);
+		mountPage("/login", LoginPage.class);
+		mountPage("/animeList", ShowAnimePage.class);
+		mountPage("/anime", SingleAnimePage.class);
+	}
+
+	@Override
+	public <T extends Page> void mountPage(String path, Class<T> pageClass) {
+		// Remove versioning
+		mount(new NoVersioningMount(path, pageClass));
+	}
 }
