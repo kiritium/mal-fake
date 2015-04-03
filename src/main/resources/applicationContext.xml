@@ -6,5 +6,8 @@
 
     <bean id="animeDao" class="de.choong.dao.AnimeHibernateDBDao">
     </bean>
+    
+    <bean id="userDao" class="de.choong.dao.UserDao">
+    </bean>
 
 </beans>

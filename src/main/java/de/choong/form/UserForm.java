@@ -13,9 +13,10 @@ import org.apache.wicket.model.PropertyModel;
 
 import de.choong.UserRight;
 import de.choong.components.AjaxFeedbackPanel;
-import de.choong.dao.UserDao;
+import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.UserDO;
+import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 
 public class UserForm extends Panel {
@@ -23,8 +24,7 @@ public class UserForm extends Panel {
     private static final long serialVersionUID = -6052123356031657622L;
 
     private FeedbackPanel feedback;
-    // TODO Load with spring + IUserDao
-    private UserDao dao = new UserDao();
+    private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
     private FormMode mode;
 
     public UserForm(String id, Model<UserDO> model, FormMode mode) {
@@ -52,25 +52,25 @@ public class UserForm extends Panel {
                 user.setSalt(UserUtil.generateSalt());
                 String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
                 user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
-                
+
                 // TODO set via Dropdown
                 user.setUserRight(UserRight.USER);
-                
+
                 UserForm.this.onSubmit(user, target);
 
                 target.add(feedback);
             }
-            
+
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
-            	super.onError(target, form);
-            	
-            	// TODO error
-            	target.add(feedback);
+                super.onError(target, form);
+
+                // TODO error
+                target.add(feedback);
             }
         });
         add(form);
-        
+
         feedback = new AjaxFeedbackPanel("feedback");
         form.add(feedback);
     }
@@ -92,7 +92,7 @@ public class UserForm extends Panel {
         try {
             dao.create(user);
         } catch (DBException ex) {
-        	feedback.error("DB Error");
+            feedback.error("DB Error");
         }
         feedback.success("User added.");
     }
@@ -101,7 +101,7 @@ public class UserForm extends Panel {
         try {
             dao.update(user);
         } catch (DBException ex) {
-        	feedback.error("DB Error");
+            feedback.error("DB Error");
         }
         feedback.success("User updated.");
     }

@@ -11,15 +11,15 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
 import de.choong.dao.IUserDao;
-import de.choong.dao.UserDao;
 import de.choong.model.UserDO;
+import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 
 public class LoginForm extends Panel {
 
     private static final long serialVersionUID = -2072142982507657566L;
-    // TODO Load with spring
-    private IUserDao dao = new UserDao();
+
+    private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
 
     public LoginForm(String id) {
         super(id);
@@ -57,12 +57,12 @@ public class LoginForm extends Panel {
 
                 // TODO login, session
             }
-            
+
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
-            	super.onError(target, form);
-            	
-            	// TODO error
+                super.onError(target, form);
+
+                // TODO error
             }
 
         });
