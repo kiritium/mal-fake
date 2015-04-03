@@ -3,7 +3,7 @@ package de.choong.pages;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.AnimeTable;
-import de.choong.components.SortableAnimeProvider;
+import de.choong.components.sortable.SortableAnimeProvider;
 import de.choong.dao.IAnimeDao;
 import de.choong.util.SpringUtil;
 

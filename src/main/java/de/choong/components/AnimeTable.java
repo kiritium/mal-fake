@@ -9,7 +9,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColu
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
-import de.choong.components.sortabletable.SortableTable;
+import de.choong.components.sortable.SortableTable;
 import de.choong.model.AnimeDO;
 
 public class AnimeTable extends Panel {

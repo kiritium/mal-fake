@@ -1,4 +1,4 @@
-package de.choong.components.sortabletable;
+package de.choong.components.sortable;
 
 import java.util.List;
 
