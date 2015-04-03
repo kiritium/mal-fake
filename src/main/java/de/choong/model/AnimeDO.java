@@ -17,17 +17,22 @@ public class AnimeDO implements Serializable {
     private int id;
 
     private String title;
-    private Integer year;
+    private String altTitle;
     private String creator;
+    private String studio;
+    private Integer year;
 
     public AnimeDO() {
     }
 
-    public AnimeDO(int id, String title, Integer year, String creator) {
+    public AnimeDO(int id, String title, String altTitle, String creator, String studio,
+            Integer year) {
         this.id = id;
         this.title = title;
-        this.year = year;
+        this.altTitle = altTitle;
         this.creator = creator;
+        this.studio = studio;
+        this.year = year;
     }
 
     public int getId() {
@@ -60,5 +65,21 @@ public class AnimeDO implements Serializable {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getAltTitle() {
+        return altTitle;
+    }
+
+    public void setAltTitle(String altTitle) {
+        this.altTitle = altTitle;
+    }
+
+    public String getStudio() {
+        return studio;
+    }
+
+    public void setStudio(String studio) {
+        this.studio = studio;
     }
 }

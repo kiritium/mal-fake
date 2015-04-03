@@ -34,8 +34,9 @@ public class AnimeTable extends Panel {
 
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getId()));
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getTitle()));
-                animeInfo.add(new Label(animeInfo.newChildId(), anime.getYear()));
                 animeInfo.add(new Label(animeInfo.newChildId(), anime.getCreator()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getStudio()));
+                animeInfo.add(new Label(animeInfo.newChildId(), anime.getYear()));
 
                 item.add(animeInfo);
             }
