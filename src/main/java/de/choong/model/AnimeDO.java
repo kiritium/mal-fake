@@ -2,6 +2,7 @@ package de.choong.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,10 +17,19 @@ public class AnimeDO implements Serializable {
     @GeneratedValue
     private int id;
 
+    @Column(length = 40, nullable = false)
     private String title;
+
+    @Column(length = 40)
     private String altTitle;
+
+    @Column(length = 30)
     private String creator;
+
+    @Column(length = 20)
     private String studio;
+
+    @Column
     private Integer year;
 
     public AnimeDO() {
