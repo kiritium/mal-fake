@@ -62,18 +62,6 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public boolean login(UserDO user) throws DBException {
-
-        return false;
-    }
-
-    @Override
-    public void logout() throws DBException {
-        // TODO Auto-generated method stub
-    
-    }
-
-    @Override
     public UserDO readByName(String name) throws DBException {
         Session session = HibernateUtil.getCurrentSession();
         Transaction tx = session.beginTransaction();

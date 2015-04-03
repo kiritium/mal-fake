@@ -32,6 +32,7 @@ public class AnimeForm extends Panel {
         super.onInitialize();
         AnimeDO anime = (AnimeDO) getDefaultModelObject();
 
+        // TODO add validation to form
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
         form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
         form.add(new TextField<String>("author", new PropertyModel<String>(anime, "author")));
@@ -53,7 +54,9 @@ public class AnimeForm extends Panel {
             protected void onError(AjaxRequestTarget target, Form<?> form) {
             	super.onError(target, form);
             	
-            	System.out.println("Error");
+            	// TODO react to error
+            	error("from.onError");
+            	target.add(feedback);
             }
         });
         add(form);

@@ -12,7 +12,6 @@ import org.apache.wicket.model.PropertyModel;
 
 import de.choong.dao.IUserDao;
 import de.choong.dao.UserDao;
-import de.choong.exceptions.DBException;
 import de.choong.model.UserDO;
 import de.choong.util.UserUtil;
 
@@ -32,6 +31,8 @@ public class LoginForm extends Panel {
 
         UserDO user = new UserDO();
 
+        // TODO validation
+        // TODO feedback
         Form<UserDO> form = new Form<>("form", Model.of(user));
 
         // Username
@@ -54,18 +55,17 @@ public class LoginForm extends Panel {
                 String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
                 user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
 
-                try {
-                    login(user);
-                } catch (DBException e) {
-                    e.printStackTrace();
-                }
+                // TODO login, session
+            }
+            
+            @Override
+            protected void onError(AjaxRequestTarget target, Form<?> form) {
+            	super.onError(target, form);
+            	
+            	// TODO error
             }
 
         });
         add(form);
-    }
-
-    private boolean login(UserDO user) throws DBException {
-        return dao.login(user);
     }
 }

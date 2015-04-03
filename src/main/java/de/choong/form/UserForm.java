@@ -60,6 +60,14 @@ public class UserForm extends Panel {
 
                 target.add(feedback);
             }
+            
+            @Override
+            protected void onError(AjaxRequestTarget target, Form<?> form) {
+            	super.onError(target, form);
+            	
+            	// TODO error
+            	target.add(feedback);
+            }
         });
         add(form);
         
