@@ -1,21 +1,24 @@
 package de.choong.components;
 
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.markup.repeater.Item;
-import org.apache.wicket.markup.repeater.RepeatingView;
-import org.apache.wicket.markup.repeater.data.DataView;
-import org.apache.wicket.markup.repeater.data.IDataProvider;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
+
+import de.choong.components.sortabletable.SortableTable;
 import de.choong.model.AnimeDO;
 
 public class AnimeTable extends Panel {
 
     private static final long serialVersionUID = -3768439988615983395L;
 
-    private IDataProvider<AnimeDO> dataProvider;
+    private ISortableDataProvider<AnimeDO,String> dataProvider;
 
-    public AnimeTable(String id, IDataProvider<AnimeDO> dataProvider) {
+    public AnimeTable(String id, ISortableDataProvider<AnimeDO, String> dataProvider) {
         super(id);
         this.dataProvider = dataProvider;
     }
@@ -24,26 +27,12 @@ public class AnimeTable extends Panel {
     protected void onInitialize() {
         super.onInitialize();
 
-        DataView<AnimeDO> animeRow = new DataView<AnimeDO>("animeRow",
-                dataProvider) {
-            private static final long serialVersionUID = -2390389602389777774L;
-
-            @Override
-            protected void populateItem(Item<AnimeDO> item) {
-                AnimeDO anime = item.getModelObject();
-                RepeatingView animeInfo = new RepeatingView("animeInfo");
-
-                animeInfo.add(new Label(animeInfo.newChildId(), anime.getId()));
-                animeInfo.add(new Label(animeInfo.newChildId(), anime
-                        .getTitle()));
-                animeInfo
-                        .add(new Label(animeInfo.newChildId(), anime.getYear()));
-                animeInfo.add(new Label(animeInfo.newChildId(), anime
-                        .getAuthor()));
-
-                item.add(animeInfo);
-            }
-        };
-        add(animeRow);
+        List<IColumn<AnimeDO, String>> columns = new ArrayList<>();
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("ID"), "id","id"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Title"), "title", "title"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Year"), "year", "year"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Author"), "author", "author"));
+        
+        add(new SortableTable<AnimeDO, String>("test", columns, dataProvider, 10));
     }
 }

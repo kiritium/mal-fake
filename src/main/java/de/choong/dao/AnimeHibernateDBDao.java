@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 
 import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
@@ -71,5 +73,47 @@ public class AnimeHibernateDBDao implements IAnimeDao {
         session.flush();
         tx.commit();
         return animes;
+    }
+    
+    public long countAll() {
+    	Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        
+        long count = (Long) session.createCriteria(AnimeDO.class).setProjection(Projections.rowCount()).uniqueResult();
+
+        session.flush();
+        tx.commit();
+        return count;
+    }
+    
+    public List<AnimeDO> readWithLimit(int first, int max) {
+    	Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        
+        @SuppressWarnings("unchecked")
+		List<AnimeDO> animes = session.createCriteria(AnimeDO.class)
+			.setFirstResult(first)
+			.setMaxResults(max)
+			.list();
+
+        session.flush();
+        tx.commit();
+    	return animes;
+    }
+    
+    public List<AnimeDO> readWithLimit(int first, int max, Order order) {
+    	Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        
+        @SuppressWarnings("unchecked")
+		List<AnimeDO> animes = session.createCriteria(AnimeDO.class)
+			.setFirstResult(first)
+			.setMaxResults(max)
+			.addOrder(order)
+			.list();
+
+        session.flush();
+        tx.commit();
+    	return animes;
     }
 }
