@@ -14,7 +14,7 @@ public class SortableTable<T, S> extends DataTable<T, S> {
 	private static final long serialVersionUID = -5349669651867050867L;
 	private ISortableDataProvider<T, S> dataProvider;
 
-	public SortableTable(String id, List<? extends IColumn<T, S>> columns,
+	public SortableTable(String id, List<IColumn<T, S>> columns,
 			ISortableDataProvider<T, S> dataProvider, int rowsPerPage) {
 		super(id, columns, dataProvider, rowsPerPage);
 		this.dataProvider = dataProvider;
@@ -35,11 +35,5 @@ public class SortableTable<T, S> extends DataTable<T, S> {
 		addBottomToolbar(new NoRecordsToolbar(this));
 		addBottomToolbar(new AjaxNavigationToolbar(this));
 	}
-	
-//	@Override
-//	protected Item<T> newRowItem(final String id, final int index, final IModel<T> model)
-//	{
-//		return new OddEvenItem<T>(id, index, model);
-//	}
 	
 }
