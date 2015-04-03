@@ -41,11 +41,11 @@ public class WicketApplication extends WebApplication {
 	}
 
 	private void addMountPages() {
-		mountPageNoVers("/addAnime", AddAnimePage.class);
-		mountPageNoVers("/addUser", AddUserPage.class);
-		mountPageNoVers("/login", LoginPage.class);
-		mountPageNoVers("/animeList", ShowAnimePage.class);
-		mountPageNoVers("/anime", SingleAnimePage.class);
+		mountPage("/addAnime", AddAnimePage.class);
+		mountPage("/addUser", AddUserPage.class);
+		mountPage("/login", LoginPage.class);
+		mountPage("/animeList", ShowAnimePage.class);
+		mountPage("/anime", SingleAnimePage.class);
 	}
 
 	public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
