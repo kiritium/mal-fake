@@ -43,6 +43,11 @@ dd {
 	margin-bottom: 20px;
 }
 
+#ppltabpanelhead {
+	padding: 0.5px 0px;
+}
+
 #animeInfoPanel {
 	margin-top: 20px;
 }
+
