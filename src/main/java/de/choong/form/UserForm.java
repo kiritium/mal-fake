@@ -2,7 +2,6 @@ package de.choong.form;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -66,7 +65,7 @@ public class UserForm extends Panel {
                 UserDO user = (UserDO) form.getModelObject();
                 user.setSalt(UserUtil.generateSalt());
                 String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
-                user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
+                user.setPassword(hashedPassword);
 
                 UserForm.this.onSubmit(user, target);
 

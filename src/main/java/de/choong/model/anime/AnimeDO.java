@@ -103,4 +103,28 @@ public class AnimeDO implements Serializable {
     public void setStudio(String studio) {
         this.studio = studio;
     }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    public MediaType getType() {
+        return type;
+    }
+
+    public void setType(MediaType type) {
+        this.type = type;
+    }
+
+    public AiringStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AiringStatus status) {
+        this.status = status;
+    }
 }

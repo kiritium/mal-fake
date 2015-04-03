@@ -39,11 +39,14 @@ public class AnimeTable extends Panel {
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Title"), "title", "title"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Alt. Title"), "altTitle",
                 "altTitle"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Type"), "type", "type"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Status"), "status", "status"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Type"), "type",
+                "type.displayName"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Status"), "status",
+                "status.displayName"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Creator"), "creator", "creator"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Studio"), "studio", "studio"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Season"), "season", "season"));
+        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Season"), "season",
+                "season.displayName"));
         columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Year"), "year", "year"));
 
         add(new SortableTable<AnimeDO, String>("test", columns, dataProvider, 10) {

@@ -10,7 +10,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
+import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.IUserDao;
+import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
@@ -20,6 +22,8 @@ public class LoginForm extends Panel {
     private static final long serialVersionUID = -2072142982507657566L;
 
     private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
+
+    private AjaxFeedbackPanel feedback;
 
     public LoginForm(String id) {
         super(id);
@@ -32,8 +36,10 @@ public class LoginForm extends Panel {
         UserDO user = new UserDO();
 
         // TODO validation
-        // TODO feedback
         Form<UserDO> form = new Form<>("form", Model.of(user));
+
+        feedback = new AjaxFeedbackPanel("feedback");
+        form.add(feedback);
 
         // Username
         TextField<String> userTextField = new TextField<>("username", new PropertyModel<>(user,
@@ -51,11 +57,30 @@ public class LoginForm extends Panel {
             @Override
             public void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 UserDO user = (UserDO) form.getModelObject();
-                user.setSalt(UserUtil.generateSalt());
-                String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
-                user.setPassword(StringUtils.substring(hashedPassword, 0, 20));
+                UserDO actualUser = null;
+                try {
+                    actualUser = dao.readByName(user.getUsername());
+                } catch (DBException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                if (actualUser == null) {
+                    feedback.error("Wrong username or password.");
+                    target.add(feedback);
+                    return;
+                }
+                String salt = actualUser.getSalt();
+                String hashedPassword = UserUtil.hash(user.getPassword(), salt);
 
-                // TODO login, session
+                if (StringUtils.equals(hashedPassword, actualUser.getPassword())) {
+                    feedback.info("Success");
+                } else {
+                    feedback.error("Wrong username or password.");
+                }
+
+                target.add(feedback);
+                // TODO session
+
             }
 
             @Override
@@ -64,7 +89,6 @@ public class LoginForm extends Panel {
 
                 // TODO error
             }
-
         });
         add(form);
     }
