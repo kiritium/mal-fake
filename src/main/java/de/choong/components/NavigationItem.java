@@ -21,6 +21,8 @@ public class NavigationItem extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+        
+        // TODO change AjaxFallbackLink to BookmarkablePageLink("menuItem", pageClass)
         AjaxFallbackLink<String> link = new AjaxFallbackLink<String>("menuitem") {
 
             private static final long serialVersionUID = 9048143806898239960L;

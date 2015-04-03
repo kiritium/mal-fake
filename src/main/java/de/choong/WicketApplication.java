@@ -9,6 +9,8 @@ import java.sql.Statement;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import de.choong.pages.AddAnimePage;
+import de.choong.pages.AddUserPage;
 import de.choong.pages.HomePage;
 import de.choong.util.HibernateUtil;
 
@@ -33,6 +35,15 @@ public class WicketApplication extends WebApplication {
 		
 		// Update schema and load settings.
 		HibernateUtil.getSessionFactory();
+		
+		addMountPages();
+	}
+	
+	private void addMountPages() {
+		// TODO add fixed urls to certain pages
+		
+		mountPage("/addAnime", AddAnimePage.class);
+		mountPage("/addUser", AddUserPage.class);
 	}
 
 	// TODO remove + old daos
