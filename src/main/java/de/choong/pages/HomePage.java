@@ -23,6 +23,7 @@ public class HomePage extends BasePage {
         add(createLink("showAnime", ShowAnimePage.class));
         add(createLink("addAnime", AddAnimePage.class));
         add(createLink("addUser", AddUserPage.class));
+        add(createLink("test", SingleAnimePage.class));
     }
 
     @SuppressWarnings("rawtypes")

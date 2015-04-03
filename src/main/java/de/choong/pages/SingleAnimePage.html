@@ -1,0 +1,126 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<div class="center-block">
+		<div class="page-header">
+			<h1>Anime Title</h1>
+		</div>
+		<div class="col-sm-4">
+			<img class="img-thumbnail" src="img/shigatsu.jpg" alt="Cover" /> <br />
+			<div class="panel panel-default" id="animeInfoPanel">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<strong>General Information</strong>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<dl>
+						<dt>Title</dt>
+						<dd>Title</dd>
+						<dt>Alternativ title</dt>
+						<dd>English title</dd>
+						<dt>Type</dt>
+						<dd>TV/Movie/OVA</dd>
+						<dt>Status</dt>
+						<dd>Not aired/Airing/Completed</dd>
+						<dt>Season</dt>
+						<dd>Season Year</dd>
+						<dt>Original creator</dt>
+						<dd>Name of creator</dd>
+						<dt>Studio</dt>
+						<dd>Name of studio</dd>
+						<dt>Genres</dt>
+						<dd>Genres</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<strong>Summary</strong>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+						diam nonumy eirmod tempor invidunt ut labore et dolore magna
+						aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+						duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+						takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+						sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+						tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+						voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+						Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+						dolor sit amet.</p>
+				</div>
+			</div>
+
+			<!-- Tabpanel unfinished -->
+			<div role="tabpanel" id="ppltabpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-justified" role="tablist">
+					<li role="presentation" class="active"><a href="#animelist"
+						aria-controls="animelist" role="tab" data-toggle="tab">Anime-List</a></li>
+					<li role="presentation"><a href="#char"
+						aria-controls="char" role="tab" data-toggle="tab">Characters</a></li>
+					<li role="presentation"><a href="#staff"
+						aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="animelist">
+						<p>User-Anime-List Options</p>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="char">
+						<p>List of characters</p>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="staff">
+						<p>List of staff</p>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<strong>Quotes</strong>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<blockquote>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Integer posuere erat a ante.</p>
+						<footer>
+							<cite title="Source">Person 1</cite>
+						</footer>
+					</blockquote>
+					<blockquote class="blockquote-reverse">
+						<p>Stet clita kasd gubergren, no sea takimata sanctus est
+							Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+							consetetur sadipscing elitr.</p>
+						<footer>
+							<cite title="Source">Person 2</cite>
+						</footer>
+					</blockquote>
+					<blockquote>
+						<p>At vero eos et accusam et justo duo dolores et ea rebum.
+							Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+							ipsum dolor sit amet.</p>
+						<footer>
+							<cite title="Source">Person 3</cite>
+						</footer>
+					</blockquote>
+					<blockquote class="blockquote-reverse">
+						<p>Sed diam nonumy eirmod tempor invidunt ut labore et dolore
+							magna aliquyam erat, sed diam voluptua.</p>
+						<footer>
+							<cite title="Source">Person 4</cite>
+						</footer>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	</div>
+</wicket:extend>
