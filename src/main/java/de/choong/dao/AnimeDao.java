@@ -44,15 +44,8 @@ public class AnimeDao implements IAnimeDao {
     }
 
     public long countAll() {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        long count = (Long) session.createCriteria(AnimeDO.class)
-                .setProjection(Projections.rowCount()).uniqueResult();
-
-        session.flush();
-        tx.commit();
-        return count;
+        return (long) ExecuteInTransaction.get(session -> session.createCriteria(AnimeDO.class)
+                .setProjection(Projections.rowCount()).uniqueResult());
     }
 
     public List<AnimeDO> readWithLimit(int first, int max, Order order) {
