@@ -9,7 +9,7 @@ import de.choong.exceptions.DBException;
 import de.choong.model.AnimeDO;
 import de.choong.util.HibernateUtil;
 
-public class AnimeHibernateDBDao implements IAnimeDao {
+public class AnimeDao implements IAnimeDao {
 
     private static final long serialVersionUID = 6398704770406750368L;
 

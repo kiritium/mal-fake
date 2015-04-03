@@ -18,16 +18,16 @@ public class AnimeDO implements Serializable {
 
     private String title;
     private Integer year;
-    private String author;
+    private String creator;
 
     public AnimeDO() {
     }
 
-    public AnimeDO(int id, String title, Integer year, String author) {
+    public AnimeDO(int id, String title, Integer year, String creator) {
         this.id = id;
         this.title = title;
         this.year = year;
-        this.author = author;
+        this.creator = creator;
     }
 
     public int getId() {
@@ -54,11 +54,11 @@ public class AnimeDO implements Serializable {
         this.year = year;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }
