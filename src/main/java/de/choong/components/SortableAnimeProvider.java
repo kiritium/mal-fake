@@ -9,13 +9,17 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.hibernate.criterion.Order;
 
-import de.choong.dao.AnimeHibernateDBDao;
+import de.choong.dao.AnimeDao;
+import de.choong.dao.IAnimeDao;
 import de.choong.model.AnimeDO;
+import de.choong.util.SpringUtil;
 
 public class SortableAnimeProvider extends SortableDataProvider<AnimeDO, String>{
 
 	private static final long serialVersionUID = 7588295684422539794L;
 
+	private IAnimeDao dao = (AnimeDao) SpringUtil.getBean("animeDao");
+	
 	public SortableAnimeProvider() {
 		super();
 		this.setSort("id", SortOrder.ASCENDING);
@@ -23,12 +27,12 @@ public class SortableAnimeProvider extends SortableDataProvider<AnimeDO, String>
 	
 	@Override
 	public Iterator<AnimeDO> iterator(long first, long count) {
-		return new AnimeHibernateDBDao().readWithLimit((int) first, (int) count, getSortOrder()).iterator();
+		return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
 	}
 
 	@Override
 	public long size() {
-		return new AnimeHibernateDBDao().countAll();
+		return dao.countAll();
 	}
 
 	@Override

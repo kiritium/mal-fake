@@ -86,21 +86,6 @@ public class AnimeDao implements IAnimeDao {
         return count;
     }
     
-    public List<AnimeDO> readWithLimit(int first, int max) {
-    	Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        
-        @SuppressWarnings("unchecked")
-		List<AnimeDO> animes = session.createCriteria(AnimeDO.class)
-			.setFirstResult(first)
-			.setMaxResults(max)
-			.list();
-
-        session.flush();
-        tx.commit();
-    	return animes;
-    }
-    
     public List<AnimeDO> readWithLimit(int first, int max, Order order) {
     	Session session = HibernateUtil.getCurrentSession();
         Transaction tx = session.beginTransaction();
