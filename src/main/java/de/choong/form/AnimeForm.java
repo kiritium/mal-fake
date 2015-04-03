@@ -114,14 +114,14 @@ public class AnimeForm extends Panel {
         season.setDefaultModelObject(Season.SPRING);
         form.add(season);
 
-        form.add(extracted(form));
+        form.add(createSubmitLink(form));
         add(form);
 
         feedback = new AjaxFeedbackPanel("feedback");
         form.add(feedback);
     }
 
-    private AjaxSubmitLink extracted(Form<AnimeDO> form) {
+    private AjaxSubmitLink createSubmitLink(Form<AnimeDO> form) {
         return new AjaxSubmitLink("submit", form) {
             private static final long serialVersionUID = -2717359351525157884L;
 

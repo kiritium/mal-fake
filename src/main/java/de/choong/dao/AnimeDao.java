@@ -2,15 +2,12 @@ package de.choong.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
 import de.choong.dao.lambda.ExecuteInTransaction;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
-import de.choong.util.HibernateUtil;
 
 public class AnimeDao implements IAnimeDao {
 
@@ -23,7 +20,7 @@ public class AnimeDao implements IAnimeDao {
 
     @Override
     public AnimeDO read(int id) throws DBException {
-        return ExecuteInTransaction.get(session -> (AnimeDO) session.get(AnimeDO.class, id));
+        return (AnimeDO) ExecuteInTransaction.get(session -> session.get(AnimeDO.class, id));
     }
 
     @Override
@@ -49,15 +46,10 @@ public class AnimeDao implements IAnimeDao {
     }
 
     public List<AnimeDO> readWithLimit(int first, int max, Order order) {
-        Session session = HibernateUtil.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
         @SuppressWarnings("unchecked")
-        List<AnimeDO> animes = session.createCriteria(AnimeDO.class).setFirstResult(first)
-                .setMaxResults(max).addOrder(order).list();
-
-        session.flush();
-        tx.commit();
+        List<AnimeDO> animes = ExecuteInTransaction.get(session -> session
+                .createCriteria(AnimeDO.class).setFirstResult(first).setMaxResults(max)
+                .addOrder(order).list());
         return animes;
     }
 }
