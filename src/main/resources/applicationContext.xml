@@ -4,7 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
                               http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="animeDao" class="de.choong.dao.AnimeHibernateDBDao">
+    <bean id="animeDao" class="de.choong.dao.AnimeDao">
+    </bean>
+    
+    <bean id="userDao" class="de.choong.dao.UserDao">
     </bean>
 
 </beans>

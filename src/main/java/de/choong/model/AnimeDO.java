@@ -2,6 +2,7 @@ package de.choong.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,18 +17,32 @@ public class AnimeDO implements Serializable {
     @GeneratedValue
     private int id;
 
+    @Column(length = 40, nullable = false)
     private String title;
+
+    @Column(length = 40)
+    private String altTitle;
+
+    @Column(length = 30)
+    private String creator;
+
+    @Column(length = 20)
+    private String studio;
+
+    @Column
     private Integer year;
-    private String author;
 
     public AnimeDO() {
     }
 
-    public AnimeDO(int id, String title, Integer year, String author) {
+    public AnimeDO(int id, String title, String altTitle, String creator, String studio,
+            Integer year) {
         this.id = id;
         this.title = title;
+        this.altTitle = altTitle;
+        this.creator = creator;
+        this.studio = studio;
         this.year = year;
-        this.author = author;
     }
 
     public int getId() {
@@ -54,11 +69,27 @@ public class AnimeDO implements Serializable {
         this.year = year;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getAltTitle() {
+        return altTitle;
+    }
+
+    public void setAltTitle(String altTitle) {
+        this.altTitle = altTitle;
+    }
+
+    public String getStudio() {
+        return studio;
+    }
+
+    public void setStudio(String studio) {
+        this.studio = studio;
     }
 }
