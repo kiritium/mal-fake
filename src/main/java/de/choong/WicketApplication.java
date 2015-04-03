@@ -3,7 +3,6 @@ package de.choong;
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.settings.IRequestCycleSettings.RenderStrategy;
 
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
@@ -38,20 +37,18 @@ public class WicketApplication extends WebApplication {
 		addMountPages();
 
 		// Remove further versioning
-		getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
+		// getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
 	}
 
 	private void addMountPages() {
-		mountPage("/addAnime", AddAnimePage.class);
-		mountPage("/addUser", AddUserPage.class);
-		mountPage("/login", LoginPage.class);
-		mountPage("/animeList", ShowAnimePage.class);
-		mountPage("/anime", SingleAnimePage.class);
+		mountPageNoVers("/addAnime", AddAnimePage.class);
+		mountPageNoVers("/addUser", AddUserPage.class);
+		mountPageNoVers("/login", LoginPage.class);
+		mountPageNoVers("/animeList", ShowAnimePage.class);
+		mountPageNoVers("/anime", SingleAnimePage.class);
 	}
 
-	@Override
-	public <T extends Page> void mountPage(String path, Class<T> pageClass) {
-		// Remove versioning
+	public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
 		mount(new NoVersioningMount(path, pageClass));
 	}
 }
