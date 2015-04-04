@@ -1,6 +1,8 @@
 package de.choong.model.anime;
 
-public enum AiringStatus {
+import de.choong.model.Displayable;
+
+public enum AiringStatus implements Displayable {
     NOT_AIRED_YET("Not aired yet"), //
     AIRING("Airing"), //
     COMPLETED("Completed"), //
@@ -9,14 +11,11 @@ public enum AiringStatus {
     private String displayName;
 
     private AiringStatus(String displayName) {
-        this.setDisplayName(displayName);
+        this.displayName = displayName;
     }
 
+    @Override
     public String getDisplayName() {
         return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
     }
 }

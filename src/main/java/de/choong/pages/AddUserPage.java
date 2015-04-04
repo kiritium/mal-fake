@@ -10,7 +10,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
-import de.choong.form.UserForm;
+import de.choong.form.UserInput;
 import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
@@ -36,7 +36,7 @@ public class AddUserPage extends BasePage {
 
         UserDO user = new UserDO();
         Form<UserDO> form = new Form<>("form", Model.of(user));
-        form.add(new UserForm("input", Model.of(user)));
+        form.add(new UserInput("input", Model.of(user)));
         form.add(createSubmitLink("submit", form));
 
         feedback = new AjaxFeedbackPanel("feedback");

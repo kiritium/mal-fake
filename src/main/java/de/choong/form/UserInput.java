@@ -13,11 +13,11 @@ import org.apache.wicket.model.PropertyModel;
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
 
-public class UserForm extends Panel {
+public class UserInput extends Panel {
 
     private static final long serialVersionUID = -6052123356031657622L;
 
-    public UserForm(String id, Model<UserDO> model) {
+    public UserInput(String id, Model<UserDO> model) {
         super(id, model);
     }
 

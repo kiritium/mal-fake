@@ -1,6 +1,8 @@
 package de.choong.model.anime;
 
-public enum MediaType {
+import de.choong.model.Displayable;
+
+public enum MediaType implements Displayable {
     TV("TV"), //
     MOVIE("Movie"), //
     OVA("OVA"), //
@@ -9,14 +11,10 @@ public enum MediaType {
     private String displayName;
 
     private MediaType(String displayName) {
-        this.setDisplayName(displayName);
+        this.displayName = displayName;
     }
 
     public String getDisplayName() {
         return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
     }
 }

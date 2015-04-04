@@ -15,11 +15,11 @@ import de.choong.model.anime.AnimeDO;
 import de.choong.model.anime.MediaType;
 import de.choong.model.anime.Season;
 
-public class AnimeForm extends Panel {
+public class AnimeInput extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
 
-    public AnimeForm(String id, Model<AnimeDO> model) {
+    public AnimeInput(String id, Model<AnimeDO> model) {
         super(id, model);
     }
 
@@ -92,6 +92,9 @@ public class AnimeForm extends Panel {
 
                     @Override
                     public Object getDisplayValue(Season object) {
+                        if (object.equals(Season.NONE)) {
+                            return null;
+                        }
                         return object.getDisplayName();
                     }
 
@@ -100,7 +103,7 @@ public class AnimeForm extends Panel {
                         return "" + index;
                     }
                 });
-        season.setDefaultModelObject(Season.SPRING);
+        season.setDefaultModelObject(Season.NONE);
         form.add(season);
 
         // Cover

@@ -1,6 +1,9 @@
 package de.choong.model.anime;
 
-public enum Season {
+import de.choong.model.Displayable;
+
+public enum Season implements Displayable {
+    NONE(""), //
     SPRING("Spring"), //
     SUMMER("Summer"), //
     FALL("Fall"), //
@@ -10,14 +13,10 @@ public enum Season {
     private String displayName;
 
     private Season(String displayName) {
-        this.setDisplayName(displayName);
+        this.displayName = displayName;
     }
 
     public String getDisplayName() {
         return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
     }
 }

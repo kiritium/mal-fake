@@ -13,6 +13,8 @@ import de.choong.util.SpringUtil;
 
 public class SingleAnimePage extends BasePage {
 
+    private static final String DEFAULT_TEXT = "-";
+
     private static final long serialVersionUID = -8384777450358070031L;
 
     private IAnimeDao dao = (IAnimeDao) SpringUtil.getBean("animeDao");
@@ -34,25 +36,26 @@ public class SingleAnimePage extends BasePage {
 
         // TODO FileNotFoundException and ResourceStreamNotFoundException
         add(new Image("cover", new ContextRelativeResource("/img/cover/" + anime.getCoverPath())));
-        add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
-        add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
-        add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), "-")));
-        if (anime.getType() == null) {
-            add(new Label("type", "-"));
-        } else {
-            add(new Label("type", anime.getType().getDisplayName()));
-        }
-        if (anime.getStatus() == null) {
-            add(new Label("status", "-"));
-        } else {
-            add(new Label("status", anime.getStatus().getDisplayName()));
-        }
-        if (anime.getSeason() == null) {
-            add(new Label("season", "" + anime.getYear()));
-        } else {
-            add(new Label("season", anime.getSeason().getDisplayName() + " " + anime.getYear()));
-        }
-        add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), "-")));
-        add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), "-")));
+        add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
+        add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
+        add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), DEFAULT_TEXT)));
+        add(new Label("type", anime.getType().getDisplayName()));
+        add(new Label("status", anime.getStatus().getDisplayName()));
+        add(new Label("season", StringUtils.defaultIfBlank(getSeasonDisplay(anime), DEFAULT_TEXT)));
+        add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), DEFAULT_TEXT)));
+        add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), DEFAULT_TEXT)));
     }
+
+    private String getSeasonDisplay(AnimeDO anime) {
+        String displayName = anime.getSeason().getDisplayName();
+
+        if (anime.getYear() != null) {
+            if (StringUtils.isNotBlank(displayName)) {
+                displayName += " ";
+            }
+            displayName += anime.getYear();
+        }
+        return displayName;
+    }
+
 }

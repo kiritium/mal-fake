@@ -54,7 +54,6 @@ public class AnimeTable extends Panel {
             @Override
             public void populateItem(Item<ICellPopulator<AnimeDO>> cellItem, String componentId,
                     IModel<AnimeDO> rowModel) {
-                // TODO action panel (delete, edit)
                 cellItem.add(new AnimeActionPanel(componentId, rowModel));
             }
         });
