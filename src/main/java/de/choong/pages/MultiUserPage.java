@@ -4,8 +4,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.UserTable;
 import de.choong.components.sortable.SortableUserProvider;
+import de.choong.model.user.UserRight;
 
-public class MultiUserPage extends BasePage {
+public class MultiUserPage extends SecurePage {
 
     private static final long serialVersionUID = 4569728237093473098L;
 
@@ -22,5 +23,10 @@ public class MultiUserPage extends BasePage {
         super.onInitialize();
 
         add(new UserTable("userTable", new SortableUserProvider()));
+    }
+
+    @Override
+    public UserRight getAccessRight() {
+        return UserRight.ADMIN;
     }
 }

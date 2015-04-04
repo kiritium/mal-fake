@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
+import de.choong.model.user.UserRight;
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
 import de.choong.pages.LoginPage;
@@ -29,20 +30,32 @@ public class Navigation extends Panel {
         RepeatingView navigationItems = new RepeatingView("navigation");
 
         addMenuItem(navigationItems, MultiAnimePage.class, "Anime-List");
-        addMenuItem(navigationItems, AddAnimePage.class, "Add Anime");
-        addMenuItem(navigationItems, LoginPage.class, "Login");
-        addMenuItem(navigationItems, AddUserPage.class, "Register");
-        addMenuItem(navigationItems, MultiUserPage.class, "User-List");
-        addLogout(navigationItems, "Logout");
+        addMenuItem(navigationItems, AddAnimePage.class, "Add Anime", UserRight.MODERATOR);
+        addMenuItem(navigationItems, LoginPage.class, "Login").setVisible(UserUtil.isNotLoggedIn());
+        addMenuItem(navigationItems, AddUserPage.class, "Register").setVisible(
+                UserUtil.isNotLoggedIn());
+        addMenuItem(navigationItems, MultiUserPage.class, "User-List", UserRight.ADMIN);
+        addLogoutMenuItem(navigationItems, "Logout");
         add(navigationItems);
     }
 
-    private void addMenuItem(RepeatingView navigationItems, Class<? extends Page> page, String name) {
-        navigationItems.add(new NavigationItem(navigationItems.newChildId(), page, name));
+    private NavigationItem addMenuItem(RepeatingView navigationItems, Class<? extends Page> page,
+            String name, UserRight userRight) {
+        NavigationItem item = new NavigationItem(navigationItems.newChildId(), page, name);
+        if (userRight != null) {
+            item.setVisible(UserUtil.hasRight(userRight));
+        }
+        navigationItems.add(item);
+        return item;
     }
 
-    private void addLogout(RepeatingView navigationItems, String name) {
-        navigationItems.add(new NavigationItem(navigationItems.newChildId(), name) {
+    private NavigationItem addMenuItem(RepeatingView navigationItems, Class<? extends Page> page,
+            String name) {
+        return addMenuItem(navigationItems, page, name, null);
+    }
+
+    private NavigationItem addLogoutMenuItem(RepeatingView navigationItems, String name) {
+        NavigationItem logout = new NavigationItem(navigationItems.newChildId(), name) {
             @Override
             protected WebMarkupContainer createNavigationLink(String id) {
                 return new AjaxFallbackLink<String>(id) {
@@ -52,11 +65,15 @@ public class Navigation extends Panel {
                     @Override
                     public void onClick(AjaxRequestTarget target) {
                         UserUtil.logout();
+                        setResponsePage(getApplication().getHomePage());
                     }
 
                 };
             }
-        });
+        };
+        logout.setVisible(UserUtil.isLoggedIn());
+        navigationItems.add(logout);
+        return logout;
     }
 
 }

@@ -40,9 +40,6 @@ public class WicketApplication extends WebApplication {
         HibernateUtil.getSessionFactory();
 
         addMountPages();
-
-        // Remove further versioning
-        // getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
     }
 
     private void addMountPages() {

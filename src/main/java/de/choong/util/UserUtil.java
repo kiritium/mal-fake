@@ -38,6 +38,10 @@ public class UserUtil {
         return getCurrentUser() != null;
     }
 
+    public static boolean isNotLoggedIn() {
+        return !isLoggedIn();
+    }
+
     public static UserDO getCurrentUser() {
         return ((MySession) WebSession.get()).getUser();
     }
