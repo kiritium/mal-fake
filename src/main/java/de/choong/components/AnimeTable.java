@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
@@ -21,55 +23,68 @@ import de.choong.pages.SingleAnimePage;
 // TODO this extra component is unnessesary, now that we have a sortable table component.
 public class AnimeTable extends Panel {
 
-    private static final long serialVersionUID = -3768439988615983395L;
+	private static final long serialVersionUID = -3768439988615983395L;
 
-    private ISortableDataProvider<AnimeDO, String> dataProvider;
+	private ISortableDataProvider<AnimeDO, String> dataProvider;
 
-    public AnimeTable(String id, ISortableDataProvider<AnimeDO, String> dataProvider) {
-        super(id);
-        this.dataProvider = dataProvider;
-    }
+	public AnimeTable(String id, ISortableDataProvider<AnimeDO, String> dataProvider) {
+		super(id);
+		this.dataProvider = dataProvider;
+	}
 
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 
-        List<IColumn<AnimeDO, String>> columns = new ArrayList<>();
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("ID"), "id", "id"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Title"), "title", "title"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Alt. Title"), "altTitle",
-                "altTitle"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Type"), "type",
-                "type.displayName"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Status"), "status",
-                "status.displayName"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Creator"), "creator", "creator"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Studio"), "studio", "studio"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Season"), "season",
-                "season.displayName"));
-        columns.add(new PropertyColumn<AnimeDO, String>(Model.of("Year"), "year", "year"));
+		List<IColumn<AnimeDO, String>> columns = new ArrayList<>();
+		columns.add(createClickablePropertyColumn("ID", "id", "id"));
+		columns.add(createClickablePropertyColumn("Title", "title", "title"));
+		columns.add(createClickablePropertyColumn("Alt. Title", "altTitle", "altTitle"));
+		columns.add(createClickablePropertyColumn("Type", "type", "type.displayName"));
+		columns.add(createClickablePropertyColumn("Status", "status", "status.displayName"));
+		columns.add(createClickablePropertyColumn("Creator", "creator", "creator"));
+		columns.add(createClickablePropertyColumn("Studio", "studio", "studio"));
+		columns.add(createClickablePropertyColumn("Season", "season", "season.displayName"));
+		columns.add(createClickablePropertyColumn("Year", "year", "year"));
 
-        add(new SortableTable<AnimeDO, String>("table", columns, dataProvider, 10) {
-            private static final long serialVersionUID = 6781390593244163407L;
+		// TODO show only if user has moderator rights
+		columns.add(new AbstractColumn<AnimeDO, String>(new Model<String>("")) {
+			private static final long serialVersionUID = 3431476079203912069L;
 
-            @Override
-            protected Item<AnimeDO> newRowItem(final String id, final int index,
-                    final IModel<AnimeDO> model) {
-                Item<AnimeDO> item = super.newRowItem(id, index, model);
-                item.add(new AjaxEventBehavior("onclick") {
-                    private static final long serialVersionUID = 3673916438509361719L;
+			@Override
+			public void populateItem(Item<ICellPopulator<AnimeDO>> cellItem, String componentId,
+					IModel<AnimeDO> rowModel) {
+				// TODO action panel (delete, edit)
+				cellItem.add(new AnimeActionPanel(componentId, rowModel));
+			}
+		});
 
-                    @Override
-                    protected void onEvent(AjaxRequestTarget target) {
-                        AnimeDO anime = model.getObject();
-                        int id = anime.getId();
-                        PageParameters param = new PageParameters();
-                        param.set("id", id);
-                        setResponsePage(SingleAnimePage.class, param);
-                    }
-                });
-                return item;
-            }
-        });
-    }
+		add(new SortableTable<AnimeDO, String>("table", columns, dataProvider, 10));
+	}
+
+	public PropertyColumn<AnimeDO, String> createClickablePropertyColumn(String display,
+			String sortProperty, String propertyExpression) {
+		return new PropertyColumn<AnimeDO, String>(Model.of(display), sortProperty,
+				propertyExpression) {
+			private static final long serialVersionUID = 7172331019091215968L;
+
+			@Override
+			public void populateItem(Item<ICellPopulator<AnimeDO>> item, String componentId,
+					IModel<AnimeDO> rowModel) {
+				super.populateItem(item, componentId, rowModel);
+				item.add(new AjaxEventBehavior("onclick") {
+					private static final long serialVersionUID = 3673916438509361719L;
+
+					@Override
+					protected void onEvent(AjaxRequestTarget target) {
+						AnimeDO anime = rowModel.getObject();
+						int id = anime.getId();
+						PageParameters param = new PageParameters();
+						param.set("id", id);
+						setResponsePage(SingleAnimePage.class, param);
+					}
+				});
+			}
+		};
+	}
 }
