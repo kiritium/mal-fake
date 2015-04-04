@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.ContextRelativeResource;
+import org.apache.wicket.util.string.StringValueConversionException;
 
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
@@ -20,13 +21,17 @@ public class SingleAnimePage extends BasePage {
     private IAnimeDao dao = (IAnimeDao) SpringUtil.getBean("animeDao");
     private AnimeDO anime;
 
-    // TODO ID NULL OR NOT INT
     public SingleAnimePage(final PageParameters parameters) {
-        int id = parameters.get("id").toInt();
+        int id = -1;
+        try {
+            id = parameters.get("id").toInt();
+        } catch (StringValueConversionException e) {
+            setResponsePage(getApplication().getHomePage());
+        }
         try {
             anime = dao.read(id);
         } catch (DBException e) {
-            e.printStackTrace();
+            setResponsePage(getApplication().getHomePage());
         }
     }
 

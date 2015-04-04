@@ -56,6 +56,8 @@ public class Navigation extends Panel {
 
     private NavigationItem addLogoutMenuItem(RepeatingView navigationItems, String name) {
         NavigationItem logout = new NavigationItem(navigationItems.newChildId(), name) {
+            private static final long serialVersionUID = -2089970305767481794L;
+
             @Override
             protected WebMarkupContainer createNavigationLink(String id) {
                 return new AjaxFallbackLink<String>(id) {

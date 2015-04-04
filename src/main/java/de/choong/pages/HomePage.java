@@ -19,7 +19,6 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-
     }
 
     @SuppressWarnings("rawtypes")

@@ -14,6 +14,7 @@ import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
 import de.choong.util.SpringUtil;
 
+// TODO SecurePage
 public class AddAnimePage extends BasePage {
 
     private static final long serialVersionUID = 8623937508924029855L;

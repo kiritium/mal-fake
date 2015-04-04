@@ -18,7 +18,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.sortable.SortableTable;
 import de.choong.model.anime.AnimeDO;
+import de.choong.model.user.UserRight;
 import de.choong.pages.SingleAnimePage;
+import de.choong.util.UserUtil;
 
 // TODO this extra component is unnessesary, now that we have a sortable table component.
 public class AnimeTable extends Panel {
@@ -47,17 +49,17 @@ public class AnimeTable extends Panel {
         columns.add(createClickablePropertyColumn("Season", "season", "season.displayName"));
         columns.add(createClickablePropertyColumn("Year", "year", "year"));
 
-        // TODO show only if user has moderator rights
-        columns.add(new AbstractColumn<AnimeDO, String>(new Model<String>("")) {
-            private static final long serialVersionUID = 3431476079203912069L;
+        if (UserUtil.hasRight(UserRight.MODERATOR)) {
+            columns.add(new AbstractColumn<AnimeDO, String>(new Model<String>("")) {
+                private static final long serialVersionUID = 3431476079203912069L;
 
-            @Override
-            public void populateItem(Item<ICellPopulator<AnimeDO>> cellItem, String componentId,
-                    IModel<AnimeDO> rowModel) {
-                cellItem.add(new AnimeActionPanel(componentId, rowModel));
-            }
-        });
-
+                @Override
+                public void populateItem(Item<ICellPopulator<AnimeDO>> cellItem,
+                        String componentId, IModel<AnimeDO> rowModel) {
+                    cellItem.add(new AnimeActionPanel(componentId, rowModel));
+                }
+            });
+        }
         add(new SortableTable<AnimeDO, String>("table", columns, dataProvider, 10));
     }
 
