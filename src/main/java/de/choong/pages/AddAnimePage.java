@@ -54,12 +54,13 @@ public class AddAnimePage extends BasePage {
 
                 AnimeDO anime = (AnimeDO) form.getModelObject();
                 try {
-                    dao.create(anime);
+                    int id = dao.create(anime);
+                    PageParameters param = new PageParameters();
+                    param.set("id", id);
+                    setResponsePage(SingleAnimePage.class, param);
                 } catch (DBException ex) {
                     feedback.error("DB Error");
                 }
-                feedback.success("Anime added.");
-
                 target.add(feedback);
             }
 

@@ -1,8 +1,11 @@
 package de.choong;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
@@ -54,5 +57,12 @@ public class WicketApplication extends WebApplication {
 
     public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
         mount(new NoVersioningMount(path, pageClass));
+    }
+
+    @Override
+    public Session newSession(Request request, Response response) {
+
+        return new MySession(request);
+
     }
 }

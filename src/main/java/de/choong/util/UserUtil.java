@@ -6,8 +6,10 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.util.crypt.Base64;
 
+import de.choong.MySession;
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
 
@@ -36,9 +38,8 @@ public class UserUtil {
         return getCurrentUser() != null;
     }
 
-    // TODO load the user from the session
     public static UserDO getCurrentUser() {
-        return null;
+        return ((MySession) WebSession.get()).getUser();
     }
 
     public static boolean hasRight(UserRight right) {
@@ -49,4 +50,7 @@ public class UserUtil {
         return false;
     }
 
+    public static void logout() {
+        WebSession.get().invalidate();
+    }
 }

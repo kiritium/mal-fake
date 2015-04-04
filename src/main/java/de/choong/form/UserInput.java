@@ -2,6 +2,7 @@ package de.choong.form;
 
 import java.util.Arrays;
 
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -12,13 +13,21 @@ import org.apache.wicket.model.PropertyModel;
 
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
+import de.choong.util.UserUtil;
 
 public class UserInput extends Panel {
 
     private static final long serialVersionUID = -6052123356031657622L;
+    private WebMarkupContainer userRightWrapper;
 
     public UserInput(String id, Model<UserDO> model) {
         super(id, model);
+    }
+
+    @Override
+    protected void onConfigure() {
+        super.onConfigure();
+        userRightWrapper.setVisibilityAllowed(UserUtil.hasRight(UserRight.ADMIN));
     }
 
     @Override
@@ -35,13 +44,14 @@ public class UserInput extends Panel {
         // Password
         form.add(new PasswordTextField("password", new PropertyModel<String>(user, "password")));
 
-        // User-Right
-        // TODO only visible to admin, else userRight default to USER
+        // User Rights
+        userRightWrapper = new WebMarkupContainer("userRightWrapper");
         DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
                 new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
         userRight.setNullValid(false);
         userRight.setDefaultModelObject(UserRight.USER);
-        form.add(userRight);
+        userRightWrapper.add(userRight);
+        form.add(userRightWrapper);
 
         add(form);
     }

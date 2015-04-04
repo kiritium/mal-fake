@@ -14,11 +14,9 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.sortable.SortableTable;
 import de.choong.model.user.UserDO;
-import de.choong.pages.SingleAnimePage;
 
 public class UserTable extends Panel {
 
@@ -69,11 +67,8 @@ public class UserTable extends Panel {
 
                     @Override
                     protected void onEvent(AjaxRequestTarget target) {
-                        UserDO anime = rowModel.getObject();
-                        int id = anime.getId();
-                        PageParameters param = new PageParameters();
-                        param.set("id", id);
-                        setResponsePage(SingleAnimePage.class, param);
+                        UserDO user = rowModel.getObject();
+
                     }
                 });
             }

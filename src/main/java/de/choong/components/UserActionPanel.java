@@ -12,6 +12,8 @@ import de.choong.util.SpringUtil;
 
 public class UserActionPanel extends Panel {
 
+    private static final long serialVersionUID = -9078649491703177796L;
+
     private int id;
     private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
 

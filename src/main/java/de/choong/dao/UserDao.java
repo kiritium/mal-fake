@@ -16,8 +16,8 @@ public class UserDao implements IUserDao {
     private static final long serialVersionUID = -2539560151301942214L;
 
     @Override
-    public void create(UserDO newObject) throws DBException {
-        ExecuteInTransaction.run(session -> session.save(newObject));
+    public int create(UserDO newObject) throws DBException {
+        return (int) ExecuteInTransaction.get(session -> session.save(newObject));
     }
 
     @Override

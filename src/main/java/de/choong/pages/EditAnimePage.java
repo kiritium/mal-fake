@@ -60,11 +60,12 @@ public class EditAnimePage extends BasePage {
                 AnimeDO anime = (AnimeDO) form.getModelObject();
                 try {
                     dao.update(anime);
+                    PageParameters param = new PageParameters();
+                    param.set("id", anime.getId());
+                    setResponsePage(SingleAnimePage.class, param);
                 } catch (DBException ex) {
                     feedback.error("DB Error");
                 }
-                feedback.success("Anime edited.");
-
                 target.add(feedback);
             }
 
