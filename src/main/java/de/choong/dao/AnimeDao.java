@@ -41,11 +41,13 @@ public class AnimeDao implements IAnimeDao {
         return ExecuteInTransaction.get(session -> session.createCriteria(AnimeDO.class).list());
     }
 
+    @Override
     public long countAll() {
         return (long) ExecuteInTransaction.get(session -> session.createCriteria(AnimeDO.class)
                 .setProjection(Projections.rowCount()).uniqueResult());
     }
 
+    @Override
     public List<AnimeDO> readWithLimit(int first, int max, Order order) {
         @SuppressWarnings("unchecked")
         List<AnimeDO> animes = ExecuteInTransaction.get(session -> session
