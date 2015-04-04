@@ -1,5 +1,6 @@
 package de.choong.pages;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -28,13 +29,25 @@ public class SingleAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        add(new Label("bigTitle", anime.getTitle()));
-        add(new Label("title", anime.getTitle()));
-        add(new Label("altTitle", anime.getAltTitle()));
-        add(new Label("type", anime.getType().getDisplayName()));
-        add(new Label("status", anime.getStatus().getDisplayName()));
-        add(new Label("season", anime.getSeason().getDisplayName() + " " + anime.getYear()));
-        add(new Label("creator", anime.getCreator()));
-        add(new Label("studio", anime.getStudio()));
+        add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
+        add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
+        add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), "-")));
+        if (anime.getType() == null) {
+            add(new Label("type", "-"));
+        } else {
+            add(new Label("type", anime.getType().getDisplayName()));
+        }
+        if (anime.getStatus() == null) {
+            add(new Label("status", "-"));
+        } else {
+            add(new Label("status", anime.getStatus().getDisplayName()));
+        }
+        if (anime.getSeason() == null) {
+            add(new Label("season", "" + anime.getYear()));
+        } else {
+            add(new Label("season", anime.getSeason().getDisplayName() + " " + anime.getYear()));
+        }
+        add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), "-")));
+        add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), "-")));
     }
 }
