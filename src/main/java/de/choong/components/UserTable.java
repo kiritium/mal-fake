@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
@@ -12,9 +14,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.sortable.SortableTable;
 import de.choong.model.user.UserDO;
+import de.choong.pages.SingleAnimePage;
 
 public class UserTable extends Panel {
 
@@ -32,29 +36,47 @@ public class UserTable extends Panel {
         super.onInitialize();
 
         List<IColumn<UserDO, String>> columns = new ArrayList<>();
-        columns.add(new PropertyColumn<UserDO, String>(Model.of("ID"), "id", "id"));
-        columns.add(new PropertyColumn<UserDO, String>(Model.of("Username"), "username", "username"));
-        columns.add(new PropertyColumn<UserDO, String>(Model.of("User-Right"), "userRight",
-                "userRight"));
-        add(new SortableTable<UserDO, String>("table", columns, dataProvider, 10) {
-            private static final long serialVersionUID = -1954053987488013638L;
+        columns.add(createClickablePropertyColumn("ID", "id", "id"));
+        columns.add(createClickablePropertyColumn("Username", "username", "username"));
+        columns.add(createClickablePropertyColumn("User-Right", "userRight", "userRight"));
+
+        // TODO show only if user has admin rights
+        columns.add(new AbstractColumn<UserDO, String>(new Model<String>("")) {
+            private static final long serialVersionUID = 3431476079203912069L;
 
             @Override
-            protected Item<UserDO> newRowItem(final String id, final int index,
-                    final IModel<UserDO> model) {
-                Item<UserDO> item = super.newRowItem(id, index, model);
+            public void populateItem(Item<ICellPopulator<UserDO>> cellItem, String componentId,
+                    IModel<UserDO> rowModel) {
+                cellItem.add(new UserActionPanel(componentId, rowModel));
+            }
+        });
+
+        add(new SortableTable<UserDO, String>("table", columns, dataProvider, 10));
+    }
+
+    public PropertyColumn<UserDO, String> createClickablePropertyColumn(String display,
+            String sortProperty, String propertyExpression) {
+        return new PropertyColumn<UserDO, String>(Model.of(display), sortProperty,
+                propertyExpression) {
+            private static final long serialVersionUID = 7172331019091215968L;
+
+            @Override
+            public void populateItem(Item<ICellPopulator<UserDO>> item, String componentId,
+                    IModel<UserDO> rowModel) {
+                super.populateItem(item, componentId, rowModel);
                 item.add(new AjaxEventBehavior("onclick") {
                     private static final long serialVersionUID = 3673916438509361719L;
 
                     @Override
                     protected void onEvent(AjaxRequestTarget target) {
-                        UserDO user = model.getObject();
-                        int id = user.getId();
-                        // Maybe SingleUserPage
+                        UserDO anime = rowModel.getObject();
+                        int id = anime.getId();
+                        PageParameters param = new PageParameters();
+                        param.set("id", id);
+                        setResponsePage(SingleAnimePage.class, param);
                     }
                 });
-                return item;
             }
-        });
+        };
     }
 }

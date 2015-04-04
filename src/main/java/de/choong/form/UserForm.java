@@ -2,36 +2,23 @@ package de.choong.form;
 
 import java.util.Arrays;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import de.choong.components.AjaxFeedbackPanel;
-import de.choong.dao.IUserDao;
-import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
-import de.choong.util.SpringUtil;
-import de.choong.util.UserUtil;
 
 public class UserForm extends Panel {
 
     private static final long serialVersionUID = -6052123356031657622L;
 
-    private FeedbackPanel feedback;
-    private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
-    private FormMode mode;
-
-    public UserForm(String id, Model<UserDO> model, FormMode mode) {
+    public UserForm(String id, Model<UserDO> model) {
         super(id, model);
-        this.mode = mode;
     }
 
     @Override
@@ -55,65 +42,7 @@ public class UserForm extends Panel {
         userRight.setNullValid(false);
         userRight.setDefaultModelObject(UserRight.USER);
         form.add(userRight);
-        form.add(new AjaxSubmitLink("submit", form) {
-            private static final long serialVersionUID = -2717359351525157884L;
 
-            @Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onSubmit(target, form);
-
-                UserDO user = (UserDO) form.getModelObject();
-                user.setSalt(UserUtil.generateSalt());
-                String hashedPassword = UserUtil.hash(user.getPassword(), user.getSalt());
-                user.setPassword(hashedPassword);
-
-                UserForm.this.onSubmit(user, target);
-
-                target.add(feedback);
-            }
-
-            @Override
-            protected void onError(AjaxRequestTarget target, Form<?> form) {
-                super.onError(target, form);
-
-                // TODO error
-                target.add(feedback);
-            }
-        });
         add(form);
-
-        feedback = new AjaxFeedbackPanel("feedback");
-        form.add(feedback);
-    }
-
-    public void onSubmit(UserDO user, AjaxRequestTarget target) {
-        switch (mode) {
-        case ADD:
-            onAdd(user, target);
-            break;
-        case EDIT:
-            onEdit(user, target);
-            break;
-        default:
-            // do nothing
-        }
-    }
-
-    public void onAdd(UserDO user, AjaxRequestTarget target) {
-        try {
-            dao.create(user);
-        } catch (DBException ex) {
-            feedback.error("DB Error");
-        }
-        feedback.success("User added.");
-    }
-
-    public void onEdit(UserDO user, AjaxRequestTarget target) {
-        try {
-            dao.update(user);
-        } catch (DBException ex) {
-            feedback.error("DB Error");
-        }
-        feedback.success("User updated.");
     }
 }

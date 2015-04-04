@@ -2,36 +2,25 @@ package de.choong.form;
 
 import java.util.Arrays;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
-import de.choong.components.AjaxFeedbackPanel;
-import de.choong.dao.IAnimeDao;
-import de.choong.exceptions.DBException;
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.anime.MediaType;
 import de.choong.model.anime.Season;
-import de.choong.util.SpringUtil;
 
 public class AnimeForm extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
-    private FeedbackPanel feedback;
-    private IAnimeDao dao = (IAnimeDao) SpringUtil.getBean("animeDao");
-    private FormMode mode;
 
-    public AnimeForm(String id, Model<AnimeDO> model, FormMode mode) {
+    public AnimeForm(String id, Model<AnimeDO> model) {
         super(id, model);
-        this.mode = mode;
     }
 
     @Override
@@ -117,69 +106,7 @@ public class AnimeForm extends Panel {
         // Cover
         form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
-        // Button
-        // TODO Button desc
-        form.add(createSubmitLink(form));
         add(form);
 
-        feedback = new AjaxFeedbackPanel("feedback");
-        form.add(feedback);
     }
-
-    private AjaxSubmitLink createSubmitLink(Form<AnimeDO> form) {
-        return new AjaxSubmitLink("submit", form) {
-            private static final long serialVersionUID = -2717359351525157884L;
-
-            @Override
-            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onSubmit(target, form);
-
-                AnimeDO anime = (AnimeDO) form.getModelObject();
-                AnimeForm.this.onSubmit(anime, target);
-
-                target.add(feedback);
-            }
-
-            @Override
-            protected void onError(AjaxRequestTarget target, Form<?> form) {
-                super.onError(target, form);
-
-                // TODO react to error
-                error("from.onError");
-                target.add(feedback);
-            }
-        };
-    }
-
-    public void onSubmit(AnimeDO anime, AjaxRequestTarget target) {
-        switch (mode) {
-        case ADD:
-            onAdd(anime, target);
-            break;
-        case EDIT:
-            onEdit(anime, target);
-            break;
-        default:
-            // do nothing
-        }
-    }
-
-    public void onAdd(AnimeDO anime, AjaxRequestTarget target) {
-        try {
-            dao.create(anime);
-        } catch (DBException ex) {
-            feedback.error("DB Error");
-        }
-        feedback.success("Anime added.");
-    }
-
-    public void onEdit(AnimeDO anime, AjaxRequestTarget target) {
-        try {
-            dao.update(anime);
-        } catch (DBException ex) {
-            feedback.error("DB Error");
-        }
-        feedback.success("Anime updated.");
-    }
-
 }

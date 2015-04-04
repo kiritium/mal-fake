@@ -4,21 +4,18 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import de.choong.dao.IAnimeDao;
+import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
-import de.choong.model.anime.AnimeDO;
-import de.choong.pages.EditAnimePage;
+import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 
-public class AnimeActionPanel extends Panel {
-    private static final long serialVersionUID = -2551106877467940713L;
+public class UserActionPanel extends Panel {
 
     private int id;
-    private IAnimeDao dao = (IAnimeDao) SpringUtil.getBean("animeDao");
+    private IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
 
-    public AnimeActionPanel(String id, IModel<AnimeDO> model) {
+    public UserActionPanel(String id, IModel<UserDO> model) {
         super(id, model);
         this.id = model.getObject().getId();
     }
@@ -26,7 +23,6 @@ public class AnimeActionPanel extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-
         add(new AjaxFallbackLink<String>("delete") {
             private static final long serialVersionUID = -983228768596472734L;
 
@@ -39,20 +35,6 @@ public class AnimeActionPanel extends Panel {
                     e.printStackTrace();
                 }
             }
-
-        });
-
-        add(new AjaxFallbackLink<String>("edit") {
-
-            private static final long serialVersionUID = -871356345740847018L;
-
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                PageParameters param = new PageParameters();
-                param.set("id", AnimeActionPanel.this.id);
-                setResponsePage(EditAnimePage.class, param);
-            }
-
         });
     }
 }

@@ -5,7 +5,18 @@
 			<h1>Edit Anime</h1>
 		</div>
 		<div>
-			<wicket:panel wicket:id="form" />
+			<form class="form-horizontal" wicket:id="form">
+				<div class="col-sm-offset-2">
+					<div class="alert alert-success" role="alert" wicket:id="feedback">Anime edited.</div>
+				</div>
+				<wicket:panel wicket:id="input"></wicket:panel>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default" id="addbutton"
+							wicket:id="submit">Edit</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<div class="col-sm-2"></div>
