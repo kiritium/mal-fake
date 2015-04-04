@@ -2,7 +2,9 @@ package de.choong.pages;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ContextRelativeResource;
 
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
@@ -29,6 +31,9 @@ public class SingleAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        // TODO FileNotFoundException and ResourceStreamNotFoundException
+        add(new Image("cover", new ContextRelativeResource("/img/cover/" + anime.getCoverPath())));
         add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
         add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), "-")));
         add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), "-")));

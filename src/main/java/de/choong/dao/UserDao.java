@@ -2,6 +2,9 @@ package de.choong.dao;
 
 import java.util.List;
 
+import org.hibernate.NullPrecedence;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import de.choong.dao.lambda.ExecuteInTransaction;
@@ -46,4 +49,18 @@ public class UserDao implements IUserDao {
         return result.get(0);
     }
 
+    @Override
+    public List<UserDO> readWithLimit(int first, int max, Order order) {
+        @SuppressWarnings("unchecked")
+        List<UserDO> users = ExecuteInTransaction.get(session -> session
+                .createCriteria(UserDO.class).setFirstResult(first).setMaxResults(max)
+                .addOrder(order.ignoreCase().nulls(NullPrecedence.LAST)).list());
+        return users;
+    }
+
+    @Override
+    public long countAll() {
+        return (long) ExecuteInTransaction.get(session -> session.createCriteria(UserDO.class)
+                .setProjection(Projections.rowCount()).uniqueResult());
+    }
 }

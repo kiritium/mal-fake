@@ -43,6 +43,9 @@ public class AnimeDO implements Serializable {
     @Enumerated(EnumType.STRING)
     private AiringStatus status;
 
+    @Column(length = 40)
+    private String coverPath;
+
     public AnimeDO() {
     }
 
@@ -126,5 +129,13 @@ public class AnimeDO implements Serializable {
 
     public void setStatus(AiringStatus status) {
         this.status = status;
+    }
+
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
     }
 }

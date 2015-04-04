@@ -10,6 +10,8 @@ import de.choong.model.anime.AnimeDO;
 public interface IAnimeDao extends ICrudDao<AnimeDO> {
 
     public List<AnimeDO> readAll() throws DBException;
+
     public long countAll();
+
     public List<AnimeDO> readWithLimit(int first, int max, Order order);
 }

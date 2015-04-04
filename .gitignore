@@ -6,3 +6,4 @@ test.db
 /target/
 mysite.db
 src/main/resources/hsqldb/*
+src/main/webapp/img/cover/*

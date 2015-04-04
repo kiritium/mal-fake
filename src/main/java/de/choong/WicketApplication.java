@@ -9,6 +9,7 @@ import de.choong.pages.AddUserPage;
 import de.choong.pages.HomePage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.ShowAnimePage;
+import de.choong.pages.ShowUserPage;
 import de.choong.pages.SingleAnimePage;
 import de.choong.util.HibernateUtil;
 
@@ -19,36 +20,37 @@ import de.choong.util.HibernateUtil;
  * @see de.choong.Start#main(String[])
  */
 public class WicketApplication extends WebApplication {
-	@Override
-	public Class<? extends WebPage> getHomePage() {
-		return HomePage.class;
-	}
+    @Override
+    public Class<? extends WebPage> getHomePage() {
+        return HomePage.class;
+    }
 
-	@Override
-	public void init() {
-		super.init();
+    @Override
+    public void init() {
+        super.init();
 
-		// Don't show wicket tags in rendered html.
-		getMarkupSettings().setStripWicketTags(true);
+        // Don't show wicket tags in rendered html.
+        getMarkupSettings().setStripWicketTags(true);
 
-		// Update schema and load settings.
-		HibernateUtil.getSessionFactory();
+        // Update schema and load settings.
+        HibernateUtil.getSessionFactory();
 
-		addMountPages();
+        addMountPages();
 
-		// Remove further versioning
-		// getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
-	}
+        // Remove further versioning
+        // getRequestCycleSettings().setRenderStrategy(RenderStrategy.ONE_PASS_RENDER);
+    }
 
-	private void addMountPages() {
-		mountPage("/addAnime", AddAnimePage.class);
-		mountPage("/addUser", AddUserPage.class);
-		mountPage("/login", LoginPage.class);
-		mountPage("/animeList", ShowAnimePage.class);
-		mountPage("/anime", SingleAnimePage.class);
-	}
+    private void addMountPages() {
+        mountPage("/addAnime", AddAnimePage.class);
+        mountPage("/addUser", AddUserPage.class);
+        mountPage("/login", LoginPage.class);
+        mountPage("/userList", ShowUserPage.class);
+        mountPage("/animeList", ShowAnimePage.class);
+        mountPage("/anime", SingleAnimePage.class);
+    }
 
-	public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
-		mount(new NoVersioningMount(path, pageClass));
-	}
+    public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
+        mount(new NoVersioningMount(path, pageClass));
+    }
 }

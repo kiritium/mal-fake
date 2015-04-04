@@ -42,13 +42,13 @@ public class AnimeForm extends Panel {
         // TODO add validation to form
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
 
-        // title
+        // Title
         form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
 
-        // alternative title
+        // Alternative title
         form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle")));
 
-        // type
+        // Type
         DropDownChoice<MediaType> mediaType = new DropDownChoice<MediaType>("mediaType",
                 new PropertyModel<MediaType>(anime, "type"), Arrays.asList(MediaType.values()),
                 new IChoiceRenderer<MediaType>() {
@@ -67,7 +67,7 @@ public class AnimeForm extends Panel {
         mediaType.setDefaultModelObject(MediaType.TV);
         form.add(mediaType);
 
-        // status
+        // Status
         DropDownChoice<AiringStatus> status = new DropDownChoice<AiringStatus>("status",
                 new PropertyModel<AiringStatus>(anime, "status"), Arrays.asList(AiringStatus
                         .values()), new IChoiceRenderer<AiringStatus>() {
@@ -86,16 +86,16 @@ public class AnimeForm extends Panel {
         status.setDefaultModelObject(AiringStatus.NOT_AIRED_YET);
         form.add(status);
 
-        // creator
+        // Creator
         form.add(new TextField<String>("creator", new PropertyModel<String>(anime, "creator")));
 
-        // studio
+        // Studio
         form.add(new TextField<String>("studio", new PropertyModel<String>(anime, "studio")));
 
-        // year
+        // Year
         form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
 
-        // season
+        // Season
         DropDownChoice<Season> season = new DropDownChoice<Season>("season",
                 new PropertyModel<Season>(anime, "season"), Arrays.asList(Season.values()),
                 new IChoiceRenderer<Season>() {
@@ -113,6 +113,9 @@ public class AnimeForm extends Panel {
                 });
         season.setDefaultModelObject(Season.SPRING);
         form.add(season);
+
+        // Cover
+        form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
         form.add(createSubmitLink(form));
         add(form);

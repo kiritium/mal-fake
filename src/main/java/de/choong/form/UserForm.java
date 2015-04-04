@@ -42,13 +42,13 @@ public class UserForm extends Panel {
 
         Form<UserDO> form = new Form<UserDO>("form", Model.of(user));
 
-        // username
+        // Username
         form.add(new TextField<String>("username", new PropertyModel<String>(user, "username")));
 
-        // password
+        // Password
         form.add(new PasswordTextField("password", new PropertyModel<String>(user, "password")));
 
-        // userRight
+        // User-Right
         // TODO only visible to admin, else userRight default to USER
         DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
                 new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
