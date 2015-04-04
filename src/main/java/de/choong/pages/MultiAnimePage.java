@@ -5,15 +5,15 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.AnimeTable;
 import de.choong.components.sortable.SortableAnimeProvider;
 
-public class ShowAnimePage extends BasePage {
+public class MultiAnimePage extends BasePage {
 
     private static final long serialVersionUID = -8485039198076648005L;
 
-    public ShowAnimePage() {
+    public MultiAnimePage() {
         super();
     }
 
-    public ShowAnimePage(final PageParameters parameters) {
+    public MultiAnimePage(final PageParameters parameters) {
         super(parameters);
     }
 

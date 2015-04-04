@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
-        add(createLink("showAnime", ShowAnimePage.class));
+        add(createLink("showAnime", MultiAnimePage.class));
         add(createLink("addAnime", AddAnimePage.class));
         add(createLink("addUser", AddUserPage.class));
         add(createLink("test", SingleAnimePage.class));

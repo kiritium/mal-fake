@@ -5,15 +5,15 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.UserTable;
 import de.choong.components.sortable.SortableUserProvider;
 
-public class ShowUserPage extends BasePage {
+public class MultiUserPage extends BasePage {
 
     private static final long serialVersionUID = 4569728237093473098L;
 
-    public ShowUserPage() {
+    public MultiUserPage() {
         super();
     }
 
-    public ShowUserPage(PageParameters parameters) {
+    public MultiUserPage(PageParameters parameters) {
         super(parameters);
     }
 
