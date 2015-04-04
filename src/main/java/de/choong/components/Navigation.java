@@ -8,30 +8,32 @@ import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
+import de.choong.pages.MultiUserPage;
 
 public class Navigation extends Panel {
 
-	private static final long serialVersionUID = 2414976312882871541L;
+    private static final long serialVersionUID = 2414976312882871541L;
 
-	public Navigation(String id) {
-		super(id);
-	}
+    public Navigation(String id) {
+        super(id);
+    }
 
-	@Override
-	protected void onInitialize() {
-		super.onInitialize();
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
-		RepeatingView navigationItems = new RepeatingView("navigation");
+        RepeatingView navigationItems = new RepeatingView("navigation");
 
-		addMenuItem(navigationItems, MultiAnimePage.class, "Anime-List");
-		addMenuItem(navigationItems, AddAnimePage.class, "Add Anime");
-		addMenuItem(navigationItems, LoginPage.class, "Login");
-		addMenuItem(navigationItems, AddUserPage.class, "Register");
-		add(navigationItems);
-	}
+        addMenuItem(navigationItems, MultiAnimePage.class, "Anime-List");
+        addMenuItem(navigationItems, AddAnimePage.class, "Add Anime");
+        addMenuItem(navigationItems, LoginPage.class, "Login");
+        addMenuItem(navigationItems, AddUserPage.class, "Register");
+        addMenuItem(navigationItems, MultiUserPage.class, "User-List");
+        add(navigationItems);
+    }
 
-	private void addMenuItem(RepeatingView navigationItems, Class<? extends Page> page, String name) {
-		navigationItems.add(new NavigationItem(navigationItems.newChildId(), page, name));
-	}
+    private void addMenuItem(RepeatingView navigationItems, Class<? extends Page> page, String name) {
+        navigationItems.add(new NavigationItem(navigationItems.newChildId(), page, name));
+    }
 
 }

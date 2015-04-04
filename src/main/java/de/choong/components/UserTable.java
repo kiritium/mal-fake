@@ -34,7 +34,8 @@ public class UserTable extends Panel {
         List<IColumn<UserDO, String>> columns = new ArrayList<>();
         columns.add(new PropertyColumn<UserDO, String>(Model.of("ID"), "id", "id"));
         columns.add(new PropertyColumn<UserDO, String>(Model.of("Username"), "username", "username"));
-
+        columns.add(new PropertyColumn<UserDO, String>(Model.of("User-Right"), "userRight",
+                "userRight"));
         add(new SortableTable<UserDO, String>("table", columns, dataProvider, 10) {
             private static final long serialVersionUID = -1954053987488013638L;
 

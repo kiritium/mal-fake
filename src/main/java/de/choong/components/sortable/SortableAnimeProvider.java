@@ -9,45 +9,43 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.hibernate.criterion.Order;
 
-import de.choong.dao.AnimeDao;
 import de.choong.dao.IAnimeDao;
 import de.choong.model.anime.AnimeDO;
 import de.choong.util.SpringUtil;
 
-public class SortableAnimeProvider extends SortableDataProvider<AnimeDO, String>{
+public class SortableAnimeProvider extends SortableDataProvider<AnimeDO, String> {
 
-	private static final long serialVersionUID = 7588295684422539794L;
+    private static final long serialVersionUID = 7588295684422539794L;
 
-	private IAnimeDao dao = (AnimeDao) SpringUtil.getBean("animeDao");
-	
-	public SortableAnimeProvider() {
-		super();
-		this.setSort("id", SortOrder.ASCENDING);
-	}
-	
-	@Override
-	public Iterator<AnimeDO> iterator(long first, long count) {
-		return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
-	}
+    private IAnimeDao dao = (IAnimeDao) SpringUtil.getBean("animeDao");
 
-	@Override
-	public long size() {
-		return dao.countAll();
-	}
+    public SortableAnimeProvider() {
+        super();
+        this.setSort("id", SortOrder.ASCENDING);
+    }
 
-	@Override
-	public IModel<AnimeDO> model(AnimeDO object) {
-		return Model.of(object);
-	}
-	
-	public Order getSortOrder() {
-		SortParam<String> sort = getSort();
-		if(sort.isAscending()) {
-			return Order.asc(sort.getProperty());
-		} else {
-			return Order.desc(sort.getProperty());
-		}
-	}
+    @Override
+    public Iterator<AnimeDO> iterator(long first, long count) {
+        return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
+    }
 
+    @Override
+    public long size() {
+        return dao.countAll();
+    }
+
+    @Override
+    public IModel<AnimeDO> model(AnimeDO object) {
+        return Model.of(object);
+    }
+
+    public Order getSortOrder() {
+        SortParam<String> sort = getSort();
+        if (sort.isAscending()) {
+            return Order.asc(sort.getProperty());
+        } else {
+            return Order.desc(sort.getProperty());
+        }
+    }
 
 }

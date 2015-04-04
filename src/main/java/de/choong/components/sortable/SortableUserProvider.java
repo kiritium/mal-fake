@@ -25,8 +25,7 @@ public class SortableUserProvider extends SortableDataProvider<UserDO, String> {
 
     @Override
     public Iterator<UserDO> iterator(long first, long count) {
-        dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
-        return null;
+        return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
     }
 
     @Override
@@ -47,5 +46,4 @@ public class SortableUserProvider extends SortableDataProvider<UserDO, String> {
             return Order.desc(sort.getProperty());
         }
     }
-
 }
