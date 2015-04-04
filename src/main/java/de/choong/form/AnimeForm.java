@@ -117,6 +117,7 @@ public class AnimeForm extends Panel {
         // Cover
         form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
+        // Button
         form.add(createSubmitLink(form));
         add(form);
 

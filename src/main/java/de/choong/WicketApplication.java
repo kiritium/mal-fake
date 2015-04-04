@@ -6,6 +6,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
+import de.choong.pages.EditAnimePage;
 import de.choong.pages.HomePage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.ShowAnimePage;
@@ -44,6 +45,7 @@ public class WicketApplication extends WebApplication {
     private void addMountPages() {
         mountPage("/addAnime", AddAnimePage.class);
         mountPage("/addUser", AddUserPage.class);
+        mountPage("/editAnime", EditAnimePage.class);
         mountPage("/login", LoginPage.class);
         mountPage("/userList", ShowUserPage.class);
         mountPage("/animeList", ShowAnimePage.class);
