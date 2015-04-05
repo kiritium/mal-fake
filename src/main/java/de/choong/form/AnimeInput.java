@@ -5,11 +5,14 @@ import java.util.Arrays;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.validator.RangeValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
@@ -34,7 +37,8 @@ public class AnimeInput extends Panel {
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
 
         // Title
-        form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
+        form.add(new RequiredTextField<String>("title", new PropertyModel<String>(anime, "title"))
+                .add(StringValidator.maximumLength(40)));
 
         // Alternative title
         form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle")));
@@ -91,7 +95,8 @@ public class AnimeInput extends Panel {
         form.add(new TextField<String>("studio", new PropertyModel<String>(anime, "studio")));
 
         // Year
-        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
+        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year"))
+                .add(RangeValidator.range(1900, 9999)));
 
         // Season
         DropDownChoice<Season> season = new DropDownChoice<Season>("season",
