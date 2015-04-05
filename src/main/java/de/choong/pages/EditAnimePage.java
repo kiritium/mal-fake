@@ -1,5 +1,7 @@
 package de.choong.pages;
 
+import java.io.IOException;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
@@ -13,6 +15,7 @@ import de.choong.exceptions.DBException;
 import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.user.UserRight;
+import de.choong.util.ConfigUtil;
 import de.choong.util.SpringUtil;
 
 public class EditAnimePage extends SecurePage {
@@ -61,11 +64,17 @@ public class EditAnimePage extends SecurePage {
                 AnimeDO anime = (AnimeDO) form.getModelObject();
                 try {
                     dao.update(anime);
+
+                    ConfigUtil.uploadCover(anime.getCover(), anime.getId());
+
                     PageParameters param = new PageParameters();
                     param.set("id", anime.getId());
                     setResponsePage(SingleAnimePage.class, param);
                 } catch (DBException ex) {
                     error("DB Error");
+                } catch (IOException ex) {
+                    error("Couldn't save cover.");
+                    ex.printStackTrace();
                 }
                 target.add(feedback);
             }

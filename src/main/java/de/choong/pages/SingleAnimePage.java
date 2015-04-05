@@ -55,9 +55,9 @@ public class SingleAnimePage extends BasePage {
     }
 
     private Component createCover(String id) {
-        if (ConfigUtil.isCoverAvailable(anime.getCoverPath())) {
-            return new Image(id, new ContextRelativeResource(ConfigUtil.getCoverPath(anime
-                    .getCoverPath())));
+        if (ConfigUtil.isCoverAvailable(anime.getId())) {
+            return new Image(id,
+                    new ContextRelativeResource(ConfigUtil.getCoverPath(anime.getId())));
         } else {
             return new WebMarkupContainer(id);
         }

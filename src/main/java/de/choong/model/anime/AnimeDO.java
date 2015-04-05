@@ -45,9 +45,6 @@ public class AnimeDO extends BaseDO {
     @Enumerated(EnumType.STRING)
     private AiringStatus status;
 
-    @Column(length = 40)
-    private String coverPath;
-
     @Transient
     private List<FileUpload> covers;
 
@@ -113,14 +110,6 @@ public class AnimeDO extends BaseDO {
 
     public void setStatus(AiringStatus status) {
         this.status = status;
-    }
-
-    public String getCoverPath() {
-        return coverPath;
-    }
-
-    public void setCoverPath(String coverPath) {
-        this.coverPath = coverPath;
     }
 
     public String getSummary() {

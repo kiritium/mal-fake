@@ -16,7 +16,9 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.util.MimeTypeUtils;
 
+import de.choong.form.validator.FileUploadValidator;
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.anime.MediaType;
@@ -83,12 +85,11 @@ public class AnimeInput extends Panel {
         // Cover
         FileUploadField cover = new FileUploadField("cover", new PropertyModel<List<FileUpload>>(
                 anime, "covers"));
-        // TODO write a file validator, max bytes, min bytes, format (content
-        // type)
-        // MimeType type = MimeTypeUtils.IMAGE_JPEG;
+        // Size between 50B and 500kB
+        cover.add(FileUploadValidator.sizeBetween(50, 500 * 1000));
+        cover.add(FileUploadValidator.withContentTypes(MimeTypeUtils.IMAGE_GIF,
+                MimeTypeUtils.IMAGE_JPEG, MimeTypeUtils.IMAGE_PNG));
         form.add(cover);
-
-        form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
         add(form);
     }
