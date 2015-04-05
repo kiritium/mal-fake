@@ -33,6 +33,10 @@ dd {
 	margin-bottom: 10px;
 }
 
+#summarytext {
+	resize: none;
+}
+
 #addbutton {
 	width: 100px;
 }

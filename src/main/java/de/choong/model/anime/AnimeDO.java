@@ -25,6 +25,9 @@ public class AnimeDO implements Serializable {
     @Column(length = 40)
     private String altTitle;
 
+    @Column(length = 750)
+    private String summary;
+
     @Column(length = 30)
     private String creator;
 
@@ -137,5 +140,13 @@ public class AnimeDO implements Serializable {
 
     public void setCoverPath(String coverPath) {
         this.coverPath = coverPath;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

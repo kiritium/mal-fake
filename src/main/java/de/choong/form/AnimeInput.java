@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
@@ -36,6 +37,9 @@ public class AnimeInput extends Panel {
 
         // Alternative title
         form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle")));
+
+        // Summary
+        form.add(new TextArea<String>("summary", new PropertyModel<String>(anime, "summary")));
 
         // Type
         DropDownChoice<MediaType> mediaType = new DropDownChoice<MediaType>("mediaType",
@@ -110,6 +114,5 @@ public class AnimeInput extends Panel {
         form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
         add(form);
-
     }
 }

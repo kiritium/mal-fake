@@ -43,6 +43,7 @@ public class SingleAnimePage extends BasePage {
         add(new Image("cover", new ContextRelativeResource("/img/cover/" + anime.getCoverPath())));
         add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
         add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
+        add(new Label("summary", StringUtils.defaultIfBlank(anime.getSummary(), DEFAULT_TEXT)));
         add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), DEFAULT_TEXT)));
         add(new Label("type", anime.getType().getDisplayName()));
         add(new Label("status", anime.getStatus().getDisplayName()));

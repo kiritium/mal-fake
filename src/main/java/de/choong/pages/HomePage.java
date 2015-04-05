@@ -1,7 +1,5 @@
 package de.choong.pages;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class HomePage extends BasePage {
@@ -19,18 +17,5 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-    }
-
-    @SuppressWarnings("rawtypes")
-    private AjaxFallbackLink<String> createLink(String id, Class page) {
-        return new AjaxFallbackLink<String>(id) {
-            private static final long serialVersionUID = 3949370585208906040L;
-
-            @SuppressWarnings("unchecked")
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                setResponsePage(page);
-            }
-        };
     }
 }
