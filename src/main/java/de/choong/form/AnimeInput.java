@@ -8,11 +8,14 @@ import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.util.MimeType;
+import org.springframework.util.MimeTypeUtils;
 
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
@@ -99,6 +102,7 @@ public class AnimeInput extends Panel {
                 .add(RangeValidator.range(1900, 9999)));
 
         // Season
+        // TODO DisplayableDropDownChoice<? extends Displayable>
         DropDownChoice<Season> season = new DropDownChoice<Season>("season",
                 new PropertyModel<Season>(anime, "season"), Arrays.asList(Season.values()),
                 new IChoiceRenderer<Season>() {
@@ -118,6 +122,14 @@ public class AnimeInput extends Panel {
         form.add(season);
 
         // Cover
+        // TODO convention over configuration! x.png / x.jpg
+        FileUploadField cover = new FileUploadField("cover");
+        // TODO write a file validator, max bytes, min bytes, format (content
+        // type)
+        MimeType type = MimeTypeUtils.IMAGE_JPEG;
+        // form.add(cover);
+        cover.getFileUpload(); // Bild
+
         form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
         add(form);
