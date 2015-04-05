@@ -101,9 +101,6 @@ public class AnimeInput extends Panel {
 
                     @Override
                     public Object getDisplayValue(Season object) {
-                        if (object.equals(Season.NONE)) {
-                            return null;
-                        }
                         return object.getDisplayName();
                     }
 
