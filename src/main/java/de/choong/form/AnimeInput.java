@@ -58,6 +58,8 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
+        // TODO bug: this overides a loaded anime! (solution, remove this code
+        // and add validation)
         mediaType.setDefaultModelObject(MediaType.TV);
         form.add(mediaType);
 
@@ -77,6 +79,8 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
+        // TODO bug: this overides a loaded anime! (solution, remove this code
+        // and add validation)
         status.setDefaultModelObject(AiringStatus.NOT_AIRED_YET);
         form.add(status);
 
@@ -108,6 +112,8 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
+        // TODO bug: this overides a loaded anime! (solution, remove this code
+        // and add validation)
         season.setDefaultModelObject(Season.NONE);
         form.add(season);
 
