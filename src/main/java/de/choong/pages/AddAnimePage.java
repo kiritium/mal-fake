@@ -12,10 +12,10 @@ import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
+import de.choong.model.user.UserRight;
 import de.choong.util.SpringUtil;
 
-// TODO SecurePage
-public class AddAnimePage extends BasePage {
+public class AddAnimePage extends SecurePage {
 
     private static final long serialVersionUID = 8623937508924029855L;
 
@@ -74,5 +74,10 @@ public class AddAnimePage extends BasePage {
                 target.add(feedback);
             }
         };
+    }
+
+    @Override
+    public UserRight getAccessRight() {
+        return UserRight.MODERATOR;
     }
 }

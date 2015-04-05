@@ -17,6 +17,8 @@ import org.apache.wicket.model.Model;
 
 import de.choong.components.sortable.SortableTable;
 import de.choong.model.user.UserDO;
+import de.choong.model.user.UserRight;
+import de.choong.util.UserUtil;
 
 public class UserTable extends Panel {
 
@@ -32,13 +34,12 @@ public class UserTable extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-
+        redirect();
         List<IColumn<UserDO, String>> columns = new ArrayList<>();
         columns.add(createClickablePropertyColumn("ID", "id", "id"));
         columns.add(createClickablePropertyColumn("Username", "username", "username"));
         columns.add(createClickablePropertyColumn("User-Right", "userRight", "userRight"));
 
-        // TODO show only if user has admin rights
         columns.add(new AbstractColumn<UserDO, String>(new Model<String>("")) {
             private static final long serialVersionUID = 3431476079203912069L;
 
@@ -67,11 +68,16 @@ public class UserTable extends Panel {
 
                     @Override
                     protected void onEvent(AjaxRequestTarget target) {
-                        UserDO user = rowModel.getObject();
-
+                        // UserDO user = rowModel.getObject();
                     }
                 });
             }
         };
+    }
+
+    private void redirect() {
+        if (UserUtil.getCurrentUser().getUserRight() != UserRight.ADMIN) {
+            setResponsePage(getApplication().getHomePage());
+        }
     }
 }

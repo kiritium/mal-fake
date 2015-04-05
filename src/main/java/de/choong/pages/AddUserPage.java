@@ -15,7 +15,6 @@ import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 
-// TODO SecurePage
 public class AddUserPage extends BasePage {
 
     private static final long serialVersionUID = -154289454209633122L;

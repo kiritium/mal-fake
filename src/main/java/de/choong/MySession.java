@@ -46,7 +46,6 @@ public class MySession extends AuthenticatedWebSession {
 
     @Override
     public Roles getRoles() {
-        // TODO Auto-generated method stub
         return null;
     }
 

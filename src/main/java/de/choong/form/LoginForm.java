@@ -48,7 +48,5 @@ public class LoginForm extends SignInPanel {
         }
 
         target.add(feedback);
-        // TODO session
-
     }
 }
