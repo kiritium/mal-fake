@@ -11,7 +11,7 @@ public interface IAnimeDao extends ICrudDao<AnimeDO> {
 
     public List<AnimeDO> readAll() throws DBException;
 
-    public long countAll();
+    public long countAll() throws DBException;
 
-    public List<AnimeDO> readWithLimit(int first, int max, Order order);
+    public List<AnimeDO> readWithLimit(int first, int max, Order order) throws DBException;
 }

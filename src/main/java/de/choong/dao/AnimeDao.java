@@ -42,13 +42,13 @@ public class AnimeDao implements IAnimeDao {
     }
 
     @Override
-    public long countAll() {
+    public long countAll() throws DBException {
         return (long) ExecuteInTransaction.get(session -> session.createCriteria(AnimeDO.class)
                 .setProjection(Projections.rowCount()).uniqueResult());
     }
 
     @Override
-    public List<AnimeDO> readWithLimit(int first, int max, Order order) {
+    public List<AnimeDO> readWithLimit(int first, int max, Order order) throws DBException {
         @SuppressWarnings("unchecked")
         List<AnimeDO> animes = ExecuteInTransaction.get(session -> session
                 .createCriteria(AnimeDO.class).setFirstResult(first).setMaxResults(max)
