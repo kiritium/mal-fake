@@ -30,6 +30,7 @@ public class AnimeInput extends Panel {
         AnimeDO anime = (AnimeDO) getDefaultModelObject();
 
         // TODO add validation to form
+        // TODO fix defaults in edit
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
 
         // Title
