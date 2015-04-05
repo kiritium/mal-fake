@@ -8,6 +8,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 
@@ -20,7 +21,7 @@ public class UserInput extends Panel {
     private static final long serialVersionUID = -6052123356031657622L;
     private WebMarkupContainer userRightWrapper;
 
-    public UserInput(String id, Model<UserDO> model) {
+    public UserInput(String id, IModel<UserDO> model) {
         super(id, model);
     }
 
