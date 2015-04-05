@@ -1,5 +1,7 @@
 package de.choong;
 
+import java.util.Locale;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -55,6 +57,11 @@ public class MySession extends AuthenticatedWebSession {
 
     public void setUser(UserDO user) {
         this.user = user;
+    }
+
+    @Override
+    public Locale getLocale() {
+        return Locale.ENGLISH;
     }
 
 }

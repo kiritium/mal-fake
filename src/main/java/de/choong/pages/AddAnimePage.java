@@ -60,17 +60,15 @@ public class AddAnimePage extends SecurePage {
                     param.set("id", id);
                     setResponsePage(SingleAnimePage.class, param);
                 } catch (DBException ex) {
-                    feedback.error("DB Error");
+                    error("DB Error");
                 }
+
                 target.add(feedback);
             }
 
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
                 super.onError(target, form);
-
-                // TODO react to error
-                error("from.onError");
                 target.add(feedback);
             }
         };

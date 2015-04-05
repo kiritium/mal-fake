@@ -13,50 +13,52 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
  */
 public class AjaxFeedbackPanel extends FeedbackPanel {
 
-	private static final long serialVersionUID = -4139802289071074689L;
+    private static final long serialVersionUID = -4139802289071074689L;
 
-	public AjaxFeedbackPanel(String id) {
-		super(id);
-	}
+    public AjaxFeedbackPanel(String id) {
+        super(id);
+    }
 
-	public AjaxFeedbackPanel(String id, IFeedbackMessageFilter filter) {
-		super(id, filter);
-	}
+    public AjaxFeedbackPanel(String id, IFeedbackMessageFilter filter) {
+        super(id, filter);
+    }
 
-	/**
-	 * Called before onBeforeRender. Sets this component visible when messages
-	 * are available.
-	 */
-	@Override
-	protected void onConfigure() {
-		super.onConfigure();
-		setOutputMarkupPlaceholderTag(true);
+    /**
+     * Called before onBeforeRender. Sets this component visible when messages
+     * are available.
+     */
+    @Override
+    protected void onConfigure() {
+        super.onConfigure();
+        setOutputMarkupPlaceholderTag(true);
 
-		if (getFeedbackMessages().isEmpty()) {
-			setVisible(false);
-		} else {
-			setVisible(true);
-		}
+        if (anyMessage()) {
+            setVisible(true);
+        } else {
+            setVisible(false);
+        }
 
-	}
+    }
 
-	/**
-	 * Called when the compenent is visible and about to be rendered. E.g. when
-	 * the component is added to the AjaxRequestTarget.
-	 */
-	@Override
-	protected void onBeforeRender() {
-		super.onBeforeRender();
+    /**
+     * Called when the compenent is visible and about to be rendered. E.g. when
+     * the component is added to the AjaxRequestTarget.
+     */
+    @Override
+    protected void onBeforeRender() {
+        super.onBeforeRender();
 
-		if (getFeedbackMessages().isEmpty() == false) {
-			FeedbackMessage msg = getFeedbackMessages().first();
-			if (msg.isError()) {
-				add(new AttributeModifier("class", "alert alert-danger"));
-			} else if (msg.isSuccess()) {
-				add(new AttributeModifier("class", "alert alert-success"));
-			} else if (msg.isInfo()) {
-				add(new AttributeModifier("class", "alert alert-info"));
-			}
-		}
-	}
+        if (anyMessage()) {
+            FeedbackMessage msg = getCurrentMessages().get(0);
+            if (msg.isError()) {
+                add(new AttributeModifier("class", "alert alert-danger"));
+            } else if (msg.isSuccess()) {
+                add(new AttributeModifier("class", "alert alert-success"));
+            } else if (msg.isInfo()) {
+                add(new AttributeModifier("class", "alert alert-info"));
+            } else {
+                setVisible(false);
+            }
+        }
+    }
 }

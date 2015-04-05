@@ -10,6 +10,7 @@ import org.apache.wicket.model.Model;
 import org.hibernate.criterion.Order;
 
 import de.choong.dao.IUserDao;
+import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
 import de.choong.util.SpringUtil;
 
@@ -25,12 +26,22 @@ public class SortableUserProvider extends SortableDataProvider<UserDO, String> {
 
     @Override
     public Iterator<UserDO> iterator(long first, long count) {
-        return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
+        try {
+            return dao.readWithLimit((int) first, (int) count, getSortOrder()).iterator();
+        } catch (DBException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public long size() {
-        return dao.countAll();
+        try {
+            return dao.countAll();
+        } catch (DBException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override

@@ -32,9 +32,10 @@ public class HibernateUtil {
 
     /**
      * Simple way to access a DB session.
+     * 
      * @return
      */
-    public static Session getCurrentSession() {
-        return getSessionFactory().getCurrentSession();
+    public static Session getSession() {
+        return getSessionFactory().openSession();
     }
 }

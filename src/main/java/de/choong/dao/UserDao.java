@@ -50,7 +50,7 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public List<UserDO> readWithLimit(int first, int max, Order order) {
+    public List<UserDO> readWithLimit(int first, int max, Order order) throws DBException {
         @SuppressWarnings("unchecked")
         List<UserDO> users = ExecuteInTransaction.get(session -> session
                 .createCriteria(UserDO.class).setFirstResult(first).setMaxResults(max)
@@ -59,7 +59,7 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public long countAll() {
+    public long countAll() throws DBException {
         return (long) ExecuteInTransaction.get(session -> session.createCriteria(UserDO.class)
                 .setProjection(Projections.rowCount()).uniqueResult());
     }

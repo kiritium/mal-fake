@@ -5,11 +5,18 @@ import java.util.Arrays;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.validation.validator.RangeValidator;
+import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.util.MimeType;
+import org.springframework.util.MimeTypeUtils;
 
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
@@ -20,7 +27,7 @@ public class AnimeInput extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
 
-    public AnimeInput(String id, Model<AnimeDO> model) {
+    public AnimeInput(String id, IModel<AnimeDO> model) {
         super(id, model);
     }
 
@@ -34,7 +41,8 @@ public class AnimeInput extends Panel {
         Form<AnimeDO> form = new Form<AnimeDO>("form", Model.of(anime));
 
         // Title
-        form.add(new TextField<String>("title", new PropertyModel<String>(anime, "title")));
+        form.add(new RequiredTextField<String>("title", new PropertyModel<String>(anime, "title"))
+                .add(StringValidator.maximumLength(40)));
 
         // Alternative title
         form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle")));
@@ -58,6 +66,8 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
+        // TODO bug: this overides a loaded anime! (solution, remove this code
+        // and add validation)
         mediaType.setDefaultModelObject(MediaType.TV);
         form.add(mediaType);
 
@@ -77,6 +87,8 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
+        // TODO bug: this overides a loaded anime! (solution, remove this code
+        // and add validation)
         status.setDefaultModelObject(AiringStatus.NOT_AIRED_YET);
         form.add(status);
 
@@ -87,9 +99,11 @@ public class AnimeInput extends Panel {
         form.add(new TextField<String>("studio", new PropertyModel<String>(anime, "studio")));
 
         // Year
-        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year")));
+        form.add(new TextField<String>("year", new PropertyModel<String>(anime, "year"))
+                .add(RangeValidator.range(1900, 9999)));
 
         // Season
+        // TODO DisplayableDropDownChoice<? extends Displayable>
         DropDownChoice<Season> season = new DropDownChoice<Season>("season",
                 new PropertyModel<Season>(anime, "season"), Arrays.asList(Season.values()),
                 new IChoiceRenderer<Season>() {
@@ -97,9 +111,6 @@ public class AnimeInput extends Panel {
 
                     @Override
                     public Object getDisplayValue(Season object) {
-                        if (object.equals(Season.NONE)) {
-                            return null;
-                        }
                         return object.getDisplayName();
                     }
 
@@ -108,10 +119,18 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
-        season.setDefaultModelObject(Season.NONE);
+        season.setDefaultModelObject(anime.getSeason() != null ? anime.getSeason() : Season.NONE);
         form.add(season);
 
         // Cover
+        // TODO convention over configuration! x.png / x.jpg
+        FileUploadField cover = new FileUploadField("cover");
+        // TODO write a file validator, max bytes, min bytes, format (content
+        // type)
+        MimeType type = MimeTypeUtils.IMAGE_JPEG;
+        // form.add(cover);
+        cover.getFileUpload(); // Bild
+
         form.add(new TextField<String>("coverPath", new PropertyModel<String>(anime, "coverPath")));
 
         add(form);
