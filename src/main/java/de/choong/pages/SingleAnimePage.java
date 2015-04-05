@@ -1,5 +1,7 @@
 package de.choong.pages;
 
+import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
@@ -40,6 +42,9 @@ public class SingleAnimePage extends BasePage {
         super.onInitialize();
 
         // TODO FileNotFoundException and ResourceStreamNotFoundException
+        // this way you can check if a file exists!
+        // TODO move configstuff (paths) to ConfigUtil + add convenience meth.
+        new File("src/main/resources/img/cover/" + anime.getCoverPath()).isFile();
         add(new Image("cover", new ContextRelativeResource("/img/cover/" + anime.getCoverPath())));
         add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
         add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
