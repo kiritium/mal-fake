@@ -48,7 +48,6 @@ public class UserInput extends Panel {
         userRightWrapper = new WebMarkupContainer("userRightWrapper");
         DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
                 new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
-        userRight.setNullValid(false);
         userRight.setDefaultModelObject(UserRight.USER);
         userRightWrapper.add(userRight);
         form.add(userRightWrapper);
