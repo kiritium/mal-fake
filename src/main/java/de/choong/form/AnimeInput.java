@@ -114,9 +114,7 @@ public class AnimeInput extends Panel {
                         return "" + index;
                     }
                 });
-        // TODO bug: this overides a loaded anime! (solution, remove this code
-        // and add validation)
-        season.setDefaultModelObject(Season.NONE);
+        season.setDefaultModelObject(anime.getSeason() != null ? anime.getSeason() : Season.NONE);
         form.add(season);
 
         // Cover

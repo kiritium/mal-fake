@@ -36,6 +36,7 @@ public class UserInput extends Panel {
         super.onInitialize();
         UserDO user = (UserDO) getDefaultModelObject();
 
+        // TODO add validation to form
         Form<UserDO> form = new Form<UserDO>("form", Model.of(user));
 
         // Username
@@ -48,6 +49,7 @@ public class UserInput extends Panel {
         userRightWrapper = new WebMarkupContainer("userRightWrapper");
         DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
                 new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
+        // TODO ternary operator
         userRight.setDefaultModelObject(UserRight.USER);
         userRightWrapper.add(userRight);
         form.add(userRightWrapper);
