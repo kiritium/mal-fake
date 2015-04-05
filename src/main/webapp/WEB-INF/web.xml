@@ -35,4 +35,9 @@
 		<!-- development | deployment -->
 		<param-value>development</param-value>
 	</context-param>
+	
+	<!-- Session timeout -->
+	<!-- <session-config>
+		<session-timeout>30</session-timeout>
+	</session-config> -->
 </web-app>
