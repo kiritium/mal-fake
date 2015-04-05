@@ -59,6 +59,7 @@ public class SingleAnimePage extends BasePage {
             return new Image(id,
                     new ContextRelativeResource(ConfigUtil.getCoverPath(anime.getId())));
         } else {
+            // TODO "no cover"-img (remove min-height in style!)
             return new WebMarkupContainer(id);
         }
     }

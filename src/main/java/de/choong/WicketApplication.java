@@ -39,6 +39,12 @@ public class WicketApplication extends WebApplication {
         // Update schema and load settings.
         HibernateUtil.getSessionFactory();
 
+        // TODO create admin user if admin user is not set
+
+        // TODO create user profile page
+
+        // TODO create user settings page
+
         addMountPages();
     }
 

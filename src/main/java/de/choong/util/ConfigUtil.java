@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 
+// TODO rename
 public class ConfigUtil {
     private static final String COVER_ABSOLUTE_PATH = "src/main/webapp/img/cover/";
 

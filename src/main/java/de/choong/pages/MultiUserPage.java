@@ -6,6 +6,7 @@ import de.choong.components.UserTable;
 import de.choong.components.sortable.SortableUserProvider;
 import de.choong.model.user.UserRight;
 
+// TODO change to administration page
 public class MultiUserPage extends SecurePage {
 
     private static final long serialVersionUID = 4569728237093473098L;

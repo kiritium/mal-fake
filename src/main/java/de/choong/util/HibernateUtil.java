@@ -46,6 +46,9 @@ public class HibernateUtil {
         return getSessionFactory().openSession();
     }
 
+    /**
+     * TODO bduong: this code does need some revision
+     */
     private static class AuditInterceptor extends EmptyInterceptor {
         private static final long serialVersionUID = 1094556730902967262L;
 
