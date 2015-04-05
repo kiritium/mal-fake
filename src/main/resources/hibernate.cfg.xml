@@ -30,7 +30,8 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
-
+		
+		<mapping class="de.choong.model.BaseDO" />
         <mapping class="de.choong.model.anime.AnimeDO" />
         <mapping class="de.choong.model.user.UserDO" />
 

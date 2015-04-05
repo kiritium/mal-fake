@@ -1,23 +1,22 @@
 package de.choong.model.anime;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+
+import de.choong.model.BaseDO;
 
 @Entity
 @Table(name = "T_ANIME")
-public class AnimeDO implements Serializable {
+public class AnimeDO extends BaseDO {
     private static final long serialVersionUID = 743646977201312600L;
-
-    @Id
-    @GeneratedValue
-    private int id;
 
     @Column(length = 40, nullable = false)
     private String title;
@@ -49,26 +48,8 @@ public class AnimeDO implements Serializable {
     @Column(length = 40)
     private String coverPath;
 
-    public AnimeDO() {
-    }
-
-    public AnimeDO(int id, String title, String altTitle, String creator, String studio,
-            Integer year) {
-        this.id = id;
-        this.title = title;
-        this.altTitle = altTitle;
-        this.creator = creator;
-        this.studio = studio;
-        this.year = year;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Transient
+    private List<FileUpload> covers;
 
     public String getTitle() {
         return title;
@@ -148,5 +129,20 @@ public class AnimeDO implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public List<FileUpload> getCovers() {
+        return covers;
+    }
+
+    public void setCovers(List<FileUpload> covers) {
+        this.covers = covers;
+    }
+
+    public FileUpload getCover() {
+        if (covers != null && covers.isEmpty() == false) {
+            return covers.get(0);
+        }
+        return null;
     }
 }

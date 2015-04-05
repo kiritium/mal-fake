@@ -1,8 +1,8 @@
 package de.choong.pages;
 
-import java.io.File;
-
 import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -12,6 +12,7 @@ import org.apache.wicket.util.string.StringValueConversionException;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
+import de.choong.util.ConfigUtil;
 import de.choong.util.SpringUtil;
 
 public class SingleAnimePage extends BasePage {
@@ -41,11 +42,7 @@ public class SingleAnimePage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
-        // TODO FileNotFoundException and ResourceStreamNotFoundException
-        // this way you can check if a file exists!
-        // TODO move configstuff (paths) to ConfigUtil + add convenience meth.
-        new File("src/main/resources/img/cover/" + anime.getCoverPath()).isFile();
-        add(new Image("cover", new ContextRelativeResource("/img/cover/" + anime.getCoverPath())));
+        add(createCover("cover"));
         add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
         add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
         add(new Label("summary", StringUtils.defaultIfBlank(anime.getSummary(), DEFAULT_TEXT)));
@@ -55,6 +52,15 @@ public class SingleAnimePage extends BasePage {
         add(new Label("season", StringUtils.defaultIfBlank(getSeasonDisplay(anime), DEFAULT_TEXT)));
         add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), DEFAULT_TEXT)));
         add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), DEFAULT_TEXT)));
+    }
+
+    private Component createCover(String id) {
+        if (ConfigUtil.isCoverAvailable(anime.getCoverPath())) {
+            return new Image(id, new ContextRelativeResource(ConfigUtil.getCoverPath(anime
+                    .getCoverPath())));
+        } else {
+            return new WebMarkupContainer(id);
+        }
     }
 
     private String getSeasonDisplay(AnimeDO anime) {

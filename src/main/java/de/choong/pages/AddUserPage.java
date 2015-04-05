@@ -61,20 +61,17 @@ public class AddUserPage extends BasePage {
 
                 try {
                     dao.create(user);
+                    // TODO E-Mail Verification
+                    success("User registered.");
                 } catch (DBException ex) {
-                    feedback.error("DB Error");
+                    error("DB Error");
                 }
-                feedback.success("User added.");
-
                 target.add(feedback);
             }
 
             @Override
             protected void onError(AjaxRequestTarget target, Form<?> form) {
                 super.onError(target, form);
-
-                // TODO react to error
-                error("from.onError");
                 target.add(feedback);
             }
         };

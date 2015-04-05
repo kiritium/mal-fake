@@ -22,7 +22,6 @@ import de.choong.model.user.UserRight;
 import de.choong.pages.SingleAnimePage;
 import de.choong.util.UserUtil;
 
-// TODO this extra component is unnessesary, now that we have a sortable table component.
 public class AnimeTable extends Panel {
 
     private static final long serialVersionUID = -3768439988615983395L;

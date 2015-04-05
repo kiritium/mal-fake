@@ -1,34 +1,28 @@
 package de.choong.model.user;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import de.choong.model.BaseDO;
 
 @Entity
 @Table(name = "T_USER")
-public class UserDO implements Serializable {
+public class UserDO extends BaseDO {
 
-    private static final long serialVersionUID = 4038226541758100768L;
-
-    @Id
-    @GeneratedValue
-    private int id;
+    private static final long serialVersionUID = -4396531083449493842L;
 
     @Column(unique = true, length = 20, nullable = false)
     private String username;
 
     @Column(length = 20, nullable = false)
     private String password;
-    
+
     @Column(length = 16, nullable = false)
     private String salt;
-    
+
     @Enumerated(EnumType.STRING)
     private UserRight userRight;
 
@@ -48,14 +42,6 @@ public class UserDO implements Serializable {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getSalt() {
         return salt;
     }
@@ -64,12 +50,11 @@ public class UserDO implements Serializable {
         this.salt = salt;
     }
 
-	public UserRight getUserRight() {
-		return userRight;
-	}
+    public UserRight getUserRight() {
+        return userRight;
+    }
 
-	public void setUserRight(UserRight userRight) {
-		this.userRight = userRight;
-	}
-
+    public void setUserRight(UserRight userRight) {
+        this.userRight = userRight;
+    }
 }

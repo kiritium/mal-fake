@@ -54,6 +54,8 @@ public class AddAnimePage extends SecurePage {
                 super.onSubmit(target, form);
 
                 AnimeDO anime = (AnimeDO) form.getModelObject();
+
+                System.out.println(anime.getCover().getSize());
                 try {
                     int id = dao.create(anime);
                     PageParameters param = new PageParameters();
