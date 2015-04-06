@@ -4,11 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.util.string.StringValueConversionException;
 
+import de.choong.components.StaticImage;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
@@ -56,8 +56,7 @@ public class SingleAnimePage extends BasePage {
 
     private Component createCover(String id) {
         if (ConfigUtil.isCoverAvailable(anime.getId())) {
-            return new Image(id,
-                    new ContextRelativeResource(ConfigUtil.getCoverPath(anime.getId())));
+            return new StaticImage(id, Model.of(ConfigUtil.getCoverPath(anime.getId())));
         } else {
             // TODO "no cover"-img (remove min-height in style!)
             return new WebMarkupContainer(id);
@@ -75,5 +74,4 @@ public class SingleAnimePage extends BasePage {
         }
         return displayName;
     }
-
 }
