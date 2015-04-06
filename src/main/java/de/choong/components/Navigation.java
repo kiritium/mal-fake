@@ -10,9 +10,9 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import de.choong.model.user.UserRight;
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
+import de.choong.pages.AdministrationPage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
-import de.choong.pages.MultiUserPage;
 import de.choong.util.UserUtil;
 
 public class Navigation extends Panel {
@@ -34,7 +34,7 @@ public class Navigation extends Panel {
         addMenuItem(navigationItems, LoginPage.class, "Login").setVisible(UserUtil.isNotLoggedIn());
         addMenuItem(navigationItems, AddUserPage.class, "Register").setVisible(
                 UserUtil.isNotLoggedIn());
-        addMenuItem(navigationItems, MultiUserPage.class, "User-List", UserRight.ADMIN);
+        addMenuItem(navigationItems, AdministrationPage.class, "Administration", UserRight.ADMIN);
         addLogoutMenuItem(navigationItems, "Logout");
         add(navigationItems);
     }

@@ -36,6 +36,7 @@ public class UserTable extends Panel {
         columns.add(createClickablePropertyColumn("ID", "id", "id"));
         columns.add(createClickablePropertyColumn("Username", "username", "username"));
         columns.add(createClickablePropertyColumn("User-Right", "userRight", "userRight"));
+        columns.add(createClickablePropertyColumn("E-Mail", "email", "email"));
 
         columns.add(new AbstractColumn<UserDO, String>(new Model<String>("")) {
             private static final long serialVersionUID = 3431476079203912069L;

@@ -23,6 +23,9 @@ public class UserDO extends BaseDO {
     @Column(length = 16, nullable = false)
     private String salt;
 
+    @Column(length = 50)
+    private String email;
+
     @Enumerated(EnumType.STRING)
     private UserRight userRight;
 
@@ -56,5 +59,13 @@ public class UserDO extends BaseDO {
 
     public void setUserRight(UserRight userRight) {
         this.userRight = userRight;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -9,11 +9,11 @@ import org.apache.wicket.request.Response;
 
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
+import de.choong.pages.AdministrationPage;
 import de.choong.pages.EditAnimePage;
 import de.choong.pages.HomePage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
-import de.choong.pages.MultiUserPage;
 import de.choong.pages.SingleAnimePage;
 import de.choong.util.HibernateUtil;
 
@@ -53,7 +53,7 @@ public class WicketApplication extends WebApplication {
         mountPage("/addUser", AddUserPage.class);
         mountPage("/editAnime", EditAnimePage.class);
         mountPage("/login", LoginPage.class);
-        mountPage("/userList", MultiUserPage.class);
+        mountPage("/administration", AdministrationPage.class);
         mountPage("/animeList", MultiAnimePage.class);
         mountPage("/anime", SingleAnimePage.class);
     }
