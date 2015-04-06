@@ -11,7 +11,7 @@ import de.choong.components.StaticImage;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
-import de.choong.util.ConfigUtil;
+import de.choong.util.ImageUtil;
 import de.choong.util.SpringUtil;
 
 public class SingleAnimePage extends BasePage {
@@ -54,10 +54,10 @@ public class SingleAnimePage extends BasePage {
     }
 
     private Component createCover(String id) {
-        if (ConfigUtil.isCoverAvailable(anime.getId())) {
-            return new StaticImage(id, Model.of(ConfigUtil.getCoverPath(anime.getId())));
+        if (ImageUtil.isCoverAvailable(anime.getId())) {
+            return new StaticImage(id, Model.of(ImageUtil.getCoverPath(anime.getId())));
         } else {
-            return new StaticImage(id, Model.of(ConfigUtil.getCoverDefaultPath()));
+            return new StaticImage(id, Model.of(ImageUtil.getCoverDefaultPath()));
         }
     }
 
