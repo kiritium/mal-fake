@@ -7,6 +7,10 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 
+import de.choong.dao.IUserDao;
+import de.choong.exceptions.DBException;
+import de.choong.model.user.UserDO;
+import de.choong.model.user.UserRight;
 import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
 import de.choong.pages.AdministrationPage;
@@ -16,6 +20,8 @@ import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
 import de.choong.pages.SingleAnimePage;
 import de.choong.util.HibernateUtil;
+import de.choong.util.SpringUtil;
+import de.choong.util.UserUtil;
 
 /**
  * Application object for your web application. If you want to run this
@@ -39,7 +45,8 @@ public class WicketApplication extends WebApplication {
         // Update schema and load settings.
         HibernateUtil.getSessionFactory();
 
-        // TODO create admin user if admin user is not set
+        // Create admin user
+        createAdminIfNotExisting();
 
         // TODO create user profile page
 
@@ -58,14 +65,29 @@ public class WicketApplication extends WebApplication {
         mountPage("/anime", SingleAnimePage.class);
     }
 
+    private void createAdminIfNotExisting() {
+        IUserDao dao = (IUserDao) SpringUtil.getBean("userDao");
+        try {
+            if (dao.readByName("admin") == null) {
+                UserDO admin = new UserDO();
+                String salt = UserUtil.generateSalt();
+                admin.setUsername("admin");
+                admin.setPassword(UserUtil.hash("admin", salt));
+                admin.setSalt(salt);
+                admin.setUserRight(UserRight.ADMIN);
+                dao.create(admin);
+            }
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+    }
+
     public <T extends Page> void mountPageNoVers(String path, Class<T> pageClass) {
         mount(new NoVersioningMount(path, pageClass));
     }
 
     @Override
     public Session newSession(Request request, Response response) {
-
         return new MySession(request);
-
     }
 }
