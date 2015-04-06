@@ -7,3 +7,5 @@ test.db
 mysite.db
 src/main/resources/hsqldb/*
 src/main/webapp/img/cover/*
+!src/main/webapp/img/cover/nocover.jpg
+src/main/webapp/img/slideshow/*

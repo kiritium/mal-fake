@@ -15,7 +15,7 @@ import de.choong.exceptions.DBException;
 import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.user.UserRight;
-import de.choong.util.ConfigUtil;
+import de.choong.util.ImageUtil;
 import de.choong.util.SpringUtil;
 
 public class EditAnimePage extends SecurePage {
@@ -65,7 +65,7 @@ public class EditAnimePage extends SecurePage {
                 try {
                     dao.update(anime);
 
-                    ConfigUtil.uploadCover(anime.getCover(), anime.getId());
+                    ImageUtil.uploadCover(anime.getCover(), anime.getId());
 
                     PageParameters param = new PageParameters();
                     param.set("id", anime.getId());
