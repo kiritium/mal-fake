@@ -15,6 +15,8 @@ public class ConfigUtil {
 
     private static final String COVER_CONTEXT_PATH = "/img/cover/";
 
+    private static final String COVER_DEFAULT_PATH = "/img/cover/nocover.jpg";
+
     public static final String COVER_FORMAT = "jpg";
 
     public static String getAbsoluteCoverPath(int id) {
@@ -36,5 +38,9 @@ public class ConfigUtil {
         File file = new File(getAbsoluteCoverPath(id));
         BufferedImage img = ImageIO.read(cover.getInputStream());
         ImageIO.write(img, COVER_FORMAT, new FileOutputStream(file));
+    }
+
+    public static String getCoverDefaultPath() {
+        return COVER_DEFAULT_PATH;
     }
 }

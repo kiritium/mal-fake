@@ -2,7 +2,6 @@ package de.choong.pages;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
-import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -58,8 +57,7 @@ public class SingleAnimePage extends BasePage {
         if (ConfigUtil.isCoverAvailable(anime.getId())) {
             return new StaticImage(id, Model.of(ConfigUtil.getCoverPath(anime.getId())));
         } else {
-            // TODO "no cover"-img (remove min-height in style!)
-            return new WebMarkupContainer(id);
+            return new StaticImage(id, Model.of(ConfigUtil.getCoverDefaultPath()));
         }
     }
 

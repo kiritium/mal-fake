@@ -46,6 +46,8 @@ public class WicketApplication extends WebApplication {
         HibernateUtil.getSessionFactory();
 
         // Create admin user
+        // Username: admin
+        // Password: admin
         createAdminIfNotExisting();
 
         // TODO create user profile page
