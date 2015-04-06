@@ -1,9 +1,8 @@
 package de.choong.components;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
@@ -60,12 +59,12 @@ public class Navigation extends Panel {
 
             @Override
             protected WebMarkupContainer createNavigationLink(String id) {
-                return new AjaxFallbackLink<String>(id) {
+                return new StatelessLink<String>(id) {
 
                     private static final long serialVersionUID = -6153926679146216248L;
 
                     @Override
-                    public void onClick(AjaxRequestTarget target) {
+                    public void onClick() {
                         UserUtil.logout();
                         setResponsePage(getApplication().getHomePage());
                     }
