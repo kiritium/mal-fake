@@ -19,6 +19,7 @@ import de.choong.pages.HomePage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
 import de.choong.pages.SingleAnimePage;
+import de.choong.pages.UserSettingsPage;
 import de.choong.util.HibernateUtil;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
@@ -65,6 +66,7 @@ public class WicketApplication extends WebApplication {
         mountPage("/administration", AdministrationPage.class);
         mountPage("/animeList", MultiAnimePage.class);
         mountPage("/anime", SingleAnimePage.class);
+        mountPage("/settings", UserSettingsPage.class);
     }
 
     private void createAdminIfNotExisting() {

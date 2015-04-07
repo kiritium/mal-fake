@@ -19,6 +19,8 @@ public class ImageUtil {
 
     public static final String COVER_FORMAT = "jpg";
 
+    private static final String SLIDESHOW_CONTEXT_PATH = "/img/slideshow/";
+
     public static String getAbsoluteCoverPath(int id) {
         return COVER_ABSOLUTE_PATH + id + "." + COVER_FORMAT;
     }
@@ -42,5 +44,9 @@ public class ImageUtil {
 
     public static String getCoverDefaultPath() {
         return COVER_DEFAULT_PATH;
+    }
+
+    public static String getSlideshowPath(String name) {
+        return SLIDESHOW_CONTEXT_PATH + name;
     }
 }

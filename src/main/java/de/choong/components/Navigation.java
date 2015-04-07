@@ -12,6 +12,7 @@ import de.choong.pages.AddUserPage;
 import de.choong.pages.AdministrationPage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
+import de.choong.pages.UserSettingsPage;
 import de.choong.util.UserUtil;
 
 public class Navigation extends Panel {
@@ -34,6 +35,7 @@ public class Navigation extends Panel {
         addMenuItem(navigationItems, AddUserPage.class, "Register").setVisible(
                 UserUtil.isNotLoggedIn());
         addMenuItem(navigationItems, AdministrationPage.class, "Administration", UserRight.ADMIN);
+        addMenuItem(navigationItems, UserSettingsPage.class, "Settings", UserRight.USER);
         addLogoutMenuItem(navigationItems, "Logout");
         add(navigationItems);
     }

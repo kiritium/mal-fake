@@ -58,3 +58,15 @@ dd {
 #animeCover {
 	width: 350px;
 }
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+#carousel {
+	height: 600px;
+}
+
+#slideimg {
+	max-height: 600px;
+}

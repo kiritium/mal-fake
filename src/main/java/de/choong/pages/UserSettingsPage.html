@@ -1,0 +1,68 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-9">
+		<div class="page-header">
+			<h1>Settings</h1>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>Change your password</strong>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal" wicket:id="pwform">
+					<div class="col-sm-offset-2">
+						<div class="alert alert-success" role="alert" wicket:id="feedback">Anime
+							added.</div>
+					</div>
+					<div class="form-group">
+						<label for="oldpw1" class="col-sm-3 control-label">Old
+							password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="oldpw1"
+								wicket:id="oldpw1" placeholder="Old password" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="oldpw2" class="col-sm-3 control-label">Confirm
+							old password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="oldpw2"
+								wicket:id="oldpw2" placeholder="Confirm old password" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="newpw" class="col-sm-3 control-label">New
+							password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="newpw"
+								wicket:id="newpw" placeholder="New password" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" name="submit" wicket:id="submit"
+								class="btn btn-default" id="addbutton">Change</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>Change your e-mail</strong>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<p></p>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="col-sm-2"></div>
+</wicket:extend>
