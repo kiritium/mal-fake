@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 
-// TODO rename
 public class ImageUtil {
     private static final String COVER_ABSOLUTE_PATH = "src/main/webapp/img/cover/";
 
@@ -18,6 +17,8 @@ public class ImageUtil {
     private static final String COVER_DEFAULT_PATH = "/img/cover/nocover.jpg";
 
     public static final String COVER_FORMAT = "jpg";
+
+    private static final String SLIDESHOW_ABSOLUTE_PATH = "src/main/webapp/img/slideshow/";
 
     private static final String SLIDESHOW_CONTEXT_PATH = "/img/slideshow/";
 
@@ -48,5 +49,9 @@ public class ImageUtil {
 
     public static String getSlideshowPath(String name) {
         return SLIDESHOW_CONTEXT_PATH + name;
+    }
+
+    public static String getAbsoluteSlideshowPath() {
+        return SLIDESHOW_ABSOLUTE_PATH;
     }
 }

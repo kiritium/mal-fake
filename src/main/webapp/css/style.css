@@ -70,3 +70,14 @@ dd {
 #slideimg {
 	max-height: 600px;
 }
+
+#adminitems {
+	color: black;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+#admintoolsheader {
+	margin: 20px 0px 20px;
+	padding-bottom: 0px;
+}

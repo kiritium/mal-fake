@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.model.user.UserRight;
 import de.choong.pages.AddAnimePage;
@@ -12,6 +13,7 @@ import de.choong.pages.AddUserPage;
 import de.choong.pages.AdministrationPage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
+import de.choong.pages.UserProfilePage;
 import de.choong.pages.UserSettingsPage;
 import de.choong.util.UserUtil;
 
@@ -29,6 +31,8 @@ public class Navigation extends Panel {
 
         RepeatingView navigationItems = new RepeatingView("navigation");
 
+        // addProfileMenuItem(navigationItems, "Profile");
+        addMenuItem(navigationItems, UserProfilePage.class, "Profile", UserRight.USER);
         addMenuItem(navigationItems, MultiAnimePage.class, "Anime-List");
         addMenuItem(navigationItems, AddAnimePage.class, "Add Anime", UserRight.MODERATOR);
         addMenuItem(navigationItems, LoginPage.class, "Login").setVisible(UserUtil.isNotLoggedIn());
@@ -79,4 +83,30 @@ public class Navigation extends Panel {
         return logout;
     }
 
+    private NavigationItem addProfileMenuItem(RepeatingView navigationItems, String name) {
+        NavigationItem profile = new NavigationItem(navigationItems.newChildId(), name) {
+
+            private static final long serialVersionUID = 281615390942815019L;
+
+            @Override
+            protected WebMarkupContainer createNavigationLink(String id) {
+                return new StatelessLink<String>(id) {
+
+                    private static final long serialVersionUID = 9169059229727869648L;
+
+                    @Override
+                    public void onClick() {
+                        if (UserUtil.getCurrentUser() != null) {
+                            PageParameters param = new PageParameters();
+                            param.set("id", UserUtil.getCurrentUser().getId());
+                            setResponsePage(UserProfilePage.class, param);
+                        }
+                    }
+                };
+            }
+        };
+        profile.setVisible(UserUtil.isLoggedIn());
+        navigationItems.add(profile);
+        return profile;
+    }
 }
