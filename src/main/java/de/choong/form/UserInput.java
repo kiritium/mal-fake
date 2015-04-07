@@ -37,28 +37,34 @@ public class UserInput extends Panel {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        super.onInitialize();
         UserDO user = (UserDO) getDefaultModelObject();
 
         Form<UserDO> form = new Form<UserDO>("form", Model.of(user));
 
         // Username
         form.add(new TextField<String>("username", new PropertyModel<String>(user, "username"))
+                .setLabel(Model.of("Username"))
+                .setRequired(true)
                 .add(StringValidator.lengthBetween(6, 20)));
 
         // Password
         form.add(new PasswordTextField("password", new PropertyModel<String>(user, "password"))
+                .setLabel(Model.of("Password"))
                 .add(StringValidator.lengthBetween(6, 20)));
 
-        form.add(new EmailTextField("email", new PropertyModel<String>(user, "email")).add(
-                EmailAddressValidator.getInstance()).add(StringValidator.lengthBetween(10, 50)));
+        // E-Mail
+        form.add(new EmailTextField("email", new PropertyModel<String>(user, "email"))
+                .setLabel(Model.of("E-Mail"))
+                .add(EmailAddressValidator.getInstance())
+                .add(StringValidator.lengthBetween(10, 50)));
 
         // User Rights
         userRightWrapper = new WebMarkupContainer("userRightWrapper");
         DropDownChoice<UserRight> userRight = new DropDownChoice<UserRight>("userRight",
                 new PropertyModel<UserRight>(user, "userRight"), Arrays.asList(UserRight.values()));
-        userRight.setDefaultModelObject(user.getUserRight() != null ? user.getUserRight()
-                : UserRight.USER);
+        userRight.setLabel(Model.of("User-Right"))
+                .setDefaultModelObject(user.getUserRight() != null ? user.getUserRight() :
+                        UserRight.USER);
         userRightWrapper.add(userRight);
         form.add(userRightWrapper);
 

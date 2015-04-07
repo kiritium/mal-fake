@@ -18,6 +18,7 @@ import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.springframework.util.MimeTypeUtils;
 
+import de.choong.components.DisplayableDropDownChoice;
 import de.choong.form.validator.FileUploadValidator;
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;

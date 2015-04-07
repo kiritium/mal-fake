@@ -1,4 +1,4 @@
-package de.choong.form;
+package de.choong.components;
 
 import java.util.List;
 
