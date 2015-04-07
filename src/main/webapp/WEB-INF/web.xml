@@ -36,6 +36,10 @@
 		<param-value>development</param-value>
 	</context-param>
 	
+	<listener>
+		<listener-class>de.choong.ActiveSessionListener</listener-class>
+	</listener>
+	
 	<!-- Session timeout -->
 	<!-- <session-config>
 		<session-timeout>30</session-timeout>
