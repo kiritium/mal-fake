@@ -47,8 +47,10 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
 
         long size = fileUpload.getSize();
         if (isInRange(size) == false) {
-
-            validatable.error(new ValidationError(rangeErrorString()));
+            ValidationError error = new ValidationError(this, "range");
+            error.setVariable("minSize", convertToByteUnit(minSize));
+            error.setVariable("maxSize", convertToByteUnit(maxSize));
+            validatable.error(error);
         }
 
         String fileType = fileUpload.getContentType();
@@ -70,14 +72,6 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
     public static FileUploadValidator withContentTypes(MimeType... types) {
         Set<MimeType> fileTypes = new HashSet<MimeType>(Arrays.asList(types));
         return new FileUploadValidator(false, 0, Long.MAX_VALUE, fileTypes);
-    }
-
-    private String rangeErrorString() {
-        Formatter formatter = new Formatter();
-        String str = formatter.format("File size must be between %s and %s.",
-                convertToByteUnit(minSize), convertToByteUnit(maxSize)).toString();
-        formatter.close();
-        return str;
     }
 
     /**

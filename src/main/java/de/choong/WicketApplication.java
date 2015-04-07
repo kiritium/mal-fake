@@ -59,7 +59,7 @@ public class WicketApplication extends WebApplication {
 
     private void addMountPages() {
         mountPage("/addAnime", AddAnimePage.class);
-        mountPage("/addUser", AddUserPage.class);
+        mountPage("/register", AddUserPage.class);
         mountPage("/editAnime", EditAnimePage.class);
         mountPage("/login", LoginPage.class);
         mountPage("/administration", AdministrationPage.class);
