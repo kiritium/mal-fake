@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import de.choong.util.ImageUtil;
@@ -17,16 +18,15 @@ public class Carousel extends Panel {
 
     private static final long serialVersionUID = 1978217406065088624L;
 
-    private File imagesPath;
-
-    public Carousel(String id, String path) {
-        super(id);
-        imagesPath = new File(path);
+    public Carousel(String id, IModel<String> path) {
+        super(id, path);
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        File imagesPath = new File(getDefaultModelObjectAsString());
         List<File> images = Arrays.asList(imagesPath.listFiles());
 
         ListView<File> indicators = new ListView<File>("indicators", images) {

@@ -1,5 +1,6 @@
 package de.choong.pages;
 
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.components.Carousel;
@@ -20,6 +21,6 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        add(new Carousel("carousel", ImageUtil.getAbsoluteSlideshowPath()));
+        add(new Carousel("carousel", Model.of(ImageUtil.getAbsoluteSlideshowPath())));
     }
 }

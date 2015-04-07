@@ -17,13 +17,11 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
 
     private static final long serialVersionUID = -4604048805555324687L;
 
-    private boolean required = false;
     private long minSize = 0;
     private long maxSize = Long.MAX_VALUE;
     private Set<MimeType> fileTypes = null;
 
-    public FileUploadValidator(boolean required, long minSize, long maxSize, Set<MimeType> fileTypes) {
-        this.required = required;
+    public FileUploadValidator(long minSize, long maxSize, Set<MimeType> fileTypes) {
         this.minSize = minSize;
         this.maxSize = maxSize;
         this.fileTypes = fileTypes;
@@ -36,12 +34,8 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
         }
     }
 
-    // TODO error message
     private void validate(FileUpload fileUpload, IValidatable<List<FileUpload>> validatable) {
         if (fileUpload == null) {
-            if (required) {
-                validatable.error(new ValidationError("File upload is required."));
-            }
             return;
         }
 
@@ -52,12 +46,11 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
             error.setVariable("maxSize", convertToByteUnit(maxSize));
             validatable.error(error);
         }
-
         String fileType = fileUpload.getContentType();
-
         if (fileTypes != null && fileTypes.contains(MimeTypeUtils.parseMimeType(fileType)) == false) {
-            validatable.error(new ValidationError(contentTypeErrorString()));
-            System.out.println("content type");
+            ValidationError error = new ValidationError(this, "contentType");
+            error.setVariable("contentTypes", contentTypeErrorString());
+            validatable.error(error);
         }
     }
 
@@ -66,12 +59,12 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
     }
 
     public static FileUploadValidator sizeBetween(long minSize, long maxSize) {
-        return new FileUploadValidator(false, minSize, maxSize, null);
+        return new FileUploadValidator(minSize, maxSize, null);
     }
 
     public static FileUploadValidator withContentTypes(MimeType... types) {
         Set<MimeType> fileTypes = new HashSet<MimeType>(Arrays.asList(types));
-        return new FileUploadValidator(false, 0, Long.MAX_VALUE, fileTypes);
+        return new FileUploadValidator(0, Long.MAX_VALUE, fileTypes);
     }
 
     /**
@@ -99,13 +92,11 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
     // TODO make it pretty
     private String contentTypeErrorString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("File type has to be: ");
         for (MimeType type : fileTypes) {
             sb.append(type.getSubtype() + ", ");
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.deleteCharAt(sb.length() - 1);
-        sb.append('.');
         return sb.toString();
     }
 }

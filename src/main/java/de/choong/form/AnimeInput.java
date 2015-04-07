@@ -42,19 +42,23 @@ public class AnimeInput extends Panel {
 
         // Title
         form.add(new RequiredTextField<String>("title", new PropertyModel<String>(anime, "title"))
+                .setLabel(Model.of("Title"))
                 .add(StringValidator.maximumLength(40)));
 
         // Alternative title
         form.add(new TextField<String>("alttitle", new PropertyModel<String>(anime, "altTitle"))
+                .setLabel(Model.of("Alt. title"))
                 .add(StringValidator.maximumLength(40)));
         // Summary
         form.add(new TextArea<String>("summary", new PropertyModel<String>(anime, "summary"))
+                .setLabel(Model.of("Summary"))
                 .add(StringValidator.maximumLength(750)));
 
         // Type
         DropDownChoice<MediaType> mediaType = new DropDownChoice<MediaType>("mediaType",
                 new PropertyModel<MediaType>(anime, "type"), Arrays.asList(MediaType.values()));
         mediaType.setDefaultModelObject(anime.getType() != null ? anime.getType() : MediaType.TV);
+        mediaType.setLabel(Model.of("Type"));
         form.add(mediaType);
 
         // Status
@@ -63,14 +67,17 @@ public class AnimeInput extends Panel {
                         .values()));
         status.setDefaultModelObject(anime.getStatus() != null ? anime.getStatus()
                 : AiringStatus.NOT_AIRED_YET);
+        status.setLabel(Model.of("Status"));
         form.add(status);
 
         // Creator
         form.add(new TextField<String>("creator", new PropertyModel<String>(anime, "creator"))
+                .setLabel(Model.of("Creator"))
                 .add(StringValidator.maximumLength(30)));
 
         // Studio
         form.add(new TextField<String>("studio", new PropertyModel<String>(anime, "studio"))
+                .setLabel(Model.of("Studio"))
                 .add(StringValidator.maximumLength(20)));
 
         // Year
@@ -81,11 +88,13 @@ public class AnimeInput extends Panel {
         DropDownChoice<Season> season = new DisplayableDropDownChoice<Season>("season",
                 new PropertyModel<Season>(anime, "season"), Arrays.asList(Season.values()));
         season.setDefaultModelObject(anime.getSeason() != null ? anime.getSeason() : Season.NONE);
+        season.setLabel(Model.of("Season"));
         form.add(season);
 
         // Cover
         FileUploadField cover = new FileUploadField("cover", new PropertyModel<List<FileUpload>>(
                 anime, "covers"));
+        cover.setLabel(Model.of("Cover"));
         // Size between 50B and 500kB
         cover.add(FileUploadValidator.sizeBetween(50, 500 * 1000));
         cover.add(FileUploadValidator.withContentTypes(MimeTypeUtils.IMAGE_GIF,

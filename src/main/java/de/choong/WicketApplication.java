@@ -51,6 +51,12 @@ public class WicketApplication extends WebApplication {
         // Password: admin
         createAdminIfNotExisting();
 
+        // TODO Homepage
+        // TODO Profile
+        // TODO Email required
+        // TODO admin slideshow
+        // TODO Genres multiselect, Hibernate one to many
+
         addMountPages();
     }
 

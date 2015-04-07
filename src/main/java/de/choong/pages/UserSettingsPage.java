@@ -44,8 +44,8 @@ public class UserSettingsPage extends SecurePage {
             private static final long serialVersionUID = -2774287942746222984L;
 
             @Override
-            protected void onAfterSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onAfterSubmit(target, form);
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                super.onSubmit(target, form);
 
                 String oldPw1 = changePasswordForm.getOldPw1();
                 String oldPw2 = changePasswordForm.getOldPw2();
@@ -59,11 +59,19 @@ public class UserSettingsPage extends SecurePage {
                         user.setSalt(salt);
                         try {
                             dao.update(user);
+                            success("Password changed.");
                         } catch (DBException e) {
-                            e.printStackTrace();
+                            error("DB Error.");
                         }
                     }
                 }
+                target.add(feedback);
+            }
+
+            @Override
+            protected void onError(AjaxRequestTarget target, Form<?> form) {
+                super.onError(target, form);
+                target.add(feedback);
             }
         });
         feedback = new AjaxFeedbackPanel("feedback");

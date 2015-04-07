@@ -44,19 +44,20 @@ public class SingleAnimePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        if (anime != null) {
-            add(createCover("cover"));
-            add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
-            add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
-            add(new Label("summary", StringUtils.defaultIfBlank(anime.getSummary(), DEFAULT_TEXT)));
-            add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), DEFAULT_TEXT)));
-            add(new Label("type", anime.getType().getDisplayName()));
-            add(new Label("status", anime.getStatus().getDisplayName()));
-            add(new Label("season", StringUtils.defaultIfBlank(getSeasonDisplay(anime),
-                    DEFAULT_TEXT)));
-            add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), DEFAULT_TEXT)));
-            add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), DEFAULT_TEXT)));
+        if (anime == null) {
+            return;
         }
+
+        add(createCover("cover"));
+        add(new Label("bigTitle", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
+        add(new Label("title", StringUtils.defaultIfBlank(anime.getTitle(), DEFAULT_TEXT)));
+        add(new Label("summary", StringUtils.defaultIfBlank(anime.getSummary(), DEFAULT_TEXT)));
+        add(new Label("altTitle", StringUtils.defaultIfBlank(anime.getAltTitle(), DEFAULT_TEXT)));
+        add(new Label("type", anime.getType().getDisplayName()));
+        add(new Label("status", anime.getStatus().getDisplayName()));
+        add(new Label("season", StringUtils.defaultIfBlank(getSeasonDisplay(anime), DEFAULT_TEXT)));
+        add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), DEFAULT_TEXT)));
+        add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), DEFAULT_TEXT)));
     }
 
     private Component createCover(String id) {

@@ -7,11 +7,10 @@ import org.apache.wicket.util.string.StringValueConversionException;
 import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
-import de.choong.model.user.UserRight;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 
-public class UserProfilePage extends SecurePage {
+public class UserProfilePage extends BasePage {
 
     private static final long serialVersionUID = 6693061036414189990L;
 
@@ -43,13 +42,9 @@ public class UserProfilePage extends SecurePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        if (user != null) {
-            add(new Label("bigUsername", user.getUsername()));
+        if (user == null) {
+            return;
         }
-    }
-
-    @Override
-    public UserRight getAccessRight() {
-        return UserRight.USER;
+        add(new Label("bigUsername", user.getUsername()));
     }
 }
