@@ -17,15 +17,17 @@ public class Carousel extends Panel {
 
     private static final long serialVersionUID = 1978217406065088624L;
 
-    public Carousel(String id) {
+    private File imagesPath;
+
+    public Carousel(String id, String path) {
         super(id);
+        imagesPath = new File(path);
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        File file = new File(ImageUtil.getAbsoluteSlideshowPath());
-        List<File> images = Arrays.asList(file.listFiles());
+        List<File> images = Arrays.asList(imagesPath.listFiles());
 
         ListView<File> indicators = new ListView<File>("indicators", images) {
 
