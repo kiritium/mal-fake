@@ -8,13 +8,19 @@
 				<wicket:panel wicket:id="userTable" />
 			</div>
 			<div class="col-sm-3">
-				<div class="page-header" id="admintoolsheader">
-					<h3>Administrator tools</h3>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Tools</h3>
+					</div>
+					<div class="panel-body">
+						<a id="adminitems" class="btn btn-default btn-block" role="button"
+							wicket:id="reguser">Add user</a> 
+						<a id="adminitems" class="btn btn-default btn-block" role="button"
+							wicket:id="changeslides">Edit slideshow</a> 
+						<a id="adminitems" class="btn btn-default btn-block" role="button">
+							There is no cow-level.</a>
+					</div>
 				</div>
-				<a id="adminitems" class="btn btn-default btn-block" role="button"
-					wicket:id="reguser">Add user</a> 
-				<a id="adminitems" class="btn btn-default btn-block" role="button">Secret Function</a> 
-				<a id="adminitems" class="btn btn-default btn-block" role="button">There is no cow-level.</a>
 			</div>
 		</div>
 	</div>

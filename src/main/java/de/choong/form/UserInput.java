@@ -55,6 +55,7 @@ public class UserInput extends Panel {
         // E-Mail
         form.add(new EmailTextField("email", new PropertyModel<String>(user, "email"))
                 .setLabel(Model.of("E-Mail"))
+                .setRequired(true)
                 .add(EmailAddressValidator.getInstance())
                 .add(StringValidator.lengthBetween(10, 50)));
 

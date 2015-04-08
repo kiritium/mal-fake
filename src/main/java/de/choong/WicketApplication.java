@@ -14,6 +14,7 @@ import de.choong.pages.AddAnimePage;
 import de.choong.pages.AddUserPage;
 import de.choong.pages.AdministrationPage;
 import de.choong.pages.EditAnimePage;
+import de.choong.pages.EditSlideshowPage;
 import de.choong.pages.HomePage;
 import de.choong.pages.LoginPage;
 import de.choong.pages.MultiAnimePage;
@@ -53,7 +54,6 @@ public class WicketApplication extends WebApplication {
 
         // TODO Homepage
         // TODO Profile
-        // TODO Email required
         // TODO admin slideshow
         // TODO Genres multiselect, Hibernate one to many
 
@@ -70,6 +70,7 @@ public class WicketApplication extends WebApplication {
         mountPage("/anime", SingleAnimePage.class);
         mountPage("/settings", UserSettingsPage.class);
         mountPage("/profile", UserProfilePage.class);
+        mountPage("/editSlideshow", EditSlideshowPage.class);
     }
 
     private void createAdminIfNotExisting() {

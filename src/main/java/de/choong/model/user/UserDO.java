@@ -23,7 +23,7 @@ public class UserDO extends BaseDO {
     @Column(length = 16, nullable = false)
     private String salt;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)

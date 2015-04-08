@@ -32,7 +32,9 @@ public class AdministrationPage extends SecurePage {
         // User-List
         add(new UserTable("userTable", new SortableUserProvider()));
 
+        // Admin function
         add(new BookmarkablePageLink<>("reguser", AddUserPage.class));
+        add(new BookmarkablePageLink<>("changeslides", EditSlideshowPage.class));
 
     }
 

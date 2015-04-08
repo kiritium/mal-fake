@@ -9,7 +9,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.AjaxFeedbackPanel;
 import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
-import de.choong.form.ChangePasswordForm;
+import de.choong.form.ChangePasswordInput;
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
 import de.choong.util.SpringUtil;
@@ -36,7 +36,7 @@ public class UserSettingsPage extends SecurePage {
 
         Form<String> form = new Form<String>("form");
 
-        ChangePasswordForm changePasswordForm = new ChangePasswordForm("input");
+        ChangePasswordInput changePasswordForm = new ChangePasswordInput("input");
 
         form.add(changePasswordForm);
         form.add(new AjaxSubmitLink("submit") {
