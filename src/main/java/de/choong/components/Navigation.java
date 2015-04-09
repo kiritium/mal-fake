@@ -8,13 +8,13 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.model.user.UserRight;
-import de.choong.pages.AddAnimePage;
-import de.choong.pages.AddUserPage;
-import de.choong.pages.AdministrationPage;
-import de.choong.pages.LoginPage;
-import de.choong.pages.MultiAnimePage;
-import de.choong.pages.UserProfilePage;
-import de.choong.pages.UserSettingsPage;
+import de.choong.pages.admin.AdministrationPage;
+import de.choong.pages.anime.AddAnimePage;
+import de.choong.pages.anime.MultiAnimePage;
+import de.choong.pages.user.AddUserPage;
+import de.choong.pages.user.LoginPage;
+import de.choong.pages.user.UserProfilePage;
+import de.choong.pages.user.UserSettingsPage;
 import de.choong.util.UserUtil;
 
 public class Navigation extends Panel {

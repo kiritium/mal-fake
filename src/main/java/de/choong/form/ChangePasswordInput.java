@@ -11,9 +11,9 @@ public class ChangePasswordInput extends Panel {
 
     private static final long serialVersionUID = 2385513506547650494L;
 
-    private String oldPw1;
-    private String oldPw2;
-    private String newPw;
+    private String oldPassword1;
+    private String oldPassword2;
+    private String newPassword;
 
     public ChangePasswordInput(String id) {
         super(id);
@@ -25,32 +25,35 @@ public class ChangePasswordInput extends Panel {
         Form<String> form = new Form<String>("form");
 
         // Old password
-        form.add(new PasswordTextField("oldpw1", new PropertyModel<String>(this, "oldPw1"))
+        form.add(new PasswordTextField("oldpassword1", new PropertyModel<String>(this,
+                "oldPassword1"))
                 .setLabel(Model.of("Old password"))
                 .add(StringValidator.lengthBetween(6, 20)));
 
         // Confirm old password
-        form.add(new PasswordTextField("oldpw2", new PropertyModel<String>(this, "oldPw2"))
+        form.add(new PasswordTextField("oldpassword2", new PropertyModel<String>(this,
+                "oldPassword2"))
                 .setLabel(Model.of("Confirm old password"))
                 .add(StringValidator.lengthBetween(6, 20)));
 
         // New password
-        form.add(new PasswordTextField("newpw", new PropertyModel<String>(this, "newPw"))
+        form.add(new PasswordTextField("newpassword",
+                new PropertyModel<String>(this, "newPassword"))
                 .setLabel(Model.of("New password"))
                 .add(StringValidator.lengthBetween(6, 20)));
 
         add(form);
     }
 
-    public String getOldPw1() {
-        return oldPw1;
+    public String getOldPassword1() {
+        return oldPassword1;
     }
 
-    public String getOldPw2() {
-        return oldPw2;
+    public String getOldPassword2() {
+        return oldPassword2;
     }
 
-    public String getNewPw() {
-        return newPw;
+    public String getNewPassword() {
+        return newPassword;
     }
 }

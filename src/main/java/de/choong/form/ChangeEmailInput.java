@@ -33,7 +33,7 @@ public class ChangeEmailInput extends Panel {
                 .add(StringValidator.lengthBetween(6, 20)));
 
         // Confirm password
-        form.add(new PasswordTextField("password1", new PropertyModel<String>(this, "password2"))
+        form.add(new PasswordTextField("password2", new PropertyModel<String>(this, "password2"))
                 .setLabel(Model.of("Confirm password"))
                 .add(StringValidator.lengthBetween(6, 20)));
 
@@ -43,6 +43,8 @@ public class ChangeEmailInput extends Panel {
                 .setRequired(true)
                 .add(EmailAddressValidator.getInstance())
                 .add(StringValidator.lengthBetween(10, 50)));
+
+        add(form);
     }
 
     public String getPassword1() {
