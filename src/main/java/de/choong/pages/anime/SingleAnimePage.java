@@ -1,4 +1,4 @@
-package de.choong.pages;
+package de.choong.pages.anime;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
@@ -11,6 +11,7 @@ import de.choong.components.StaticImage;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
+import de.choong.pages.BasePage;
 import de.choong.util.ImageUtil;
 import de.choong.util.SpringUtil;
 

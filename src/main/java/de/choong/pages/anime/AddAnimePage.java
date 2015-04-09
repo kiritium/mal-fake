@@ -1,4 +1,4 @@
-package de.choong.pages;
+package de.choong.pages.anime;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ import de.choong.exceptions.DBException;
 import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.user.UserRight;
+import de.choong.pages.SecurePage;
 import de.choong.util.ImageUtil;
 import de.choong.util.SpringUtil;
 

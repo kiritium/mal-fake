@@ -9,7 +9,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
-import de.choong.pages.EditAnimePage;
+import de.choong.pages.anime.EditAnimePage;
 import de.choong.util.SpringUtil;
 
 public class AnimeActionPanel extends Panel {

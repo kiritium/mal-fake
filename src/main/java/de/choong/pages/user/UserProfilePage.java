@@ -1,4 +1,4 @@
-package de.choong.pages;
+package de.choong.pages.user;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -7,6 +7,7 @@ import org.apache.wicket.util.string.StringValueConversionException;
 import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
+import de.choong.pages.BasePage;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 

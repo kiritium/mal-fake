@@ -10,17 +10,17 @@ import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.user.UserDO;
 import de.choong.model.user.UserRight;
-import de.choong.pages.AddAnimePage;
-import de.choong.pages.AddUserPage;
-import de.choong.pages.AdministrationPage;
-import de.choong.pages.EditAnimePage;
-import de.choong.pages.EditSlideshowPage;
 import de.choong.pages.HomePage;
-import de.choong.pages.LoginPage;
-import de.choong.pages.MultiAnimePage;
-import de.choong.pages.SingleAnimePage;
-import de.choong.pages.UserProfilePage;
-import de.choong.pages.UserSettingsPage;
+import de.choong.pages.admin.AdministrationPage;
+import de.choong.pages.admin.EditSlideshowPage;
+import de.choong.pages.anime.AddAnimePage;
+import de.choong.pages.anime.EditAnimePage;
+import de.choong.pages.anime.MultiAnimePage;
+import de.choong.pages.anime.SingleAnimePage;
+import de.choong.pages.user.AddUserPage;
+import de.choong.pages.user.LoginPage;
+import de.choong.pages.user.UserProfilePage;
+import de.choong.pages.user.UserSettingsPage;
 import de.choong.util.HibernateUtil;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
@@ -83,6 +83,7 @@ public class WicketApplication extends WebApplication {
                 admin.setPassword(UserUtil.hash("admin", salt));
                 admin.setSalt(salt);
                 admin.setUserRight(UserRight.ADMIN);
+                admin.setEmail("admin@admin.com");
                 dao.create(admin);
             }
         } catch (DBException e) {

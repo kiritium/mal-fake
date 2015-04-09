@@ -1,4 +1,4 @@
-package de.choong.pages;
+package de.choong.pages.user;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
@@ -12,6 +12,7 @@ import de.choong.dao.IUserDao;
 import de.choong.exceptions.DBException;
 import de.choong.form.UserInput;
 import de.choong.model.user.UserDO;
+import de.choong.pages.BasePage;
 import de.choong.util.SpringUtil;
 import de.choong.util.UserUtil;
 

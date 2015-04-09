@@ -1,8 +1,9 @@
-package de.choong.pages;
+package de.choong.pages.user;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import de.choong.form.LoginForm;
+import de.choong.pages.BasePage;
 import de.choong.util.UserUtil;
 
 public class LoginPage extends BasePage {

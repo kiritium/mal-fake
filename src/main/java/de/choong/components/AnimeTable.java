@@ -19,7 +19,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import de.choong.components.sortable.SortableTable;
 import de.choong.model.anime.AnimeDO;
 import de.choong.model.user.UserRight;
-import de.choong.pages.SingleAnimePage;
+import de.choong.pages.anime.SingleAnimePage;
 import de.choong.util.UserUtil;
 
 public class AnimeTable extends Panel {
