@@ -69,7 +69,7 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
 
     /**
      * Convert bytes in byte with units (e.g. kB, B) atm supported formats: B,
-     * kB
+     * kB, MB
      * 
      * @param bytes
      * @return
@@ -78,7 +78,10 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
         double bytes2 = bytes;
         String str;
         Formatter formatter = new Formatter();
-        if (bytes2 >= 1000) {
+        if (bytes2 >= 100000) {
+            bytes2 /= 100000;
+            formatter.format("%.1f MB", bytes2);
+        } else if (bytes2 >= 1000) {
             bytes2 /= 1000;
             formatter.format("%.1f kB", bytes2);
         } else {

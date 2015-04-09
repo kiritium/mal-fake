@@ -1,4 +1,4 @@
-package de.choong.pages;
+package de.choong.pages.admin;
 
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -8,6 +8,8 @@ import de.choong.components.UserTable;
 import de.choong.components.sortable.SortableUserProvider;
 import de.choong.dao.IUserDao;
 import de.choong.model.user.UserRight;
+import de.choong.pages.SecurePage;
+import de.choong.pages.user.AddUserPage;
 import de.choong.util.SpringUtil;
 
 public class AdministrationPage extends SecurePage {

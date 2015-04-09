@@ -32,8 +32,7 @@ public class FileActionPanel extends Panel {
             public void onClick(AjaxRequestTarget target) {
                 try {
                     Files.delete(file.toPath());
-                    // TODO Refreshing
-                    setResponsePage(getPage());
+                    setResponsePage(getPage().getClass());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
