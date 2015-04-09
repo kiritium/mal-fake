@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -18,6 +19,8 @@ public class Carousel extends Panel {
 
     private static final long serialVersionUID = 1978217406065088624L;
 
+    private boolean controlVisibility = true;
+
     public Carousel(String id, IModel<String> path) {
         super(id, path);
     }
@@ -29,6 +32,7 @@ public class Carousel extends Panel {
         File imagesPath = new File(getDefaultModelObjectAsString());
         List<File> images = Arrays.asList(imagesPath.listFiles());
 
+        // Indicators
         ListView<File> indicators = new ListView<File>("indicators", images) {
 
             private static final long serialVersionUID = 4217645638613748902L;
@@ -42,9 +46,9 @@ public class Carousel extends Panel {
                 }
             }
         };
-
         add(indicators);
 
+        // Slides
         ListView<File> slides = new ListView<File>("slidediv", images) {
 
             private static final long serialVersionUID = 2554064251622341267L;
@@ -59,5 +63,13 @@ public class Carousel extends Panel {
             }
         };
         add(slides);
+
+        // Control visibility
+        add(new WebMarkupContainer("control").setVisible(controlVisibility));
     }
+
+    public void setControlVisibility(boolean controlVisibility) {
+        this.controlVisibility = controlVisibility;
+    }
+
 }

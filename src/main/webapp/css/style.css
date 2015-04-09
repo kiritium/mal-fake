@@ -63,14 +63,6 @@ dd {
     margin: 0 auto;
 }
 
-#carousel {
-	height: 600px;
-}
-
-#slideimg {
-	max-height: 600px;
-}
-
 #adminitems {
 	color: black;
 	font-weight: bold;
