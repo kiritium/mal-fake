@@ -1,5 +1,6 @@
 package de.choong.pages;
 
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -21,6 +22,9 @@ public class HomePage extends BasePage {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        add(new Carousel("carousel", Model.of(ImageUtil.getAbsoluteSlideshowPath())));
+        add(new BookmarkablePageLink<>("newhomepage", NewHomePage.class));
+        Carousel carousel = new Carousel("carousel", Model.of(ImageUtil.getAbsoluteSlideshowPath()));
+        carousel.setControlVisibility(false);
+        add(carousel);
     }
 }
