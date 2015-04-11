@@ -45,20 +45,14 @@ public class ChangeEmailForm extends Panel {
                 String password2 = input.getPassword2();
                 String email = input.getEmail();
 
-                System.out.println(password1);
-                System.out.println(password2);
-                System.out.println(email);
-
                 if (password1.equals(password2)) {
                     UserDO user = UserUtil.getCurrentUser();
                     if (UserUtil.hash(password1, user.getSalt()).equals(user.getPassword())) {
                         user.setEmail(email);
                         try {
-                            System.out.println("try");
                             dao.update(user);
                             success("E-mail changed.");
                         } catch (DBException e) {
-                            System.out.println("cath");
                             error("DB Error.");
                         }
                     } else {

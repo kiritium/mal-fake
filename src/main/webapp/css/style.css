@@ -33,13 +33,14 @@ dd {
 	margin-bottom: 10px;
 }
 
+.formbtn {
+	width: 100px
+}
+
 #summarytext {
 	resize: none;
 }
 
-#addbutton {
-	width: 100px;
-}
 
 #ppltabpanel {
 	/* border: 1px solid #DDD; */
