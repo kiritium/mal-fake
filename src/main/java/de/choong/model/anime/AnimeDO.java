@@ -1,11 +1,18 @@
 package de.choong.model.anime;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -36,14 +43,29 @@ public class AnimeDO extends BaseDO {
     @Column
     private Integer year;
 
+    @Column(length = 10)
     @Enumerated(EnumType.STRING)
     private Season season;
 
+    @Column(length = 10)
     @Enumerated(EnumType.STRING)
     private MediaType type;
 
+    @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private AiringStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Genre.class)
+    @CollectionTable(name = "T_ANIME_GENRES", joinColumns = @JoinColumn(name = "anime_fk"))
+    private Set<Genre> genres;
+
+    // TODO remove, after CharacterDao
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "T_ANIME_CHARACTER",
+            joinColumns = { @JoinColumn(name = "anime_id", nullable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "character_id", nullable = false) })
+    private Set<CharacterDO> characters;
 
     @Transient
     private List<FileUpload> covers;
@@ -133,5 +155,21 @@ public class AnimeDO extends BaseDO {
             return covers.get(0);
         }
         return null;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Set<CharacterDO> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<CharacterDO> characters) {
+        this.characters = characters;
     }
 }

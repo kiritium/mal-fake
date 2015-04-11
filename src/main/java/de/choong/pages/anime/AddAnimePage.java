@@ -1,6 +1,8 @@
 package de.choong.pages.anime;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
@@ -14,6 +16,7 @@ import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.form.AnimeInput;
 import de.choong.model.anime.AnimeDO;
+import de.choong.model.anime.Genre;
 import de.choong.model.user.UserRight;
 import de.choong.pages.SecurePage;
 import de.choong.util.ImageUtil;

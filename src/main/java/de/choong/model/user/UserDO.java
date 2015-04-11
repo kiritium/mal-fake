@@ -26,6 +26,7 @@ public class UserDO extends BaseDO {
     @Column(length = 50, nullable = false)
     private String email;
 
+    @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private UserRight userRight;
 
