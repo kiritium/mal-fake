@@ -2,6 +2,10 @@ package de.choong.util;
 
 import java.io.Serializable;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,7 +22,8 @@ import de.choong.model.BaseDO;
  *
  */
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
+    private static ThreadLocal<SessionFactory> sessionFactory = new ThreadLocal<SessionFactory>();
+    private static EntityManagerFactory entityManagerFactory;
 
     /**
      * Creates SessionFactory from hibernate.cfg.xml.
@@ -27,14 +32,19 @@ public class HibernateUtil {
      * @throws HibernateException
      */
     public static SessionFactory getSessionFactory() throws HibernateException {
-        if (sessionFactory == null) {
+        if (sessionFactory.get() == null) {
             Configuration conf = new Configuration().configure().setInterceptor(
                     new AuditInterceptor());
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     conf.getProperties()).build();
-            sessionFactory = conf.buildSessionFactory(serviceRegistry);
+            sessionFactory.set(conf.buildSessionFactory(serviceRegistry));
         }
-        return sessionFactory;
+        return sessionFactory.get();
+    }
+
+    public static EntityManager getEntityManager() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("myManager");
+        return entityManagerFactory.createEntityManager();
     }
 
     /**
@@ -43,7 +53,7 @@ public class HibernateUtil {
      * @return
      */
     public static Session getSession() {
-        return getSessionFactory().openSession();
+        return getSessionFactory().getCurrentSession();
     }
 
     /**

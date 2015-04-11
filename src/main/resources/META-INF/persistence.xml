@@ -1,0 +1,34 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="myManager" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- 
+		<jta-data-source>java:/DefaultDS</jta-data-source>
+		<jar-file>MyApp.jar</jar-file>
+		 -->
+		<!-- Mapped Classed -->
+		<!-- 
+		<class>de.choong.model.BaseDO</class>
+		<class>de.choong.model.anime.AnimeDO</class>
+		<class>de.choong.model.user.UserDO</class>
+		 -->
+		 <!-- Caching of entities
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		 -->
+		<!-- Bean Validation
+		<validation-mode>CALLBACK</validation-mode>
+		 -->
+		<properties>
+			<property name="connection.driver_class" value="org.hsqldb.jdbcDriver" />
+	        <property name="connection.url" value="jdbc:hsqldb:file:src/main/resources/hsqldb/mysite.db" />
+	        <property name="connection.username" value="sa" />
+	        <property name="connection.password" value="" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<!-- update | create-drop -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="show_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
