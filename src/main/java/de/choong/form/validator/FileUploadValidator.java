@@ -92,14 +92,14 @@ public class FileUploadValidator implements IValidator<List<FileUpload>> {
         return str;
     }
 
-    // TODO make it pretty
     private String contentTypeErrorString() {
         StringBuilder sb = new StringBuilder();
         for (MimeType type : fileTypes) {
-            sb.append(type.getSubtype() + ", ");
+            if (sb.length() != 0) {
+                sb.append(", ");
+            }
+            sb.append(type.getSubtype());
         }
-        sb.deleteCharAt(sb.length() - 1);
-        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 }

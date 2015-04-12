@@ -1,5 +1,10 @@
 package de.choong.pages.anime;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
@@ -11,6 +16,7 @@ import de.choong.components.StaticImage;
 import de.choong.dao.IAnimeDao;
 import de.choong.exceptions.DBException;
 import de.choong.model.anime.AnimeDO;
+import de.choong.model.anime.Genre;
 import de.choong.pages.BasePage;
 import de.choong.util.ImageUtil;
 import de.choong.util.SpringUtil;
@@ -59,6 +65,7 @@ public class SingleAnimePage extends BasePage {
         add(new Label("season", StringUtils.defaultIfBlank(getSeasonDisplay(anime), DEFAULT_TEXT)));
         add(new Label("creator", StringUtils.defaultIfBlank(anime.getCreator(), DEFAULT_TEXT)));
         add(new Label("studio", StringUtils.defaultIfBlank(anime.getStudio(), DEFAULT_TEXT)));
+        add(new Label("genre", getGenreString()));
     }
 
     private Component createCover(String id) {
@@ -79,5 +86,27 @@ public class SingleAnimePage extends BasePage {
             displayName += anime.getYear();
         }
         return displayName;
+    }
+
+    private String getGenreString() {
+        List<Genre> genres = new ArrayList<>(anime.getGenres());
+        Collections.sort(genres, new Comparator<Genre>() {
+            @Override
+            public int compare(Genre o1, Genre o2) {
+                return o1.getDisplayName().compareTo(o2.getDisplayName());
+            }
+        });
+
+        if (genres != null && genres.isEmpty() == false) {
+            StringBuilder sb = new StringBuilder();
+            for (Genre genre : genres) {
+                if (sb.length() != 0) {
+                    sb.append(", ");
+                }
+                sb.append(genre.getDisplayName());
+            }
+            return sb.toString();
+        }
+        return DEFAULT_TEXT;
     }
 }

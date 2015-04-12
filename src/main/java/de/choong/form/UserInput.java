@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
-import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -42,9 +42,9 @@ public class UserInput extends Panel {
         Form<UserDO> form = new Form<UserDO>("form", Model.of(user));
 
         // Username
-        form.add(new TextField<String>("username", new PropertyModel<String>(user, "username"))
+        form.add(new RequiredTextField<String>("username", new PropertyModel<String>(user,
+                "username"))
                 .setLabel(Model.of("Username"))
-                .setRequired(true)
                 .add(StringValidator.lengthBetween(6, 20)));
 
         // Password

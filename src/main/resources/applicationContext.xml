@@ -4,10 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
                               http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="userDao" class="de.choong.dao.UserDao">
+    </bean>
+    
     <bean id="animeDao" class="de.choong.dao.AnimeDao">
     </bean>
     
-    <bean id="userDao" class="de.choong.dao.UserDao">
+    <bean id="characterDao" class="de.choong.dao.CharacterDao">
     </bean>
 
 </beans>

@@ -53,7 +53,6 @@ public class TestCharacter {
 
                 @Override
                 public int compare(CharacterDO o1, CharacterDO o2) {
-                    // TODO Auto-generated method stub
                     return o1.getName().compareTo(o2.getName());
                 }
 

@@ -1,8 +1,10 @@
 package de.choong.form;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -22,12 +24,16 @@ import de.choong.components.DisplayableDropDownChoice;
 import de.choong.form.validator.FileUploadValidator;
 import de.choong.model.anime.AiringStatus;
 import de.choong.model.anime.AnimeDO;
+import de.choong.model.anime.Genre;
 import de.choong.model.anime.MediaType;
 import de.choong.model.anime.Season;
 
 public class AnimeInput extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
+
+    private List<Genre> genres = Arrays.asList(Genre.values());
+    private ArrayList<Genre> genresSelect = new ArrayList<>();
 
     public AnimeInput(String id, IModel<AnimeDO> model) {
         super(id, model);
@@ -101,6 +107,16 @@ public class AnimeInput extends Panel {
                 MimeTypeUtils.IMAGE_JPEG, MimeTypeUtils.IMAGE_PNG));
         form.add(cover);
 
+        // Genres
+        CheckBoxMultipleChoice<Genre> checkBoxGenres = new CheckBoxMultipleChoice<Genre>("genres",
+                new Model<>(getGenresSelect()), genres);
+        checkBoxGenres.setLabel(Model.of("Genres(s)"));
+        form.add(checkBoxGenres);
+
         add(form);
+    }
+
+    public ArrayList<Genre> getGenresSelect() {
+        return genresSelect;
     }
 }

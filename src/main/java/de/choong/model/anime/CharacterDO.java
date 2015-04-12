@@ -25,17 +25,17 @@ public class CharacterDO extends BaseDO {
     @Column(length = 80)
     private String altName;
 
-    @ManyToMany
-    private Set<AnimeDO> animes;
-
     @Column(length = 750)
     private String description;
 
-    @Transient
-    private List<FileUpload> profileImgs;
-
     // TODO Quotes
     // private List<QuoteDO> quotes;
+
+    @ManyToMany
+    private Set<AnimeDO> animes;
+
+    @Transient
+    private List<FileUpload> profileImgs;
 
     public String getName() {
         return name;
