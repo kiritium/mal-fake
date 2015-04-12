@@ -58,7 +58,7 @@ public class AnimeDO extends BaseDO {
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Genre.class)
     @CollectionTable(name = "T_ANIME_GENRES", joinColumns = @JoinColumn(name = "anime_fk"))
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
     // TODO remove, after CharacterDao
     @ManyToMany(cascade = CascadeType.ALL)
@@ -157,11 +157,11 @@ public class AnimeDO extends BaseDO {
         return null;
     }
 
-    public Set<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 

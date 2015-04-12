@@ -1,6 +1,5 @@
 package de.choong.form;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,9 +30,6 @@ import de.choong.model.anime.Season;
 public class AnimeInput extends Panel {
 
     private static final long serialVersionUID = -749279800147765490L;
-
-    private List<Genre> genres = Arrays.asList(Genre.values());
-    private ArrayList<Genre> genresSelect = new ArrayList<>();
 
     public AnimeInput(String id, IModel<AnimeDO> model) {
         super(id, model);
@@ -97,6 +93,14 @@ public class AnimeInput extends Panel {
         season.setLabel(Model.of("Season"));
         form.add(season);
 
+        // Genres
+        CheckBoxMultipleChoice<Genre> checkBoxGenres = new CheckBoxMultipleChoice<Genre>("genres",
+                new PropertyModel<>(anime, "genres"), Arrays.asList(Genre.values()));
+        checkBoxGenres.setLabel(Model.of("Genres(s)"));
+        checkBoxGenres.setPrefix("<div class='col-md-4 col-xs-6'>");
+        checkBoxGenres.setSuffix("</div>");
+        form.add(checkBoxGenres);
+
         // Cover
         FileUploadField cover = new FileUploadField("cover", new PropertyModel<List<FileUpload>>(
                 anime, "covers"));
@@ -107,16 +111,6 @@ public class AnimeInput extends Panel {
                 MimeTypeUtils.IMAGE_JPEG, MimeTypeUtils.IMAGE_PNG));
         form.add(cover);
 
-        // Genres
-        CheckBoxMultipleChoice<Genre> checkBoxGenres = new CheckBoxMultipleChoice<Genre>("genres",
-                new Model<>(getGenresSelect()), genres);
-        checkBoxGenres.setLabel(Model.of("Genres(s)"));
-        form.add(checkBoxGenres);
-
         add(form);
-    }
-
-    public ArrayList<Genre> getGenresSelect() {
-        return genresSelect;
     }
 }

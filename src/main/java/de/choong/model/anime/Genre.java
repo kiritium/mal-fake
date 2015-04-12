@@ -56,5 +56,5 @@ public enum Genre implements Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
-    } //
+    }
 }

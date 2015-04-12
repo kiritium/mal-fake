@@ -1,7 +1,7 @@
 package de.choong;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class TestGenres {
 
         AnimeDO anime = new AnimeDO();
         anime.setTitle("TestGenre2");
-        Set<Genre> genres = new HashSet<>();
+        List<Genre> genres = new ArrayList<>();
         genres.add(Genre.ACTION);
         genres.add(Genre.ADVENTURE);
         anime.setGenres(genres);

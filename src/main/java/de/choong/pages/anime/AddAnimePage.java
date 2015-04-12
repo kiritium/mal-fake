@@ -1,7 +1,6 @@
 package de.choong.pages.anime;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
@@ -41,8 +40,7 @@ public class AddAnimePage extends SecurePage {
 
         AnimeDO anime = new AnimeDO();
         Form<AnimeDO> form = new Form<>("form", Model.of(anime));
-        AnimeInput input = new AnimeInput("input", Model.of(anime));
-        form.add(input);
+        form.add(new AnimeInput("input", Model.of(anime)));
         form.add(createSubmitLink("submit", form));
 
         feedback = new AjaxFeedbackPanel("feedback");
@@ -60,9 +58,6 @@ public class AddAnimePage extends SecurePage {
                 super.onSubmit(target, form);
 
                 AnimeDO anime = (AnimeDO) form.getModelObject();
-
-                AnimeInput submitInput = (AnimeInput) form.get("input");
-                anime.setGenres(new HashSet<>(submitInput.getGenresSelect()));
 
                 try {
                     int id = dao.create(anime);
